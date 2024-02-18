@@ -3,8 +3,9 @@
 title: vojay
 logo:
 description: Volker Janz - Thoughts, stories and ideas
-baseurl: ""
-url: ""
+domain: vojay-dev.github.io
+url: https://vojay-dev.github.io
+baseurl: /vojay-page/
 
 
 #-------------------------------
