@@ -6,6 +6,18 @@
 <script src="{{ site.baseurl }}/js/vendors/zoom.min.js"></script>
 <script src="{{ site.baseurl }}/js/common.js"></script>
 <script>
+  // =====================
+  // Simple Jekyll Search
+  // =====================
+  SimpleJekyllSearch({
+    searchInput: document.getElementById("js-search-input"),
+    resultsContainer: document.getElementById("js-results-container"),
+    json: "{{ site.baseurl }}/search.json",
+    searchResultTemplate: '{article}',
+    noResultsText: '<li class="no-results"><h3>No results found</h3></li>'
+  });
+</script>
+<script>
   var base_url = "",
     pagination_next_url = base_url + '/page2',
     pagination_next_page_number = '{{ paginator.next_page }}',

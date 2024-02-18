@@ -64,6 +64,17 @@ bundle exec jekyll serve --livereload
 
 With the `--livereload` flag, the page refreshes automatically with each change you make.
 
+If you get an error like: `cannot load such file -- webrick`, simply add `webrick` explicitly to your `Gemfile`:
+{% highlight ruby %}
+gem 'webrick'
+{% endhighlight %}
+
+And then run:
+{% highlight bash %}
+bundle install
+bundle exec jekyll serve --livereload
+{% endhighlight %}
+
 Now simply open [http://localhost:4000](http://localhost:4000){:target="_blank"} in your browser, and there you go, your first static site with Jekyll is ready.
 
 ![Sample page]({{site.baseurl}}/images/blog/2024-02-18-01.png)

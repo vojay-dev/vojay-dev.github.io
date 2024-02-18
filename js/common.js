@@ -63,18 +63,6 @@ $(document).ready(function() {
   },150)
 
 
-  // =====================
-  // Simple Jekyll Search
-  // =====================
-  SimpleJekyllSearch({
-    searchInput: document.getElementById("js-search-input"),
-    resultsContainer: document.getElementById("js-results-container"),
-    json: "./search.json",
-    searchResultTemplate: '{article}',
-    noResultsText: '<li class="no-results"><h3>No results found</h3></li>'
-  });
-
-
   /* =======================
   // LazyLoad Images
   ======================= */
