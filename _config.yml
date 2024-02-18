@@ -5,7 +5,7 @@ logo:
 description: Volker Janz - Thoughts, stories and ideas
 domain: vojay-dev.github.io
 url: https://vojay-dev.github.io
-baseurl: /vojay-page/
+baseurl:
 
 
 #-------------------------------

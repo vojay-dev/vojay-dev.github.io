@@ -217,7 +217,6 @@ GEM
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     mercenary (0.3.6)
-    mini_portile2 (2.8.5)
     minima (2.5.1)
       jekyll (>= 3.5, < 5.0)
       jekyll-feed (~> 0.9)
@@ -226,20 +225,7 @@ GEM
     mutex_m (0.2.0)
     net-http (0.4.1)
       uri
-    nokogiri (1.16.2)
-      mini_portile2 (~> 2.8.2)
-      racc (~> 1.4)
-    nokogiri (1.16.2-aarch64-linux)
-      racc (~> 1.4)
-    nokogiri (1.16.2-arm-linux)
-      racc (~> 1.4)
     nokogiri (1.16.2-arm64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.16.2-x86-linux)
-      racc (~> 1.4)
-    nokogiri (1.16.2-x86_64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.16.2-x86_64-linux)
       racc (~> 1.4)
     nuggets (1.6.1)
     octokit (4.25.1)
@@ -278,6 +264,7 @@ GEM
     unf_ext (0.0.9.1)
     unicode-display_width (1.8.0)
     uri (0.13.0)
+    webrick (1.8.1)
 
 PLATFORMS
   aarch64-linux
@@ -305,6 +292,7 @@ DEPENDENCIES
   jekyll-paginate
   jekyll-sitemap
   jekyll-tagging
+  webrick
 
 BUNDLED WITH
    2.5.6
