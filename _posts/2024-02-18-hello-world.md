@@ -9,7 +9,7 @@ tags: [life, motivation, jekyll, tech]
 
 # Introduction
 
-I have a folder of bookmarks with interesting frameworks, tools and technologies in general, which I would like to try at some point. One of these is [Jekyll](https://jekyllrb.com/){:target="_blank"}, a static site generator which takes text written in a markup language like Markdown and transforms it into appealing websites.
+I maintain a folder of bookmarks with interesting frameworks, tools and technologies in general, which I would like to try at some point. One of these is [Jekyll](https://jekyllrb.com/){:target="_blank"}, a static site generator which takes text written in a markup language like Markdown and transforms it into appealing websites.
 
 I also planned to renew my personal website for a while already as well as adding a blog, to share thoughts, ideas and stories about my journey as a father, data engineer, software developer, passionate speaker, gym enthusiast and adventurer. It is not like we have a lack of content these days, but I just love to write and share my thoughts, so for me, this is a way to jot down thoughts to clear my mind; one could even consider it a form of therapy. Like my personal `/dev/null` - and if I can even help or inspire someone with my content, it would be a great side effect.
 

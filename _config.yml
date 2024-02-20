@@ -2,7 +2,7 @@
 # General Site Settings
 title: vojay
 logo:
-description: Volker Janz - Thoughts, stories and ideas
+description: Volker Janz - Thoughts, stories and ideas from a Data Engineer, Software Developer, Passionate Speaker, Gym Enthusiast and Adventurer
 domain: vojay-dev.github.io
 url: https://vojay-dev.github.io
 baseurl: ""
