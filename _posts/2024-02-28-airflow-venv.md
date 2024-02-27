@@ -2,8 +2,8 @@
 layout: post
 title: An introduction to Airflow, setting up a local environment and writing your first DAG
 description: This article explains the Apache Airflow basics and guides you through the process to set up a local environment as well as writing your first DAG using the TaskFlow API
-date: 2024-03-01 20:00:00 +0300
-image: '/images/blog/2024-03-01.jpg'
+date: 2024-02-28 20:00:00 +0300
+image: '/images/blog/2024-02-28.jpg'
 tags: [python, data engineering, airflow, tech]
 ---
 
@@ -13,7 +13,7 @@ tags: [python, data engineering, airflow, tech]
 
 Often, workflows are so called Extract, Transform, Load (ETL) processes (or ELT), but in in fact, Airflow is so flexible that any kind of workflow can be implemented.
 
-![Airflow workflow]({{site.baseurl}}/images/blog/2024-03-01-09.png)
+![Airflow workflow]({{site.baseurl}}/images/blog/2024-02-28-09.png)
 
 Airflow comes with a web interface which allows to manage and monitor the DAGs. Airflow has four main components:
 
@@ -50,7 +50,7 @@ Now we activate the virtual environment, so that any dependencies we install wil
 source .venv/bin/activate
 {% endhighlight %}
 
-![venv]({{site.baseurl}}/images/blog/2024-03-01-01.png)
+![venv]({{site.baseurl}}/images/blog/2024-02-28-01.png)
 
 The following commands will install Airflow version 2.8.2 using `pip` while considering the Python version you are using (3.11.8 in my case).
 
@@ -75,7 +75,7 @@ NO_PROXY="*" AIRFLOW_HOME="$(pwd)/airflow" airflow standalone
 
 This will not only start Airflow but also create the `airflow` folder in the project directory. It will also automatically create an `admin` user for the web interface. You should see the username and password in the log output.
 
-![Airflow standalone]({{site.baseurl}}/images/blog/2024-03-01-02.png)
+![Airflow standalone]({{site.baseurl}}/images/blog/2024-02-28-02.png)
 
 {% highlight text %}
 standalone | Airflow is ready
@@ -85,7 +85,7 @@ standalone | Airflow Standalone is for development purposes only. Do not use thi
 
 You can now open [http://localhost:8080/](http://localhost:8080/) in your browser and log in using the credentials from the log output.
 
-![Airflow web interface]({{site.baseurl}}/images/blog/2024-03-01-03.png)
+![Airflow web interface]({{site.baseurl}}/images/blog/2024-02-28-03.png)
 
 Congratulations 🎉, you have a pragmatic, local Airflow environment. The warnings in the web interface show up because you are automatically using the `SequentialExecutor` and a [SQLite](https://www.sqlite.org/) database in standalone mode, so of course this is not meant for production usage.
 
@@ -99,7 +99,7 @@ One thing you might have noticed: there are a bunch of example DAGs. Personally,
 
 Since we set the `AIRFLOW_HOME` variable to the `airflow` folder within the project folder, the location of the configuration file is `airflow/airflow.cfg`.
 
-![Airflow config location]({{site.baseurl}}/images/blog/2024-03-01-04.png)
+![Airflow config location]({{site.baseurl}}/images/blog/2024-02-28-04.png)
 
 Open the configuration in your favorite editor, and change the following configuration:
 
@@ -107,7 +107,7 @@ Open the configuration in your favorite editor, and change the following configu
 load_examples = False
 {% endhighlight %}
 
-![Deactivate load examples]({{site.baseurl}}/images/blog/2024-03-01-05.png)
+![Deactivate load examples]({{site.baseurl}}/images/blog/2024-02-28-05.png)
 
 Even if you now restart the standalone process, the example DAGs may still show up as they are persisted in the database. Therefore, we also need to reset the database accordingly with the following command (ensure to activate your virtual environment first and be in the project folder).
 
@@ -121,7 +121,7 @@ Confirm with `y` and afterwards start your environment again, you now have a cle
 NO_PROXY="*" AIRFLOW_HOME="$(pwd)/airflow" airflow standalone
 {% endhighlight %}
 
-![Airflow clean]({{site.baseurl}}/images/blog/2024-03-01-06.png)
+![Airflow clean]({{site.baseurl}}/images/blog/2024-02-28-06.png)
 
 Before we create our DAG, there is one more thing we should adjust. Usually, when we commit our project to Git repository, we do not want to add the `airflow` folder. First of all because this does not reside in the project folder in the production environment but also because this is our local environment and we want to ensure other developers can setup their own environment accordingly.
 
@@ -141,7 +141,7 @@ Finally, we create the empty `dags` folder within our project and we are ready t
 mkdir dags
 {% endhighlight %}
 
-![Ready to go]({{site.baseurl}}/images/blog/2024-03-01-07.png)
+![Ready to go]({{site.baseurl}}/images/blog/2024-02-28-07.png)
 
 # Create your first DAG
 
@@ -183,7 +183,7 @@ After saving your new DAG, it might take up to 60 seconds before Airflow scans t
 
 Once your DAG shows up, open it, activate it on the top left (toggle button) and click the run button on the top right. If you open the *Graph* view, you can extend the group and see a nice visualization of your first DAG run.
 
-![Some DAG]({{site.baseurl}}/images/blog/2024-03-01-08.png)
+![Some DAG]({{site.baseurl}}/images/blog/2024-02-28-08.png)
 
 This is an example for a minimal DAG using the TaskFlow API. You can also see the output of the `print` statements when checking the logs of the individual task runs.
 
