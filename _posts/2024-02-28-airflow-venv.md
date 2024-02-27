@@ -1,7 +1,7 @@
 ---
 layout: post
 title: An introduction to Airflow, setting up a local environment and writing your first DAG
-description: This article explains the Apache Airflow basics and guides you through the process to set up a local environment as well as writing your first DAG using the TaskFlow API
+description: This article explains the Apache Airflow basics and guides you through the process setting up a local environment as well as writing your first DAG using the TaskFlow API
 date: 2024-02-28 10:00:00 +0300
 image: '/images/blog/2024-02-28.jpg'
 tags: [python, data engineering, airflow, tech]
@@ -24,7 +24,7 @@ Airflow comes with a web interface which allows to manage and monitor the DAGs. 
 
 When it comes to the database and executor, Airflow is very flexible. The `SequentialExecutor` for instance can be used for local development and runs one task at a time, while the `CeleryExecutor` or `KubernetesExecutor` allows for parallel execution on a cluster of worker nodes.
 
-While typically MySQL or Postgres are used as a database, Airflow also supports [SQLite](https://www.sqlite.org/) as an embedded database, which makes it possible to run a leightweight setup on your local machine.
+While typically MySQL or Postgres are used as a database, Airflow also supports [SQLite](https://www.sqlite.org/) as an embedded database, which makes it possible to run a lightweight setup on your local machine.
 
 The following article describes how to run Airflow locally as well as creating a minimal DAG using the TaskFlow API. It uses the following versions:
 
@@ -67,7 +67,7 @@ Airflow uses a folder called `airflow` on the local disc to manage some of its d
 
 When we first start Airflow in `standalone` mode, it will create the folder at the given location with a default configuration. It will use the `SequentialExecutor` and [SQLite](https://www.sqlite.org/) as a database, while storing the database file in the `AIRFLOW_HOME` location.
 
-The following commands will set the `AIRFLOW_HOME` environment variable to a folder called `airflow` in current directoy (which is the project directory) and start Airflow in `standalone` mode. We also add another environment variable called `NO_PROXY` to the command. This is due to a [known issue on macOS](https://github.com/apache/airflow/discussions/24463), which causes a `SIGSEGV` when running DAGs via the Airflow web interface.
+The following commands will set the `AIRFLOW_HOME` environment variable to a folder called `airflow` in current directory (which is the project directory) and start Airflow in `standalone` mode. We also add another environment variable called `NO_PROXY` to the command. This is due to a [known issue on macOS](https://github.com/apache/airflow/discussions/24463), which causes a `SIGSEGV` when running DAGs via the Airflow web interface.
 
 {% highlight bash %}
 NO_PROXY="*" AIRFLOW_HOME="$(pwd)/airflow" airflow standalone
@@ -101,7 +101,7 @@ Since we set the `AIRFLOW_HOME` variable to the `airflow` folder within the proj
 
 ![Airflow config location]({{site.baseurl}}/images/blog/2024-02-28-04.png)
 
-Open the configuration in your favorite editor, and change the following configuration:
+Open the configuration in your favourite editor, and change the following configuration:
 
 {% highlight text %}
 load_examples = False
