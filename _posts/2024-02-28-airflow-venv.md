@@ -2,7 +2,7 @@
 layout: post
 title: An introduction to Airflow, setting up a local environment and writing your first DAG
 description: This article explains the Apache Airflow basics and guides you through the process to set up a local environment as well as writing your first DAG using the TaskFlow API
-date: 2024-02-28 20:00:00 +0300
+date: 2024-02-28 10:00:00 +0300
 image: '/images/blog/2024-02-28.jpg'
 tags: [python, data engineering, airflow, tech]
 ---
