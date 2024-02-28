@@ -12,7 +12,7 @@ baseurl: ""
 # Author Settings
 author:
   name: Volker Janz
-  avatar: '/images/avatar.jpg'
+  avatar: '/images/avatar.webp'
 
 
 #-------------------------------
@@ -20,7 +20,7 @@ author:
 hero:
   title: Volker Janz
   description: Thoughts, stories and ideas from a Data Engineer, Software Developer, Passionate Speaker, Gym Enthusiast and Adventurer
-  image: '/images/header/home.jpg'
+  image: '/images/header/home.webp'
 
 
 #-------------------------------

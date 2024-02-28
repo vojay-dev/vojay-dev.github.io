@@ -2,7 +2,7 @@
 layout: page
 title: Speaking References
 permalink: /references/
-image: '/images/header/references.jpg'
+image: '/images/header/references.webp'
 toc: true
 order: 2
 ---
@@ -37,7 +37,7 @@ This talk was nominated as one of the top 5 talks at the conference.
 **Streaming SQL - Be Like Water My Friend**
 This talk was nominated as the highest rated presentation of the conference.
 
-![Highest rated presentation]({{site.baseurl}}/images/big-data-warsaw.jpg)
+![Highest rated presentation]({{site.baseurl}}/images/big-data-warsaw.webp)
 
 ## DataWorks Summit 2019 Barcelona, Spain
 

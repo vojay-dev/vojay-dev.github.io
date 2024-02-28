@@ -2,7 +2,7 @@
 layout: page
 title: About
 permalink: /about/
-image: '/images/header/about.jpg'
+image: '/images/header/about.webp'
 order: 1
 ---
 
@@ -12,7 +12,7 @@ My name is Volker and I am working as an Expert Data Engineer at [InnoGames](htt
 >
 > <cite>Steve Jobs</cite>
 
-![Time to think]({{site.baseurl}}/images/hamburg.jpg)
+![Time to think]({{site.baseurl}}/images/hamburg.webp)
 *Waltershofer Damm Hamburg, Germany / Volker Janz 2018*
 
 # Curriculum Vitae
