@@ -65,6 +65,7 @@ plugins:
   - jekyll/tagging
   - jekyll-feed
   - jekyll-seo-tag
+  - jekyll-toc
 
 paginate: 8
 paginate_path: "/page/:num"
