@@ -169,7 +169,7 @@ Partitions divide a table into segments based on **one** specific column. The pa
 
 ⏱️ **Ingestion time partitioning**: Automatically assign partition when inserting data based on current time with a pseudocolumn named `_PARTITIONTIME`
 
-It is up to you to define the partition column but it is highly recommend to choose this wisely as it can elimate a lot of bytes processed / billed.
+It is up to you to define the partition column but it is highly recommend to choose this wisely as it can eliminate a lot of bytes processed / billed.
 
 ![Partitioning]({{site.baseurl}}/images/blog/2024-03-03-14.png)
 
