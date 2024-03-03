@@ -300,7 +300,7 @@ Defining constraints is similar to other SQL dialects, just that you have to spe
 {% highlight sql %}
 CREATE TABLE gold.inventory (
  date INT64 REFERENCES dim_date(id) NOT ENFORCED,
- item INT64 REFERENCES item(iid) NOT ENFORCED,
+ item INT64 REFERENCES item(id) NOT ENFORCED,
  warehouse INT64 REFERENCES warehouse(id) NOT ENFORCED,
  quantity INT64,
  PRIMARY KEY(date, item, warehouse) NOT ENFORCED
