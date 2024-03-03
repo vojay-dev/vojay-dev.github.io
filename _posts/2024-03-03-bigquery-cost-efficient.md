@@ -82,24 +82,24 @@ When reaching a certain spending per month, it is worth looking into the capacit
 
 To reduce the costs for storage but also compute, it is very important to always use the smallest datatype possible for your columns. You can easily estimate the costs for a certain amount of rows following this overview:
 
-| Type           | Size                                                                               |
-|----------------|------------------------------------------------------------------------------------|
-| `ARRAY`        | Sum of the size of its elements                                                    |
-| `BIGNUMERIC`   | 32 logical bytes                                                                   |
-| `BOOL`         | 1 logical byte                                                                     |
-| `BYTES`        | 2 logical bytes + the number of logical bytes in the value                         |
-| `DATE`         | 8 logical bytes                                                                    |
-| `DATETIME`     | 8 logical bytes                                                                    |
-| `FLOAT64`      | 8 logical bytes                                                                    |
-| `GEOGRAPHY`    | 16 logical bytes + 24 logical bytes * the number of vertices in the geography type |
-| `INT64`        | 8 logical bytes                                                                    |
-| `INTERVAL`     | 16 logical bytes                                                                   |
-| `JSON`         | Number of logical bytes in UTF-8 encoding of the JSON-formatted string             |
-| `NUMERIC`      | 16 logical bytes                                                                   |
-| `STRING`       | 2 logical bytes + the UTF-8 encoded string size                                    |
-| `STRUCT`       | 0 logical bytes + the size of the contained fields                                 |
-| `TIME`         | 8 logical bytes                                                                    |
-| `TIMESTAMP`    | 8 logical bytes                                                                    |
+| Type           | Size                                                           |
+|----------------|----------------------------------------------------------------|
+| `ARRAY`        | Sum of the size of its elements                                |
+| `BIGNUMERIC`   | 32 logical bytes                                               |
+| `BOOL`         | 1 logical byte                                                 |
+| `BYTES`        | 2 logical bytes + logical bytes in the value                   |
+| `DATE`         | 8 logical bytes                                                |
+| `DATETIME`     | 8 logical bytes                                                |
+| `FLOAT64`      | 8 logical bytes                                                |
+| `GEOGRAPHY`    | 16 logical bytes + 24 logical bytes * vertices in the geo type |
+| `INT64`        | 8 logical bytes                                                |
+| `INTERVAL`     | 16 logical bytes                                               |
+| `JSON`         | Logical bytes in UTF-8 encoding of the JSON string             |
+| `NUMERIC`      | 16 logical bytes                                               |
+| `STRING`       | 2 logical bytes + the UTF-8 encoded string size                |
+| `STRUCT`       | 0 logical bytes + the size of the contained fields             |
+| `TIME`         | 8 logical bytes                                                |
+| `TIMESTAMP`    | 8 logical bytes                                                |
 
 _`NULL` is calculated as 0 logical bytes_
 
@@ -320,14 +320,14 @@ SELECT
     platform,
     login_count,
     day
-FROM project_x.bronze.login_count
+FROM project_x.bronze.login_count;
 {% endhighlight %}
 
 Even though this allows for transformation, in many cases we simply want to copy data from one place to another. The bytes billed for the query above would essentially be the amount of data we have to read from the source. However, we can also get this **for free** with the following query:
 
 {% highlight sql %}
 CREATE TABLE project_x.silver.login_count
-COPY project_x.bronze.login_count
+COPY project_x.bronze.login_count;
 {% endhighlight %}
 
 Alternatively, the `bq` CLI tool can be used to achieve the same result:
@@ -362,7 +362,7 @@ OPTIONS(
   format="ORC",
   hive_partition_uri_prefix="gs://project_x/ingest/some_orc_table",
   uris=["gs://project_x/ingest/some_orc_table/*"]
-)
+);
 {% endhighlight %}
 
 It will derive the schema from the ORC files and even detect the partition column. The naive approach to move this data from GCS to BigQuery storage might now be, to create a table in BigQuery and then follow the pragmatic `INSERT INTO ... SELECT FROM` approach.
@@ -384,7 +384,7 @@ FROM FILES (
 )
 WITH PARTITION COLUMNS (
   month STRING
-)
+);
 {% endhighlight %}
 
 Using this statement, we directly get a BigQuery table with the data ingested, **no need to create an external table first**! Also this query comes at **0 costs**. The `OVERWRITE` is optional, since data can also be appended instead of overwriting the table on every run.
@@ -405,7 +405,7 @@ Deleting partitions in such a scenario can be achieved like this:
 DELETE FROM silver.target WHERE day IN (
   SELECT DISTINCT day
   FROM bronze.ingest
-)
+);
 {% endhighlight %}
 
 Even if `day` is a partition column in both cases, this operation is connected to several costs. However, again there is an alternative solution that comes at **0 costs** again:
@@ -488,7 +488,7 @@ PARTITION BY day
 CLUSTER BY user_id
 OPTIONS (
   partition_expiration_days = 365
-)
+);
 {% endhighlight %}
 
 The basic idea is to introduce a view for stakeholders accessing this data and extend it with calculated measures:
@@ -503,7 +503,7 @@ SELECT
   payment_count > 0 AS is_paying_user,
   value_1 + value_2 AS total_value,
   day
-FROM gold.some_fact_table
+FROM gold.some_fact_table;
 {% endhighlight %}
 
 In this example we were able to avoid persisting two `INT64` values. One of these uses 8 logical bytes. If our fact table has 1,000,000,000 rows this would mean we save:
