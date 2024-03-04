@@ -7,7 +7,7 @@ toc: true
 order: 2
 ---
 
-During my career I shared my passion at various international conferences. This is a selection of my speaking references:
+I share my passion at various international conferences. This is a selection of my speaking references:
 
 * [Big Data Conference Europe 2023 Vilnius, Lithuania](#big-data-conference-europe-2023-vilnius-lithuania)
 * [Big Data Technology Warsaw Summit 2021 Warsaw, Poland](#big-data-technology-warsaw-summit-2021-warsaw-poland)
