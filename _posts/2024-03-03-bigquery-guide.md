@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Burn data rather than money with BigQuery - The Definitive Guide
+title: A Definitive Guide to Using BigQuery efficiently
 description: Make the most out of your BigQuery usage, burn data rather than money to create real value with some practical techniques
 date: 2024-03-03 10:00:00 +0300
 image: '/images/blog/2024-03-03.jpg'
@@ -10,11 +10,9 @@ toc: true
 
 # 📝 Introduction
 
-In the vast expanse of data management, there's a universal truth: managing data can be costly. Like a dragon guarding its treasure, each byte stored and each query executed demands its share of gold coins. But fear not, for in the kingdom of BigQuery, there exists a powerful spell to vanquish this fiscal dragon: burn data, not money!
+In the field of data warehousing, there’s a universal truth: managing data can be costly. Like a dragon guarding its treasure, each byte stored and each query executed demands its share of gold coins. But let me give you a magical spell to appease the dragon: burn data, not money!
 
-In this definitive guide, we shall unravel the arcane arts of BigQuery sorcery, mastering the mystical techniques of reducing costs while increasing efficiency, and beyond. Join as we journey through the labyrinthine depths of cost optimization, where every query is a battle and every byte, a precious coin.
-
-So, ready your wands and sharpen your minds, for in the realm of BigQuery, the path to riches lies not in hoarding data but in burning it - **burning data, not money** 🔥!
+In this article, we will unravel the arts of BigQuery sorcery, to reduce costs while increasing efficiency, and beyond. Join as we journey through the depths of cost optimization, where every byte is a precious coin.
 
 ![Burn data, not money]({{site.baseurl}}/images/blog/2024-03-03-11.jpg)
 
@@ -191,7 +189,7 @@ In the above example you can also see how to set the `partition_expiration_days`
 
 ## Clustering
 
-Clusters sort the data within each partition based on one ore more columns. If your queries commonly filter on particular columns, clustering accelerates queries because the query only scans the blocks that match the filter. If your queries filter on columns that have many distinct values (high cardinality), clustering accelerates these queries by providing BigQuery with detailed metadata for where to get input data.
+Clusters sort the data within each partition based on one ore more columns. When using cluster columns in your query filter, this technique will speed up the execution since BigQuery can determine which blocks to scan. This is especially recommended to use with high cardinality columns such as the title column in the following example.
 
 You can define up to **four** cluster columns.
 
@@ -247,7 +245,7 @@ That means: in the example above, if a user would filter by `login_device` a ful
 
 ## Indexing
 
-When you index your data, BigQuery can optimize some queries that use the `SEARCH` function or other functions and operator, such as `=`, `IN`, `LIKE`, and `STARTS_WITH`.
+By defining a search index on one or multiple columns, BigQuery can use this to speed up queries using the `SEARCH` function.
 
 A search index can be created with the `CREATE SEARCH INDEX` statement:
 
@@ -261,7 +259,7 @@ With `ALL COLUMNS` the index is automatically created for all `STRING` and `JSON
 SELECT * FROM silver.some_table WHERE SEARCH(some_table, 'needle');
 {% endhighlight %}
 
-BigQuery can optimize some queries that use the equal operator (=), IN operator, LIKE operator, or STARTS_WITH function to compare string literals with indexed data. By the time creating this article, you must enroll your project in the preview in order to use this functionality.
+A new feature, which is in preview state by the time writing this article, is to also utilize the index for operators such as `=`, `IN`, `LIKE`, and `STARTS_WITH`. This can be very beneficial for data structures that are directly used by end users via third party tools like PowerBI or Excel to further increase speed and reduce costs for certain filter operations.
 
 More information about this can be found in the [official search index documentation](https://cloud.google.com/bigquery/docs/search-index).
 
