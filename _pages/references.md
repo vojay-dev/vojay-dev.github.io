@@ -3,7 +3,6 @@ layout: page
 title: Speaking References
 permalink: /references/
 image: '/images/header/references.webp'
-toc: true
 order: 2
 ---
 
