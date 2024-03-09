@@ -19,25 +19,26 @@ My name is Volker and I am working as an Expert Data Engineer at [InnoGames](htt
 
 ## Work
 
-| Timeframe                              | Description                                                              |
-|----------------------------------------|--------------------------------------------------------------------------|
-| Apr.&nbsp;2020 - <br /> Now            | **InnoGames GmbH** <br /> Expert Data Engineer                           |
-| Aug.&nbsp;2018 - <br /> Apr.&nbsp;2020 | **InnoGames GmbH** <br /> Senior Data Engineer                           |
-| Aug.&nbsp;2014 - <br /> Aug.&nbsp;2020 | **InnoGames GmbH** <br /> Technical Product Lead - Data Engineering      |
-| Sep.&nbsp;2011 - <br /> Aug.&nbsp;2014 | **InnoGames GmbH** <br /> Software Developer - Backend Systems           |
-| Apr.&nbsp;2011 - <br /> Sep.&nbsp;2011 | **InnoGames GmbH** <br /> Student - Master's thesis                      |
-| Jan.&nbsp;2010 - <br /> Jan.&nbsp;2011 | **Carl von Ossietzky University of Oldenburg** <br /> Graduate Assistant |
-| Oct.&nbsp;2008 - <br /> Dec.&nbsp;2009 | **OFFIS Institute for Information Technology** <br /> Graduate Assistant |
+| Timeframe                              | Description                                                                                                         |
+|----------------------------------------|---------------------------------------------------------------------------------------------------------------------|
+| Apr.&nbsp;2020 - <br /> Now            | [**InnoGames GmbH**](https://innogames.com){:target="_blank"} <br /> Expert Data Engineer                           |
+| Aug.&nbsp;2018 - <br /> Apr.&nbsp;2020 | [**InnoGames GmbH**](https://innogames.com){:target="_blank"} <br /> Senior Data Engineer                           |
+| Aug.&nbsp;2014 - <br /> Aug.&nbsp;2020 | [**InnoGames GmbH**](https://innogames.com){:target="_blank"} <br /> Technical Product Lead - Data Engineering      |
+| Sep.&nbsp;2011 - <br /> Aug.&nbsp;2014 | [**InnoGames GmbH**](https://innogames.com){:target="_blank"} <br /> Software Developer - Backend Systems           |
+| Apr.&nbsp;2011 - <br /> Sep.&nbsp;2011 | [**InnoGames GmbH**](https://innogames.com){:target="_blank"} <br /> Student - Master's thesis                      |
+| Jan.&nbsp;2010 - <br /> Jan.&nbsp;2011 | [**Carl von Ossietzky University of Oldenburg**](https://uol.de){:target="_blank"} <br /> Graduate Assistant        |
+| Oct.&nbsp;2008 - <br /> Dec.&nbsp;2009 | [**OFFIS Institute for Information Technology**](https://www.offis.de){:target="_blank"} <br /> Graduate Assistant  |
 
 ## Education
 
 | Timeframe          | Description                                                                                        |
 |--------------------|----------------------------------------------------------------------------------------------------|
-| 2009 - <br /> 2011 | **Carl von Ossietzky University of Oldenburg** <br /> Master of Science (MSc), Business Informatics <small>(final grade: 1,37)</small> |
-| 2006 - <br /> 2009 | **Carl von Ossietzky University of Oldenburg** <br /> Bachelor of Science (BSc), Computer Science <small>(final grade: 1,71)</small> |
+| 2009 - <br /> 2011 | [**Carl von Ossietzky University of Oldenburg**](https://uol.de){:target="_blank"} <br /> Master of Science (MSc), Business Informatics <small>(final grade: 1,37)</small> |
+| 2006 - <br /> 2009 | [**Carl von Ossietzky University of Oldenburg**](https://uol.de){:target="_blank"} <br /> Bachelor of Science (BSc), Computer Science <small>(final grade: 1,71)</small> |
 
 ## Volunteering
 
-| Timeframe          | Description                                                                                     |
-|--------------------|-------------------------------------------------------------------------------------------------|
+| Timeframe          | Description                                                                                        |
+|--------------------|----------------------------------------------------------------------------------------------------|
+| 2009 - <br /> Now  | [**IEEE**](https://www.ieee.org){:target="_blank"} Member                                          |
 | Mar.&nbsp;2023     | **Game Development with Godot** <br /> Designed, organized and hosted a workshop on game development with Godot for kids (age 11-17) as part of the Hacker School Hamburg |
