@@ -33,8 +33,8 @@ My name is Volker and I am working as an Expert Data Engineer at [InnoGames](htt
 
 | Timeframe          | Description                                                                                        |
 |--------------------|----------------------------------------------------------------------------------------------------|
-| 2009 - <br /> 2011 | **Carl von Ossietzky University of Oldenburg** <br /> Master of Science (MSc), Information Systems |
-| 2006 - <br /> 2009 | **Carl von Ossietzky University of Oldenburg** <br /> Bachelor of Science (BSc), Computer Science  |
+| 2009 - <br /> 2011 | **Carl von Ossietzky University of Oldenburg** <br /> Master of Science (MSc), Business Informatics <small>(final grade: 1,37)</small> |
+| 2006 - <br /> 2009 | **Carl von Ossietzky University of Oldenburg** <br /> Bachelor of Science (BSc), Computer Science <small>(final grade: 1,71)</small> |
 
 ## Volunteering
 
