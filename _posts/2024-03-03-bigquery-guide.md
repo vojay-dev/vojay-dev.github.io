@@ -157,6 +157,20 @@ Also, storage is much cheaper than compute and that means:
 
 ![de-normalization example]({{site.baseurl}}/images/blog/2024-03-03-04.png)
 
+While de-normalization is not a one-size-fits-all solution, it should be considered for cost and performance optimization. However, there are aspects that might lead to a different, cost-efficient design.
+
+Especially when having small tables on the **right side** of the `JOIN`, BigQuery utilizes **Broadcast Joins** to broadcast the full dataset of the table to each slot which processes the larger table. That way, normalization has no negative impact on performance. Actually, the opposite is the case and due to reduced data redundancy.
+
+When BigQuery is not using the Broadcast Join, it uses the **Hash Join** approach. In this case, BigQuery uses hash and shuffle operations so that matching keys are processed in the same slot in order to perform a local join. However, compared to a Broadcast Join, this can be a an expensive operation as data needs to be moved.
+
+If you find yourself in a situation where Hash Joins are being used, there are still ways to potentially improve performance. At least aim for defining the join columns as cluster columns. This colocates data in the same columnar file, reducing the impact of shuffling.
+
+Ultimately, the best approach depends on the specifics of your data model and the size of the normalized tables. If redundancy can be reduced with a normalized structure while keeping the size of the `JOIN` tables small, so that Broadcast Joins are used, this is the better solution than enforcing a de-normalized approach. For tables bigger than 10G however, this should be evaluated with concrete benchmarks, which leads to the golden rule:
+
+> Benchmarking is key! Don’t rely solely on theory.
+
+Test different approaches (_normalized, denormalized, nested/repeated_) to find the most efficient solution for your specific use case.
+
 ## Partitioning
 
 Partitions divide a table into segments based on **one** specific column. The partition column can use one of 3 approaches:
