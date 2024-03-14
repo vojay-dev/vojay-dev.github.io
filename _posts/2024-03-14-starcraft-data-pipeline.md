@@ -139,9 +139,9 @@ ORDER BY total_wins DESC;
 
 Some fun facts based on this example:
 
-* Protoss has the highest total wins but the lowest maximum MMR in the grandmaster ladder.
-* Terran has the highest maximum MMR in the grandmaster ladder.
-* Zerg has the least wins but the highest average MMR in the grandmaster ladder.
+* 🥇 Protoss has the highest total wins but the lowest maximum MMR in the grandmaster ladder.
+* 🥈 Terran has the highest maximum MMR in the grandmaster ladder.
+* 🥉 Zerg has the least wins but the highest average MMR in the grandmaster ladder.
 
 ## DuckDB: Your versatile data manipulation tool
 
