@@ -40,5 +40,5 @@ My name is Volker and I am working as an Expert Data Engineer at [InnoGames](htt
 
 | Timeframe          | Description                                                                                        |
 |--------------------|----------------------------------------------------------------------------------------------------|
-| 2009 - <br /> Now  | [**IEEE**](https://www.ieee.org){:target="_blank"} Member                                          |
+| 2024 - <br /> Now  | [**IEEE**](https://www.ieee.org){:target="_blank"} Member                                          |
 | Mar.&nbsp;2023     | **Game Development with Godot** <br /> Designed, organized and hosted a workshop on game development with Godot for kids (age 11-17) as part of the Hacker School Hamburg |
