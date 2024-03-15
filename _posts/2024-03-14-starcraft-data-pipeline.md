@@ -149,7 +149,7 @@ While working on the first projects trying DuckDB I quickly realized, that it is
 
 At its core, DuckDB offers a seamless integration between SQL-based operations and other data processing tools like Pandas. This unique feature allows you to effortlessly switch between different technologies within your data processing scripts.
 
-Instead of implementing data wrangling fully in SQL or within your Pythin script using typical libraries like Pandas or NumPy, you switch between these environments without the need to setup a complex database integration.
+Instead of implementing data wrangling fully in SQL or within your Python script using typical libraries like Pandas or NumPy, you switch between these environments without the need to setup a complex database integration.
 
 You can start fetching data from an API, load it to a Pandas dataframe, insert into an in-memory DuckDB, perform aggregations using SQL, write the result back to another dataframe and continue from there, without much overhead. Especially as a Data Engineer who works with SQL a lot, this gave me a powerful tool for my toolbox to create more intuitive data flows.
 
