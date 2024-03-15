@@ -10,7 +10,7 @@ toc: true
 
 # Introduction and overview
 
-This project and article is not only a source for knowledge sharing but also a celebration of my love for gaming and the endless possibilities that data holds. It is a fusion of two great passions: gaming and Data Engineering. I grew up playing a lot of StarCraft: Brood War as well as StarCraft II. I never made it to the grandmaster ladder, but I enjoyed every match experiencing the adrenaline rush of commanding armies, outmanoeuvring opponents, and claiming victory (from time to time at least).
+This project and article is not only a source for knowledge sharing but also a celebration of my love for gaming and the endless possibilities that data holds. It is a fusion of two great passions: **gaming** and **Data Engineering**. I grew up playing a lot of [StarCraft: Brood War](https://starcraft.blizzard.com/){:target="_blank"} as well as [StarCraft II](https://starcraft2.blizzard.com/){:target="_blank"}, a real-time strategy video game where players control one of three unique factions in an intergalactic war, featuring resource management, base-building, and tactical combat. I never made it to the grandmaster ladder, where top-ranked players compete against each other, but I enjoyed every match experiencing the adrenaline rush of commanding armies, outmanoeuvring opponents, and claiming victory (*from time to time at least*).
 
 Just as I fine-tuned my build orders and adapt to enemy tactics in StarCraft, I am now optimizing data pipelines, analyze trends, and visualize insights as a Data Engineer. In this article I would like to share knowledge about three useful technologies of today's modern data stacks, which are namely:
 
@@ -20,7 +20,7 @@ Just as I fine-tuned my build orders and adapt to enemy tactics in StarCraft, I 
 
 In this article, I will explain the basics about each of the three technologies also giving examples how you can use them in your daily business.
 
-Finally, everything comes together when we create an example project, a StarCraft II data pipeline, where we fetch data from the StarCraft II API and storing the results in DuckDB, orchestrated via Airflow. We will also create a Streamlit app to visualize the data and have a look, how the current grandmaster ladder in StarCraft II looks like (spoiler: you will not find me in it). This is our final result:
+Finally, everything comes together when we create an example project, a **StarCraft II data pipeline**, where we fetch data from the StarCraft II API and store the results in DuckDB, orchestrated via Airflow. We will also create a Streamlit app to visualize the data and have a look, how the current grandmaster ladder in StarCraft II looks like (spoiler: you will not find me in it). This is our final result:
 
 ![Streamlit app]({{site.baseurl}}/images/blog/2024-03-14-03.png)
 *Streamlit app for StarCraft II grandmaster ladder data*
@@ -33,7 +33,7 @@ So, grab your mouse and keyboard, summon your inner Protoss, Zerg, or Terran com
 
 [Apache Airflow](https://airflow.apache.org/){:target="_blank"} is an open-source platform to programmatically author, schedule and monitor workflows using Python. Workflows are represented as Directed Acyclic Graphs (DAGs) and each vertex in the graph is one unit of work (task).
 
-Often, workflows are so called Extract, Transform, Load (ETL) processes (or ELT), but in in fact, Airflow is so flexible that any kind of workflow can be implemented.
+Often, workflows are so called Extract, Transform, Load (ETL) processes (*or ELT, depending on when the transformation happens*), but in in fact, Airflow is so flexible that **any kind of workflow** can be implemented.
 
 ![Airflow workflow]({{site.baseurl}}/images/blog/2024-03-14-02.png)
 
@@ -116,7 +116,7 @@ You can use this to connect to a DuckDB source or perform in-memory operations.
 ![DuckDB CLI]({{site.baseurl}}/images/blog/2024-03-14-04.png)
 *Analyze data with the DuckDB CLI*
 
-To show some of the capabilities, I used it to connect to the DuckDB database file we will create as part of the project, keeping the data fetched from the StarCraft API, to run some analysis quickly:
+To show some of the capabilities, I used it to connect to the DuckDB database file, we will create as part of the project later, to run some analysis:
 
 {% highlight sql %}
 SELECT favorite_race, SUM(wins) AS total_wins, MAX(mmr) AS max_mmr, AVG(mmr) AS avg_mmr
@@ -155,7 +155,7 @@ You can start fetching data from an API, load it to a Pandas dataframe, insert i
 
 Just like in StarCraft, you have to choose the right units for the situation. You can create an army of Zealots but once your opponent attacks with a lot of Roaches, you should adjust your army composition and add Immortals and Void Rays to it. Same is true for your data wrangling scripts: by adding tools like DuckDB to your overall composition, your possibilities can cope with more challenges when processing data.
 
-The following example reads the StarCraft II ladder data we will populate with the Airflow DAG, uses SQL for aggregation, writes the result to a Pandas dataframe, adds some column using Pandas, puts the result back to an in-memory DuckDB table, performs further transformation to finally move back to a Pandas dataframe.
+The following example reads the StarCraft II ladder data we will populate with the Airflow DAG, uses SQL for aggregation, writes the result to a Pandas dataframe, adds some column using Pandas, puts the result back to an in-memory DuckDB table and performs further transformation to finally move back to a Pandas dataframe.
 
 {% highlight py %}
 import duckdb
@@ -198,7 +198,7 @@ if __name__ == '__main__':
     print(df_agg)
 {% endhighlight %}
 
-We get the following output:
+With the code above and the StarCraft II API grandmaster ladder data, the following output is generated:
 
 {% highlight text %}
   favorite_race  total_wins  total_losses  max_mmr      avg_mmr
@@ -241,7 +241,11 @@ import streamlit as st
 st.title("My Streamlit App")
 {% endhighlight %}
 
-You get a simple header, or with:
+You get a web app with a simple header.
+
+![DuckDB CLI]({{site.baseurl}}/images/blog/2024-03-14-14.png)
+
+While with the following code:
 
 {% highlight py %}
 import streamlit as st
@@ -309,7 +313,7 @@ Airflow uses a folder called `airflow` on the local disc to manage some of its d
 
 When we first start Airflow in `standalone` mode, it will create the folder at the given location with a default configuration. It will use the `SequentialExecutor` and [SQLite](https://www.sqlite.org/){:target="_blank"} as a database, while storing the database file in the `AIRFLOW_HOME` location.
 
-The following commands will set the `AIRFLOW_HOME` environment variable to a folder called `airflow` in current directory (which is the project directory) and start Airflow in `standalone` mode. We also add another environment variable called `NO_PROXY` to the command. This is due to a [known issue on macOS](https://github.com/apache/airflow/discussions/24463){:target="_blank"}, which causes a `SIGSEGV` when running DAGs via the Airflow web interface.
+The following command will set the `AIRFLOW_HOME` environment variable to a folder called `airflow` in **current directory** (*which is the project directory*) and start Airflow in `standalone` mode. We also add another environment variable called `NO_PROXY` to the command. This is due to a [known issue on macOS](https://github.com/apache/airflow/discussions/24463){:target="_blank"}, which causes a `SIGSEGV` when running DAGs via the Airflow web interface.
 
 {% highlight bash %}
 NO_PROXY="*" AIRFLOW_HOME="$(pwd)/airflow" airflow standalone
@@ -329,7 +333,7 @@ You can now open [http://localhost:8080/](http://localhost:8080/){:target="_blan
 
 ![Airflow web interface]({{site.baseurl}}/images/blog/2024-03-14-06.png)
 
-Congratulations 🎉, you have a pragmatic, local Airflow environment. The warnings in the web interface show up because you are automatically using the `SequentialExecutor` and a [SQLite](https://www.sqlite.org/){:target="_blank"} database in standalone mode, so of course this is not meant for production usage.
+Congratulations 🎉, you have a pragmatic, local Airflow environment. The warnings in the web interface show up because you are automatically using the `SequentialExecutor` and a [SQLite](https://www.sqlite.org/){:target="_blank"} database in standalone mode, so of course **this is not meant for production usage**.
 
 You can stop the standalone process with `control+c`.
 
@@ -347,7 +351,7 @@ Open the configuration in your favourite editor, and change the following config
 load_examples = False
 {% endhighlight %}
 
-Even if you now restart the standalone process, the example DAGs may still show up as they are persisted in the database. Therefore, we also need to reset the database accordingly with the following command (ensure to activate your virtual environment first and be in the project folder).
+Even if you now restart the standalone process, the example DAGs may still show up as they are persisted in the database. Therefore, we also need to reset the database accordingly with the following command (*ensure to activate your virtual environment first and be in the project folder*).
 
 {% highlight sh %}
 NO_PROXY="*" AIRFLOW_HOME="$(pwd)/airflow" airflow db reset
@@ -554,7 +558,7 @@ The basic flow of the DAG is rather simple, it has 2 main task groups that are c
 
 ![DAG]({{site.baseurl}}/images/blog/2024-03-14-13.png)
 
-We will look at some of the key elements of these task groups.
+We will now look at some of the key elements of these task groups.
 
 ### Get data
 
@@ -711,7 +715,7 @@ st.dataframe(ladder, column_config={
 })
 {% endhighlight %}
 
-Finally, we see that Protoss seems to be the most prominent race in the grandmaster ladder, which is nice, since I am a former Protoss player myself 😉.
+Finally, we see that Protoss seems to be the most prominent faction in the grandmaster ladder, which is nice, since I am a former Protoss player myself 😉.
 
 # Conclusion
 
