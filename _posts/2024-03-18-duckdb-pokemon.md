@@ -128,7 +128,7 @@ Running this code, we get the expected output, a table with one column and one r
 
 # Demo 2: Read JSON from API
 
-Things will escalate quickly now, so ensure you have your Poké Ball ready. Usually when fetching JSON data from an API, we would start with `requests.get` implementing some client logic to finally load the data to a database or use another framework for data wrangling like Pandas. The next example will for sure surprise you with its pragmatism, we will use SQL to fetch the data and make it directly available as a table in SQL.
+Things will escalate quickly now, so ensure you have your Pokéball ready. Usually when fetching JSON data from an API, we would start with `requests.get` implementing some client logic to finally load the data to a database or use another framework for data wrangling like Pandas. The next example will for sure surprise you with its pragmatism, we will use SQL to fetch the data and make it directly available as a table in SQL.
 
 {% highlight py %}
 import duckdb
@@ -148,7 +148,7 @@ The code above gives us a table with four columns, according to the respective r
 
 ![read_json_auto]({{site.baseurl}}/images/blog/2024-03-18-05.png)
 
-Flexibility is where DuckDB truly shines. DuckDB is your zippy Pikachu - and loading JSON data is just one example. You can also read data from CSV files or even Parquet files with Hive paritioning:
+Flexibility is where DuckDB truly shines. DuckDB is your zippy Pikachu - and loading JSON data is just one example. You can also read data from CSV files or even Parquet files with Hive partitioning:
 
 {% highlight sql %}
 SELECT *
@@ -237,7 +237,7 @@ We can then use it in SQL:
 json(get(pokemon.url)) AS details
 {% endhighlight %}
 
-In other words: we call the Python function `get` for each `pokemon.url` form our unnested list of Pokémon. What we get is the JSON response as text and we parse that with the `json` function to get a propertly typed result.
+In other words: we call the Python function `get` for each `pokemon.url` form our unnested list of Pokémon. What we get is the JSON response as text and we parse that with the `json` function to get a properly typed result.
 
 This is the final code to try yourself:
 
@@ -274,7 +274,7 @@ The execution might take a few seconds as we call the API for each of the Pokém
 
 # Demo 5: List comprehension
 
-List comprehension in Python is one of my favourite features. You can also use list comprehension in DuckDB! Our goal is to furhter process the details, by extracting them into individual columns. But not all details, just the ID, the name, the height and the weight of the Pokémon.
+List comprehension in Python is one of my favourite features. You can also use list comprehension in DuckDB! Our goal is to further process the details, by extracting them into individual columns. But not all details, just the ID, the name, the height and the weight of the Pokémon.
 
 We also want to reduce the abilities to a simple list with the ability names that the Pokémon can use in another column.
 
@@ -496,6 +496,8 @@ with duckdb.connect(database="pokemon.db") as conn:
 # Conclusion
 
 DuckDB emerged as a robust companion in data wrangling challenges, offering seamless integration with Pandas dataframes and advanced analytical SQL capabilities. Its lightweight nature and efficient performance underscored its suitability for analytical workloads in resource-constrained environments.
+
+**You can find all demos also on Github** 🪄: https://github.com/vojay-dev/duckdb-pokemon
 
 With DuckDB by your side, you'll become a successful Pokémon trainer in no time.
 
