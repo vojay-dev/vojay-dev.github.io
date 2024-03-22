@@ -185,7 +185,7 @@ It is up to you to define the partition column but it is highly recommend to cho
 
 ![Partitioning]({{site.baseurl}}/images/blog/2024-03-03-14.png)
 
-**Example**
+**Example**:
 
 {% highlight sql %}
 CREATE TABLE IF NOT EXISTS silver.some_partitioned_table (
@@ -207,7 +207,7 @@ Clusters sort the data within each partition based on one ore more columns. When
 
 You can define up to **four** cluster columns.
 
-**Example**
+**Example**:
 
 {% highlight sql %}
 CREATE TABLE IF NOT EXISTS silver.some_partitioned_table (
@@ -232,7 +232,7 @@ Instead of storing one row per login, with a nested repeated column you can stor
 
 ![Nested repeated columns example]({{site.baseurl}}/images/blog/2024-03-03-05.png)
 
-**Example**
+**Example**:
 
 {% highlight sql %}
 CREATE TABLE silver.logins (
