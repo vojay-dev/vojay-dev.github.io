@@ -28,7 +28,7 @@ The following illustration shows the basic architecture of how BigQuery is struc
 
 ![BigQuery architecture]({{site.baseurl}}/images/blog/2024-03-03-12.png)
 
-Data can be stored in Colossus, however, it is also possible to create BigQuery tables on top of data stored in Google Cloud Storage. In that case, queries are still processed using the BigQuery compute infrastructure but read data from GCS instead. Such `external tables` come with some disadvantages but in some cases it can be more cost efficient to have the data stored in GCS. Also, sometimes it is not about Big Data but simply reading data from existing CSV files that are somehow ingested to GCS. For simplicity it can also be benficial to use these kind of tables.
+Data can be stored in Colossus, however, it is also possible to create BigQuery tables on top of data stored in Google Cloud Storage. In that case, queries are still processed using the BigQuery compute infrastructure but read data from GCS instead. Such `external tables` come with some disadvantages but in some cases it can be more cost efficient to have the data stored in GCS. Also, sometimes it is not about Big Data but simply reading data from existing CSV files that are somehow ingested to GCS. For simplicity it can also be benificial to use these kind of tables.
 
 ![BigQuery external tables]({{site.baseurl}}/images/blog/2024-03-03-13.png)
 
