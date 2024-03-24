@@ -548,6 +548,10 @@ Forget hoarding every byte like a dragon guarding its treasure. Instead, learn t
 * Implement a view layer to serve data with calculated measures, preventing the storage of redundant data.
 * Monitor your BigQuery slot usage to understand if slot limitations are a concern, allowing you to focus on optimizing query structures.
 
+There are more techniques to consider regarding data modeling for cost-optimized BigQuery usage I didn't mention in this article.
+
+_For example:_ BigQuery offers smart tuning via materialized views, which means queries are automatically rewritten by the engine using materialized views when certain conditions are met. That way, common aggregations, JOINs, and other operations can be pre-computed in materialized views to significantly reduce costs. The best practice here is to apply this kind of optimization after the release of the project to stakeholders to first gather data on how they utilize your model. Then, try to identify common cost-intensive patterns in the queries and create materialized views for these parts. I might cover this aspect in a future article.
+
 > By adopting these strategies, you can unlock the true potential of BigQuery, transforming it into a cost-effective engine for data exploration and analysis. Remember, in the realm of BigQuery, it's all about burning data, not money!
 
 **Feel free to share your experiences in the comments!**
