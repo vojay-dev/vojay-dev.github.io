@@ -2,7 +2,7 @@
 layout: post
 title: Gotta process 'em all - DuckDB masters your data like a Pokémon trainer
 description: Practical examples how to use DuckDB as a tool for data wrangling based on Pokémon API data
-date: 2024-03-14 10:00:00 +0300
+date: 2024-03-18 10:00:00 +0300
 image: '/images/blog/2024-03-18.jpg'
 tags: [data engineering, tech, duckdb, python]
 toc: true
@@ -497,7 +497,7 @@ with duckdb.connect(database="pokemon.db") as conn:
 
 DuckDB emerged as a robust companion in data wrangling challenges, offering seamless integration with Pandas dataframes and advanced analytical SQL capabilities. Its lightweight nature and efficient performance underscored its suitability for analytical workloads in resource-constrained environments.
 
-**You can find all demos also on Github** 🪄: https://github.com/vojay-dev/duckdb-pokemon
+**You can find all demos also on Github** 🪄: [https://github.com/vojay-dev/duckdb-pokemon](https://github.com/vojay-dev/duckdb-pokemon){:target="_blank"}
 
 With DuckDB by your side, you'll become a successful Pokémon trainer in no time.
 
