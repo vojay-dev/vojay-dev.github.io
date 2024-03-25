@@ -821,7 +821,7 @@ public class App {
 }
 {% endhighlight %}
 
-Before we run it again, we need to adjust our run configuration again by adding the new `--twitchChannels` parameter. As we marked it as **required**, the application would fail otherwise. Navigate to "Run" -> "Edit Configurations..." and add:
+Before we run it again, we need to adjust our run configuration again by adding the new `--twitchChannels` parameter. As we marked it as **required**, the application would fail otherwise. Navigate to _Run_ --> _Edit Configurations..._ and add:
 
 {% highlight text %}
 --twitchChannels vojay,valorant
