@@ -839,6 +839,24 @@ Now it is time to run your streaming application again and enjoy the show!
 
 And there you have it! We've built a real-time sentiment analysis application for Twitch chat using Apache Flink. Now you can not only see the chat flow by, but also understand the emotional pulse of the audience. This might be the boilerplate for a more advanced version. Track the sentiment throughout a stream, see how the viewers react to big plays or funny moments, and use that knowledge to create even more engaging content.
 
+Some inspiration to turn this prototype into a valubale, production-ready project:
+
+**Adjust model**
+
+Use a model that is trained specifically on social media data, (e.g., roBERTa) or even better, train a model directly with historical Twich chat data to incorporate Twich specific communication aspects like specific emoji codes.
+
+**Apply windowing**
+
+Extend the Flink pipeline with a window function, for example a tumbling window per minute, and aggregate the sentiment score as an average per minute.
+
+**Persist results**
+
+Persist the resulting stream with an aggregate per minute in Kafka or a Time Series Database (TSDB).
+
+**Create dashboard**
+
+Create a dashboard on the aggregated data, visualizing the average sentiment per minute in a graph.
+
 So, the next time you tune into your favorite streamer, keep an eye out for that sentiment analysis running in the background. It might just reveal some fascinating insights about the passionate world of the Twitch chat!
 
 But the most important thing about this article is: get inspired, learn and inspire others. The cool thing about Data Engineering and related fields:
