@@ -841,19 +841,19 @@ And there you have it! We've built a real-time sentiment analysis application fo
 
 Some inspiration to turn this prototype into a valuable, production-ready project:
 
-**Adjust model**
+⚙️ **Adjust model**
 
 Use a model that is trained specifically on social media data (e.g., [RoBERTa](https://huggingface.co/cardiffnlp/twitter-roberta-base-sentiment){:target="_blank"}) or even better, train a model directly with historical Twitch chat data to incorporate Twitch-specific communication aspects like specific emoji codes.
 
-**Apply windowing**
+🧮 **Apply windowing**
 
 Extend the Flink pipeline with a window function, for example, a tumbling window per minute, and aggregate the sentiment score as an average per minute.
 
-**Persist results**
+📦 **Persist results**
 
 Persist the resulting stream with an aggregate per minute in Kafka or a Time Series Database (TSDB).
 
-**Create dashboard**
+📊 **Create dashboard**
 
 Create a dashboard on the aggregated data, visualizing the average sentiment per minute in a graph.
 
