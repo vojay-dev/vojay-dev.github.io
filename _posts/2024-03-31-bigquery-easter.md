@@ -8,7 +8,7 @@ tags: [data engineering, tech, big query, gcp, sql]
 toc: true
 ---
 
-Happy Easter! As a little _thank you_ to the Data Engineering community 🫶, I wrote this article where, you will learn how to create and use a BigQuery User-Defined Function (UDF) by creating a little Easter egg hunt game 🐰.
+As a little _thank you_ to the Data Engineering community 🫶, I wrote this article where you will learn how to create and use a BigQuery User-Defined Function (UDF) by creating a little Easter egg hunt game 🐰.
 
 ![Easter egg UDF]({{site.baseurl}}/images/blog/2024-03-31-02.png)
 
