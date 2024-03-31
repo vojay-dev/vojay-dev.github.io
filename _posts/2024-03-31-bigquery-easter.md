@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Easter egg hunt with BigQuery and User-Defined Functions (UDFs) - Happy Easter!
+title: Easter egg hunt with BigQuery and User-Defined Functions (UDFs)
 description: Discover the basics of extensibility with BigQuery User-Defined Functions (UDFs) with a little Easter egg hunt game
 date: 2024-03-31 10:00:00 +0300
 image: '/images/blog/2024-03-31.jpg'
@@ -263,4 +263,4 @@ As we hop through the joyous fields of Easter egg hunts and BigQuery wonders, le
 
 Just like cracking open an Easter egg reveals a hidden surprise, exploring the world of UDFs unveils a treasure trove of possibilities for data exploration and analysis.
 
-So, as you embark on your own data adventures, remember the magic of UDFs. They're not just tools; they can help centralizing and encapsulate custom data transformations, advanced processing and validation tasks to turn data into delightful insights. Happy Easter, and may your hunts be filled with joy, laughter, and plenty of colorful eggs 🐰🥚!
+So, as you embark on your own data adventures, remember the magic of UDFs. They're not just tools; they can help centralizing and encapsulate custom data transformations, advanced processing and validation tasks to turn data into delightful insights. Happy Easter, and may your (data) hunts be filled with joy, laughter, and plenty of colorful eggs 🐰🥚!
