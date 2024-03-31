@@ -42,7 +42,7 @@ social:
 
 #-------------------------------
 # Comment Section (Disqus)
-disqus-identifier: vojay
+disqus-identifier: # Enter Disqus user to enable
 
 
 #-------------------------------
