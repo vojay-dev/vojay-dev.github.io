@@ -526,7 +526,7 @@ responses = chat.send_message(
 
 I am using this in Gemini Movie Detectives to set the `temperature` to 0.5, which gave me best results. In this context `temperature` means: how creative are the generated responses by Gemini. The value must be between 0.0 and 1.0, whereas closer to 1.0 means more creativity.
 
-One of the main challenges apart from sending a  prompt and receive the reply from Gemini is to parse the reply in order to extract the relevant information.
+One of the main challenges apart from sending a prompt and receive the reply from Gemini is to parse the reply in order to extract the relevant information.
 
 One learning from the project is:
 
