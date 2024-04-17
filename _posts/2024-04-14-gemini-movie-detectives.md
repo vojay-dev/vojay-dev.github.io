@@ -27,6 +27,11 @@ The project is **fully open-source** and is split into two separate repositories
 
 The focus of the article is the backend project and underlying concepts. It will therefore only briefly explain the frontend and its components.
 
+In the following video, I also give an overview over the project and its components:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/l72WUiuGkAU?si=JauteTRjhHwyWpYR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<br />
+
 ## Inspiration
 
 Growing up as a passionate gamer and now working as a Data Engineer, I've always been drawn to the intersection of gaming and data. With this project, I combined two of my greatest passions: gaming and data. Back in the 90' I always enjoyed the video game series You Don't Know Jack, a delightful blend of trivia and comedy that not only entertained but also taught me a thing or two. Generally, the usage of games for educational purposes is another concept that fascinates me.
