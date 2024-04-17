@@ -8,9 +8,9 @@ tags: [data engineering, tech, vertexai, gcp, python, ai, gemini]
 toc: true
 ---
 
-Within this article, I would like to share some of the basics to create a LLM-driven web-application, using various technologies, such as: Python, [FastAPI](https://fastapi.tiangolo.com/){:target="_blank"}, [Pydantic](https://docs.pydantic.dev/latest/){:target="_blank"}, [VertexAI](https://cloud.google.com/vertex-ai){:target="_blank"} and more. You will learn how to create such a project from the very beginning and get an overview of the underlying concepts, including **Retrieval-Augmented Generation** (RAG).
+Within this article, I share some of the basics to create a LLM-driven web-application, using various technologies, such as: Python, [FastAPI](https://fastapi.tiangolo.com/){:target="_blank"}, [Pydantic](https://docs.pydantic.dev/latest/){:target="_blank"}, [VertexAI](https://cloud.google.com/vertex-ai){:target="_blank"} and more. You will learn how to create such a project from the very beginning and get an overview of the underlying concepts, including **Retrieval-Augmented Generation** (RAG).
 
-The best way to share this knowledge is by a practical example. And therefore, I will use my project Gemini Movie Detectives to cover the various aspects. The project was created as part of the [Google AI Hackathon 2024](https://googleai.devpost.com/){:target="_blank"}, which is still running while I am writing this.
+The best way to share this knowledge is through a practical example. Hence, I'll use my project **Gemini Movie Detectives** to cover the various aspects. The project was created as part of the [Google AI Hackathon 2024](https://googleai.devpost.com/){:target="_blank"}, which is still running while I am writing this.
 
 ![Gemini Movie Detectives]({{site.baseurl}}/images/blog/2024-04-14-09.png)
 
@@ -22,8 +22,8 @@ Part of the project was also to make it deployable with Docker and to create a l
 
 The project is **fully open-source** and is split into two separate repositories:
 
-- **Github repository for backend**: [https://github.com/vojay-dev/gemini-movie-detectives-api](https://github.com/vojay-dev/gemini-movie-detectives-api){:target="_blank"}
-- **Github repository for frontend**: [https://github.com/vojay-dev/gemini-movie-detectives-ui](https://github.com/vojay-dev/gemini-movie-detectives-ui){:target="_blank"}
+- 🚀 **Github repository for backend**: [https://github.com/vojay-dev/gemini-movie-detectives-api](https://github.com/vojay-dev/gemini-movie-detectives-api){:target="_blank"}
+- ️️🖥️ **Github repository for frontend**: [https://github.com/vojay-dev/gemini-movie-detectives-ui](https://github.com/vojay-dev/gemini-movie-detectives-ui){:target="_blank"}
 
 The focus of the article is the backend project and underlying concepts. It will therefore only briefly explain the frontend and its components.
 
@@ -55,7 +55,7 @@ From a business standpoint, this modularization opens doors to a wider customer 
 
 Before we jump into details, let's get an overview of how the application was built.
 
-**Tech Stack: Backend**
+**Tech Stack: 🚀 Backend**
 
 - Python 3.12 + [FastAPI](https://fastapi.tiangolo.com/){:target="_blank"} API development
 - [httpx](https://www.python-httpx.org/){:target="_blank"} for TMDB integration
@@ -68,7 +68,7 @@ Before we jump into details, let's get an overview of how the application was bu
 - [Ruff](https://docs.astral.sh/ruff/){:target="_blank"} as linter and code formatter together with [pre-commit](https://pre-commit.com/){:target="_blank"} hooks
 - Github Actions to automatically run tests and linter on every push
 
-**Tech Stack: Frontend**
+**Tech Stack: 🖥️ Frontend**
 
 - [VueJS](https://vuejs.org/){:target="_blank"} 3.4 as the frontend framework
 - [Vite](https://vitejs.dev/){:target="_blank"} for frontend tooling
@@ -681,7 +681,7 @@ And there you have it, folks! You're now equipped to craft your own LLM-powered 
 
 Feeling inspired but need a starting point? Check out the open-source code for the Gemini Movie Detectives project:
 
-- **Github repository for backend**: [https://github.com/vojay-dev/gemini-movie-detectives-api](https://github.com/vojay-dev/gemini-movie-detectives-api){:target="_blank"}
-- **Github repository for frontend**: [https://github.com/vojay-dev/gemini-movie-detectives-ui](https://github.com/vojay-dev/gemini-movie-detectives-ui){:target="_blank"}
+- 🚀 **Github repository for backend**: [https://github.com/vojay-dev/gemini-movie-detectives-api](https://github.com/vojay-dev/gemini-movie-detectives-api){:target="_blank"}
+- ️️🖥️ **Github repository for frontend**: [https://github.com/vojay-dev/gemini-movie-detectives-ui](https://github.com/vojay-dev/gemini-movie-detectives-ui){:target="_blank"}
 
 The future of AI-powered applications is bright, and you're holding the paintbrush! Let's go make something remarkable. And if you need a break, feel free to try [https://movie-detectives.com/](https://movie-detectives.com/){:target="_blank"}.
