@@ -535,8 +535,7 @@ One learning from the project is:
 For example, the question prompt for Gemini contains this instruction:
 
 {% highlight text %}
-Strictly use the following template to reply:
-
+Your reply must only consist of three lines! You must only reply strictly using the following template for the three lines:
 Question: <Your question>
 Hint 1: <The first hint to help the participants>
 Hint 2: <The second hint to get the title more easily>
