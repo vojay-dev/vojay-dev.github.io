@@ -8,6 +8,7 @@ order: 3
 
 Knowledge shared is knowledge squared. This is a selection of my publications:
 
+* **Article published in [Towards Data Science](https://towardsdatascience.com/), April, 2024**: [Create an AI-Driven Movie Quiz with Gemini LLM, Python, FastAPI, Pydantic, RAG and more](https://medium.com/towards-data-science/create-an-ai-driven-movie-quiz-with-gemini-llm-python-fastapi-pydantic-rag-and-more-e15322be4f66)
 * **Article published in [Data Engineer Things](https://blog.det.life/), April, 2024**: [Easter egg hunt with BigQuery and User-Defined Functions (UDFs)
 ](https://medium.com/data-engineer-things/easter-egg-hunt-with-bigquery-and-user-defined-functions-udfs-c89b3e831823)
 * **Article published in the German online magazine [BigData-Insider](https://www.bigdata-insider.de/), March, 2024**: [Big Data im Gaming – Echtzeit-Kundeninteraktion mit Kafka und Flink](https://www.bigdata-insider.de/big-data-im-gaming-echtzeit-kundeninteraktion-mit-kafka-und-flink-a-5f54958c1e1b6983adddaa16e3a59ae7/)
