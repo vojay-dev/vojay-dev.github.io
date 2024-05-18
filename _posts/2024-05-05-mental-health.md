@@ -678,4 +678,4 @@ By embracing these advancements and prioritizing ethical development, such appli
 
 This future is closer than we think. With responsible development and a focus on ethical considerations, technology might revolutionize mental healthcare, making it accessible and available to everyone, every day.
 
-Even thought AI, LLMs, ML and data in general is all around these days, there are many areas where AI can be used for making positive, social impact. Especially mental health support holds many risks and challenges, but making these transparent and discussing them is a great start! Therefore, looking forward to hear about your ideas, experiences, concerns and solutions.
+Even though AI, LLMs, ML, and data are all around today, there are still numerous opportunities to use AI for positive social impact. Mental health support, in particular, presents significant risks and challenges, but by making these transparent and discussing them openly, we can make the way for meaningful progress. I look forward to hearing your ideas, experiences, concerns, and solutions.
