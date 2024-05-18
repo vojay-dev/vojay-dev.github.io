@@ -15,6 +15,12 @@ My name is Volker and I am working as an Expert Data Engineer at [InnoGames](htt
 ![Time to think]({{site.baseurl}}/images/hamburg.webp)
 *Waltershofer Damm Hamburg, Germany / Volker Janz 2018*
 
+# Prizes and Awards
+
+- Second place overall at the [Google AI Hackathon 2024](https://googleai.devpost.com/) by Google (>15k participants)
+- Top 5 session of Big Data Conference Europe 2023
+- Award for best presentation of Big Data Technology Warsaw Summit 2021
+
 # Curriculum Vitae
 
 ## Work
