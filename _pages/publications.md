@@ -8,6 +8,7 @@ order: 3
 
 Knowledge shared is knowledge squared. This is a selection of my publications:
 
+* **Article published in [Data Engineer Things](https://blog.det.life/), May, 2024**: [Minds and Machines — AI for Mental Health Support, Fine-Tuning LLMs with LoRA in Practice](https://blog.det.life/minds-and-machines-ai-for-mental-health-support-fine-tuning-llms-with-lora-in-practice-0ff19edb9d76)
 * **Article published in [Data Engineer Things](https://blog.det.life/), April, 2024**: [Create your own Gemini AI-chatbot with a twist using Python, Jinja2 and NiceGUI](https://medium.com/data-engineer-things/create-your-own-gemini-ai-chatbot-with-a-twist-using-python-jinja2-and-nicegui-7d35ac981a63)
 * **Article published in [Towards Data Science](https://towardsdatascience.com/), April, 2024**: [Create an AI-Driven Movie Quiz with Gemini LLM, Python, FastAPI, Pydantic, RAG and more](https://medium.com/towards-data-science/create-an-ai-driven-movie-quiz-with-gemini-llm-python-fastapi-pydantic-rag-and-more-e15322be4f66)
 * **Article published in [Data Engineer Things](https://blog.det.life/), April, 2024**: [Easter egg hunt with BigQuery and User-Defined Functions (UDFs)
