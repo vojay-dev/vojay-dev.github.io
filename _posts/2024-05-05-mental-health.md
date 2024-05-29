@@ -35,7 +35,7 @@ While Large Language Models (LLMs) like ChatGPT or Gemini are capturing the head
 
 ELIZA wasn't originally intended for the therapeutic realm. Its purpose was to explore the dynamics of human-machine communication, not to provide mental health support but it ended up sparking a conversation about the potential of chatbots in mental health support.
 
-Actually, ELIZA itself was an interpreter whereas the ruleset came from scripts. Reading these scripts was done using the Symmetric List Processor (SLIP) programming language, also invented by Joseph Weizenbaum for this purpose. While SLIP was originally an extension to Fortran, in was later embedded into the Michigan Algorithm Decoder (MAD) and Algorithmic Language (ALGOL).
+Actually, ELIZA itself was an interpreter whereas the ruleset came from scripts. Reading these scripts was done using the Symmetric List Processor (SLIP) programming language, also invented by Joseph Weizenbaum for this purpose. While SLIP was originally an extension to Fortran, it was later embedded into the Michigan Algorithm Decoder (MAD) and Algorithmic Language (ALGOL).
 
 The most famous script is the DOCTOR script. Drawing inspiration from Rogerian therapy, a client-centered method that emphasizes listening and reflecting back the client's words, ELIZA with the DOCTOR script uses pattern matching, decomposition and reassembly rules to emulate a Rogerian psychotherapist. Due to the popularity of the DOCTOR script, these days what is commonly called ELIZA is actually referencing the DOCTOR script.
 
