@@ -29,7 +29,7 @@ My name is Volker and I am working as an Expert Data Engineer at [InnoGames](htt
 |----------------------------------------|---------------------------------------------------------------------------------------------------------------------|
 | Apr.&nbsp;2020 - <br /> Now            | [**InnoGames GmbH**](https://innogames.com){:target="_blank"} <br /> Expert Data Engineer                           |
 | Aug.&nbsp;2018 - <br /> Apr.&nbsp;2020 | [**InnoGames GmbH**](https://innogames.com){:target="_blank"} <br /> Senior Data Engineer                           |
-| Aug.&nbsp;2014 - <br /> Aug.&nbsp;2020 | [**InnoGames GmbH**](https://innogames.com){:target="_blank"} <br /> Technical Product Lead - Data Engineering      |
+| Aug.&nbsp;2014 - <br /> Aug.&nbsp;2018 | [**InnoGames GmbH**](https://innogames.com){:target="_blank"} <br /> Technical Product Lead - Data Engineering      |
 | Sep.&nbsp;2011 - <br /> Aug.&nbsp;2014 | [**InnoGames GmbH**](https://innogames.com){:target="_blank"} <br /> Software Developer - Backend Systems           |
 | Apr.&nbsp;2011 - <br /> Sep.&nbsp;2011 | [**InnoGames GmbH**](https://innogames.com){:target="_blank"} <br /> Student - Master's thesis                      |
 | Jan.&nbsp;2010 - <br /> Jan.&nbsp;2011 | [**Carl von Ossietzky University of Oldenburg**](https://uol.de){:target="_blank"} <br /> Graduate Assistant        |
