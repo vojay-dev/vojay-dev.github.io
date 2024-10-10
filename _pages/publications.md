@@ -8,6 +8,11 @@ order: 3
 
 Knowledge shared is knowledge squared. This is a selection of my publications:
 
+* **Article published in the German online magazine [Computerwoche](https://www.computerwoche.de/), October, 2024**: [Der GenAI-Alltag in Hamburgs größtem Gaming-Unternehmen](https://www.computerwoche.de/article/3553326)
+
+![Computerwoche]({{site.baseurl}}/images/computerwoche.webp)
+*Computerwoche front page / October 2024*
+
 * **Article published in [Data Engineer Things](https://blog.det.life/), May, 2024**: [Minds and Machines — AI for Mental Health Support, Fine-Tuning LLMs with LoRA in Practice](https://blog.det.life/minds-and-machines-ai-for-mental-health-support-fine-tuning-llms-with-lora-in-practice-0ff19edb9d76)
 * **Article published in [Data Engineer Things](https://blog.det.life/), April, 2024**: [Create your own Gemini AI-chatbot with a twist using Python, Jinja2 and NiceGUI](https://medium.com/data-engineer-things/create-your-own-gemini-ai-chatbot-with-a-twist-using-python-jinja2-and-nicegui-7d35ac981a63)
 * **Article published in [Towards Data Science](https://towardsdatascience.com/), April, 2024**: [Create an AI-Driven Movie Quiz with Gemini LLM, Python, FastAPI, Pydantic, RAG and more](https://medium.com/towards-data-science/create-an-ai-driven-movie-quiz-with-gemini-llm-python-fastapi-pydantic-rag-and-more-e15322be4f66)
@@ -15,7 +20,7 @@ Knowledge shared is knowledge squared. This is a selection of my publications:
 ](https://medium.com/data-engineer-things/easter-egg-hunt-with-bigquery-and-user-defined-functions-udfs-c89b3e831823)
 * **Article published in the German online magazine [BigData-Insider](https://www.bigdata-insider.de/), March, 2024**: [Big Data im Gaming – Echtzeit-Kundeninteraktion mit Kafka und Flink](https://www.bigdata-insider.de/big-data-im-gaming-echtzeit-kundeninteraktion-mit-kafka-und-flink-a-5f54958c1e1b6983adddaa16e3a59ae7/)
 
-![Time to think]({{site.baseurl}}/images/bd-insider.webp)
+![BigData-Insider]({{site.baseurl}}/images/bd-insider.webp)
 *BigData-Insider front page / March 2024*
 
 * **Article published in [Towards Data Science](https://towardsdatascience.com/), March, 2024**: [Real-Time Twitch Chat Sentiment Analysis with Apache Flink](https://medium.com/towards-data-science/real-time-twitch-chat-sentiment-analysis-with-apache-flink-e165ac1a8dcf)
