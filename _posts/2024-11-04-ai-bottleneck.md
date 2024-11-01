@@ -17,7 +17,7 @@ Recently, [Yaakov Bressler](https://www.linkedin.com/in/yaakovbressler), a highl
 
 > I was chatting with a founder about their data capabilities. The conversation brought up, "Do I have enough data to use AI?" Yes, she does. However, my perspective is that human capital is the limitation. Am I wrong? Are there AI tools which have drag-and-drop functionality?
 
-This question highlights a common misconception in the field of AI: that data volume is the primary barrier to realize AI projects. While data is essential, the true bottleneck often lies elsewhere. So, what's the real hurdle? It's **human expertise**—the technical skills necessary to effectively make use of AI technologies.
+This question highlights a common misconception in the field of AI: that data volume is the primary barrier to realize AI projects. While data is essential, the true bottleneck often lies elsewhere. So, what's the real hurdle? It's **human expertise**, so the technical skills necessary to effectively make use of AI technologies.
 
 # The Misconception of Data Quantity
 
@@ -46,7 +46,7 @@ The paper underscores how these techniques, combined with expert knowledge in da
 
 ## Example: Procedual Level Generation in Gaming
 
-The gaming industry provides another compelling example of how small, carefully curated datasets can drive significant advancements in AI. Generating engaging and playable game levels is a complex task, traditionally requiring extensive manual design. However, recent research demonstrates how AI, trained on relatively small datasets, can automate this process effectively.
+The gaming industry provides another interesting example of how small, carefully curated datasets can drive significant advancements in AI. Generating engaging and playable game levels is a complex task, traditionally requiring extensive manual design. However, recent research demonstrates how AI, trained on relatively small datasets, can automate this process effectively.
 
 The paper [Level Generation for Angry Birds with Sequential VAE and Latent Variable Evolution](https://arxiv.org/abs/2104.06106) tackles the challenge of procedurally generating levels for the popular game Angry Birds. Generating levels for physics-based puzzle games like Angry Birds presents unique difficulties. The levels must be structurally stable, playable, and offer a balanced challenge. Slight errors in object placement can lead to unstable structures, destroyed by the physics engine or trivial solutions, ruining the gameplay experience.
 
@@ -102,7 +102,7 @@ Google Cloud Platform (GCP) offers a comprehensive suite of AI/ML tools under th
 
 One advantage of Vertex AI Pipelines compared with other cloud provider is, that it embraces open-source technologies, supporting pipeline formats from [Kubeflow](https://www.kubeflow.org/) and [TensorFlow Extended (TFX)](https://www.tensorflow.org/tfx).
 
-Focusing on Kubeflow Pipelines, these are constructed from individual components that can have inputs and outputs, linked together using Python code. These components can be pre-built container images or simply Python functions. Kubeflow cleverly automates the execution of Python functions within a containerized environment, eliminating the need for users to write Dockerfiles. This simplifies the development process and allows for greater flexibility in building and deploying machine learning pipelines.
+Focusing on Kubeflow Pipelines, these are constructed from individual components that can have inputs and outputs, linked together using Python code. These components can be pre-built container images or simply Python functions. Kubeflow automates the execution of Python functions within a containerized environment, eliminating the need for users to write Dockerfiles. This simplifies the development process and allows for greater flexibility in building and deploying machine learning pipelines.
 
 _Hello world component with the Kubeflow Pipelines (KFP) SDK_:
 
