@@ -38,13 +38,13 @@ To delve deeper into the principles of Small Data, I highly recommend exploring 
 
 In the realm of medical image analysis, acquiring large labeled datasets is often challenging due to privacy concerns, the need for expert annotations, and the rarity of certain conditions. The paper [Not-so-supervised: a survey of semi-supervised, multi-instance, and transfer learning in medical image analysis](https://arxiv.org/abs/1804.06353), highlights this challenge and explores alternative learning strategies that thrive on smaller datasets, underlining that less is sometimes more:
 
-- **Semi-Supervised Learning (SSL):** SSL leverages both labeled and unlabeled data. In medical imaging, where expert annotation is time-consuming and expensive, SSL can significantly improve model performance by incorporating readily available unlabeled images.
+- **Semi-Supervised Learning (SSL):** SSL leverages both labeled and unlabelled data. In medical imaging, where expert annotation is time-consuming and expensive, SSL can significantly improve model performance by incorporating readily available unlabelled images.
 - **Multiple Instance Learning (MIL):** MIL deals with situations where labels are available for groups of instances (e.g., a whole image) but not for individual instances (e.g., pixels or patches within the image). This is common in medical diagnoses where a doctor might label a scan as positive for a condition but not pinpoint the exact location.
 - **Transfer Learning (TL):** TL leverages knowledge gained from one domain or task to improve learning in a related but different domain or task. For instance, a model trained on a large dataset of general medical images can be fine-tuned with a smaller, specialized dataset for a specific condition, achieving high accuracy with limited data.
 
 The paper underscores how these techniques, combined with expert knowledge in data curation and annotation, enable effective AI models even with limited data. Their work demonstrates that focusing on highly relevant, carefully annotated examples can lead to better performance than simply amassing vast quantities of less pertinent data. This is particularly relevant in medical imaging, where the small data approach empowers AI to detect rare diseases, segment anatomical structures, and perform various diagnostic tasks with remarkable accuracy, even with limited labeled samples. This reinforces the idea that with strategic data selection and appropriate techniques, smaller can indeed be better.
 
-## Example: Procedual Level Generation in Gaming
+## Example: Procedural Level Generation in Gaming
 
 The gaming industry provides another interesting example of how small, carefully curated datasets can drive significant advancements in AI. Generating engaging and playable game levels is a complex task, traditionally requiring extensive manual design. However, recent research demonstrates how AI, trained on relatively small datasets, can automate this process effectively.
 
