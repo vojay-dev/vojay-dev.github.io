@@ -23,7 +23,7 @@ This question highlights a common misconception in the field of AI: that data vo
 
 Many businesses operate under the assumption that massive amounts of data are essential for successful AI projects. The belief that more data equals better AI is widespread, but often misleading. In many cases, the **quality** and **relevance** of data outweigh quantity.
 
-There's a movement known as **Small Data** that emphasizes the use of well-curated, relevant datasets over large volumes of data. This approach recognizes that:
+There's a movement known as **[Small Data](https://www.smalldatasf.com/)** that emphasizes the use of well-curated, relevant datasets over large volumes of data. This approach recognizes that:
 
 - Modern computing power allows for efficient local-first development. Computers are now one hundred times more powerful than when the early hype of the Big Data movement was in full swing.
 - More data doesn't automatically translate to better results. Recent and relevant data often holds the most value.
@@ -216,6 +216,9 @@ ML.GENERATE_TEXT(
 - **[Hugging Face](https://huggingface.co/):** The Hugging Face Hub provides a vast repository of pre-trained models and datasets, making it easy to access and experiment with state-of-the-art models without needing to train them from scratch. This simplifies one of the most resource-intensive aspects of AI development.
 - **[Hugging Face Spaces](https://huggingface.co/spaces):** Spaces allows for quick and easy deployment of Machine Learning models, including LLMs, as interactive web applications. With minimal coding, users can create demos and share their models with a wider audience.
 - **[Gradio](https://www.gradio.app/) and [Streamlit](https://streamlit.io/):** These Python libraries provide user-friendly frameworks for building interactive interfaces for Machine Learning models. They empower developers to quickly create custom interfaces for LLMs, enabling users to experiment with different inputs and visualize the model's outputs without needing to write complex front-end code.
+- **[OpenAI](https://openai.com/):** OpenAI caters to diverse AI development needs by combining user-friendly tools with powerful APIs. [Custom GPTs](https://openai.com/index/introducing-gpts/) empower anyone to build tailored ChatGPT assistants without coding, while the platform's APIs unlock deeper customization and integration possibilities for more complex AI projects. These APIs can be integrated with previously mentioned solutions like [LangFlow](https://github.com/langflow-ai/langflow). _Note: Since OpenAI and ChatGPT are well known through public media, I am not further discussing these solutions within this article._
+
+OpenAI offers a suite of tools that cater to a range of AI development needs. For low-code development, [custom GPTs](https://openai.com/index/introducing-gpts/) provide a user-friendly way to build tailored versions of ChatGPT for specific tasks without writing code. While custom GPTs simplify interaction with the model, OpenAI also provides APIs and tools for more advanced development and customization. This combination of low-code options and robust APIs makes OpenAI's platform suitable for a diverse user base, from those seeking quick solutions to developers building complex AI applications.
 
 These tools, along with frameworks like [LangChain](https://www.langchain.com/) for building LLM-powered applications, represent the rapid evolution of the low-code AI landscape. They empower also smaller data teams, to create sophisticated AI solutions.
 
