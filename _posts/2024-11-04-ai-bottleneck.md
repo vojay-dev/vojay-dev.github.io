@@ -70,6 +70,9 @@ Remarkably, their generator, trained on a dataset significantly smaller than tho
 
 AI isn't a monolithic field. It includes a wide range of topics—from traditional Machine Learning models like decision trees and random forests to advanced architectures such as **Generative Adversarial Networks (GANs)** and **Large Language Models (LLMs)**.
 
+![AI is more than LLMs]({{site.baseurl}}/images/blog/2024-11-04-10.png)
+*AI is more than LLMs, source: by author*
+
 Selecting the right tool for a specific task requires more than just access to data; it demands the technical expertise to understand the nuances of different models and their applicability. The Angry Birds level generation example showcased this perfectly, where success was driven by a clever approach to data representation and model selection.
 
 A crucial, often overlooked, aspect of AI solutions is data preparation. Machine Learning algorithms learn from the data they are fed. For effective learning, this data must be clean, complete, and appropriately formatted. Data preparation for AI involves collecting, cleaning, transforming, and organizing raw data into a format suitable for Machine Learning algorithms. This is not a one-time task but a continuous process. As models evolve or new data becomes available, data preparation steps often need revisiting and refinement.
