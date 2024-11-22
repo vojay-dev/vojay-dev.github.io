@@ -242,7 +242,7 @@ We'll use [DuckDB](https://duckdb.org/){:target="_blank"} to write partitioned [
 2. **Custom Mode:** Reprocesses a specified date range in parallel using Dynamic Task Mapping.
 
 In addition to Dynamic Task Mapping, the example showcases these modern Airflow features:
-* [TaskFlow API](https://airflow.apache.org/docs/apache-airflow/stable/tutorial/taskflow.html){:target="_blank"}.
+* [TaskFlow API](https://airflow.apache.org/docs/apache-airflow/stable/tutorial/taskflow.html){:target="_blank"}
 * DAG parameters
 * Python Virtual Environment Operator
 
