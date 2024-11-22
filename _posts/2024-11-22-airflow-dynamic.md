@@ -8,6 +8,11 @@ tags: [data engineering, airflow, python, dynamic task mapping, taskflow api]
 toc: true
 ---
 
+In this article, we'll tackle a common challenge in Airflow development: the proliferation of nearly identical DAGs for handling different data processing scenarios, especially those involving partitioned tables and historical reloads. You'll learn how to build a single, flexible DAG that leverages Dynamic Task Mapping to process partitions in parallel, handling both daily operations and custom date range reloads with ease.
+
+![Dynamic Task Mapping demo]({{site.baseurl}}/images/blog/2024-11-22-09.gif)
+*Dynamic Task Mapping demo, source: by author*
+
 # The DAG Proliferation Nightmare
 
 A recent Reddit thread posed a common data engineering challenge: "[How to Leverage Data Partitions for Parallelizing ETL Workflows in Airflow?](https://www.reddit.com/r/dataengineering/comments/1ghdhtb/how_to_leverage_data_partitions_for_parallelizing/){:target="_blank"}" The user, like many of us, wanted to process partitioned data in parallel for increased efficiency. This sparks a crucial question: How can we achieve true parallel processing while maintaining a clean and manageable codebase?
