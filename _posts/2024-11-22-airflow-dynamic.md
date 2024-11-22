@@ -13,6 +13,8 @@ In this article, we'll tackle a common challenge in Airflow development: the pro
 ![Dynamic Task Mapping demo]({{site.baseurl}}/images/blog/2024-11-22-09.gif)
 *Dynamic Task Mapping demo, source: by author*
 
+🚀 _Note: I published the final Airflow project on Github: [https://github.com/vojay-dev/airflow-dynamic-task-mapping](https://github.com/vojay-dev/airflow-dynamic-task-mapping)_
+
 # The DAG Proliferation Nightmare
 
 A recent Reddit thread posed a common data engineering challenge: "[How to Leverage Data Partitions for Parallelizing ETL Workflows in Airflow?](https://www.reddit.com/r/dataengineering/comments/1ghdhtb/how_to_leverage_data_partitions_for_parallelizing/){:target="_blank"}" The user, like many of us, wanted to process partitioned data in parallel for increased efficiency. This sparks a crucial question: How can we achieve true parallel processing while maintaining a clean and manageable codebase?
