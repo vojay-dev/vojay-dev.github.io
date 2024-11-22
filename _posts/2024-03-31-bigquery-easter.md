@@ -4,7 +4,7 @@ title: Easter egg hunt with BigQuery and User-Defined Functions (UDFs)
 description: Discover the basics of extensibility with BigQuery User-Defined Functions (UDFs) with a little Easter egg hunt game
 date: 2024-03-31 10:00:00 +0300
 image: '/images/blog/2024-03-31.jpg'
-tags: [data engineering, tech, big query, gcp, sql]
+tags: [data-engineering, tech, big-query, gcp, sql]
 toc: true
 ---
 

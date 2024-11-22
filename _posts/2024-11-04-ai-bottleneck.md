@@ -4,7 +4,7 @@ title: The AI Bottleneck - It's Not Data, It's People
 description: Effective AI implementation relies not only on the quantity of data but also on technical expertise. Let's explore the significance of having a skilled data team for AI projects, learn about the Small Data movement and examine how far we can go with no-code or low-code AI platforms.
 date: 2024-11-04 09:00:00 +0300
 image: '/images/blog/2024-11-04.jpg'
-tags: [data engineering, tech, ai, small data, big data, ai platforms]
+tags: [data-engineering, tech, ai, small-data, big-data, ai-platforms]
 toc: true
 ---
 

@@ -4,7 +4,7 @@ title: Solving a Data Engineering task with pragmatism and asking WHY?
 description: Explore the essence of pragmatic Data Engineering through a task-solving journey and learn why you should ask WHY?
 date: 2024-04-27 10:00:00 +0300
 image: '/images/blog/2024-04-27.jpg'
-tags: [data engineering, tech, kiss, python, duckdb, s3, fastapi]
+tags: [data-engineering, tech, kiss, python, duckdb, s3, fastapi]
 toc: true
 ---
 

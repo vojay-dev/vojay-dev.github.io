@@ -4,7 +4,7 @@ title: Create your own Gemini AI-chatbot with a twist using Python, Jinja2 and N
 description: Discover the basics of using Gemini with Python via VertexAI, creating a Web UI with NiceGUI and using Jinja2 to construct modular prompts
 date: 2024-04-17 10:00:00 +0300
 image: '/images/blog/2024-04-17.jpg'
-tags: [data engineering, tech, nicegui, gcp, python, ai, gemini]
+tags: [data-engineering, tech, nicegui, gcp, python, ai, gemini]
 toc: true
 ---
 

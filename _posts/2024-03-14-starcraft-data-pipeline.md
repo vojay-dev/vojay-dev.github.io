@@ -4,7 +4,7 @@ title: Exploring StarCraft 2 data with Airflow, DuckDB and Streamlit
 description: Practical example on how to create an Airflow DAG to fetch data from the StarCraft II API, utilize DuckDB for processing and Streamlit for visualizing
 date: 2024-03-14 10:00:00 +0300
 image: '/images/blog/2024-03-14.jpg'
-tags: [data engineering, tech, airflow, duckdb, streamlit, python]
+tags: [data-engineering, tech, airflow, duckdb, streamlit, python]
 toc: true
 ---
 

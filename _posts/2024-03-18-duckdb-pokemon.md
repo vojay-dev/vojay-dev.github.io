@@ -4,7 +4,7 @@ title: Gotta process 'em all - DuckDB masters your data like a Pokémon trainer
 description: Practical examples how to use DuckDB as a tool for data wrangling based on Pokémon API data
 date: 2024-03-18 10:00:00 +0300
 image: '/images/blog/2024-03-18.jpg'
-tags: [data engineering, tech, duckdb, python]
+tags: [data-engineering, tech, duckdb, python]
 toc: true
 ---
 

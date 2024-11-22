@@ -4,7 +4,7 @@ title: A Definitive Guide to Using BigQuery efficiently
 description: Make the most out of your BigQuery usage, burn data rather than money to create real value with some practical techniques
 date: 2024-03-03 10:00:00 +0300
 image: '/images/blog/2024-03-03.jpg'
-tags: [gcp, data engineering, bigquery, cloud, tech]
+tags: [gcp, data-engineering, bigquery, cloud, tech]
 toc: true
 ---
 

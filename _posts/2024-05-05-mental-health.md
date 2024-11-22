@@ -4,7 +4,7 @@ title: Minds and Machines - AI for Mental Health Support, Fine-Tuning LLMs with 
 description: Explore the potential of Large Language Models (LLMs) changing the future of mental healthcare and learn about how to apply Parameter-Efficient Fine-Tuning (PEFT) to create an AI-powered mental health support chatbot by example
 date: 2024-05-05 10:00:00 +0300
 image: '/images/blog/2024-05-05.jpg'
-tags: [data engineering, tech, ai, hackathon, mental health, llm, hugging face, peft, lora]
+tags: [data-engineering, tech, ai, hackathon, mental-health, llm, hugging-face, peft, lora]
 toc: true
 ---
 

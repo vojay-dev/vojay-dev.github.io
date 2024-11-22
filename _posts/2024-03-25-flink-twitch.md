@@ -4,7 +4,7 @@ title: Real-time Twitch chat sentiment analysis with Apache Flink
 description: Learn how to use Apache Flink with this demo that uses Stanford CoreNLP to analyze the Twitch chat in real-time
 date: 2024-03-25 10:00:00 +0300
 image: '/images/blog/2024-03-25.jpg'
-tags: [data engineering, tech, java, flink, nlp, machine learning]
+tags: [data-engineering, tech, java, flink, nlp, machine-learning]
 toc: true
 ---
 

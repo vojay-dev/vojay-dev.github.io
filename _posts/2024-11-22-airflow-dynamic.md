@@ -4,7 +4,7 @@ title: Stop Creating Multiple Airflow DAGs for Reloads and Parallel Processing
 description: Modern Airflow and Dynamic Task Mapping to Transform Messy DAG Collections into Clean Solutions
 date: 2024-11-22 09:00:00 +0300
 image: '/images/blog/2024-11-22.jpg'
-tags: [data engineering, airflow, python, dynamic task mapping, taskflow api]
+tags: [data-engineering, airflow, python, dynamic-task-mapping, taskflow-api]
 toc: true
 ---
 

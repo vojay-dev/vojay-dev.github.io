@@ -4,7 +4,7 @@ title: Create an AI-driven movie quiz with Gemini LLM, Python, FastAPI, Pydantic
 description: Discover the basics of using Gemini with Python via VertexAI, creating APIs with FastAPI, data validation with Pydantic and the fundamentals of Retrieval-Augmented Generation (RAG)
 date: 2024-04-14 10:00:00 +0300
 image: '/images/blog/2024-04-14.jpg'
-tags: [data engineering, tech, vertexai, gcp, python, ai, gemini]
+tags: [data-engineering, tech, vertex-ai, gcp, python, ai, gemini]
 toc: true
 ---
 
