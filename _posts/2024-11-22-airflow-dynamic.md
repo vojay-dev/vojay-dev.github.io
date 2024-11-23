@@ -144,7 +144,7 @@ When Airflow encounters a mapped task, it dynamically generates multiple task in
 
 Here's how these settings interact:
 
-- Global Parallelism: Airflow's `parallelism`setting defines the absolute upper limit.
+- Global Parallelism: Airflow's `parallelism` setting defines the absolute upper limit.
 - DAG Concurrency: A DAG's `concurrency` setting limits parallel tasks within that DAG.
 - Task-Level Concurrency: `max_active_tis_per_dag` further restricts parallelism for a specific task across all DAG runs.
 - Pools: Pools allow you to allocate resources to specific tasks or DAGs, influencing parallel execution.
@@ -265,7 +265,7 @@ astro dev start
 
 ## Setup Parameterized DAG
 
-First, we'll create a parameterized DAG. We define the following parameters:
+First, we'll create a parameterized DAG with the following parameters:
 
 * `mode`:  Determines whether to process a single day (`daily`) or a custom range (`custom`). Defaults to `daily`.
 * `start_date`, `end_date`: Define the date range for custom reloads.
@@ -325,7 +325,7 @@ With this, we already learn about three modern Airflow features:
 
 ## Task-Generated Dates
 
-For this scenario, we use an upstream task to generate the list of partitions based on the given start and end date.
+For this scenario, we'll use an upstream task to generate the list of partitions based on the given start and end date.
 
 {% highlight py %}
 {% raw %}
@@ -404,7 +404,7 @@ Want to learn more about DuckDB? Feel free to read my article [Gotta process 'em
 
 ## Putting it Together: Dynamic Task Mapping
 
-With the tasks prepared, we can setup the Dynamic Task Mapping in our DAG. The goal is to have a task per partition, each calculating a different date. For this purpose, we use the `expand()` function. The number of random rows / events per partition remains the same for each task, consequently we use `partial()` to set this attribute.
+With the tasks prepared, we can setup the Dynamic Task Mapping in our DAG. The goal is to have a task per partition, each calculating a different date. For this purpose, we'll use the `expand()` function. The number of random rows / events per partition remains the same for each task, consequently we'll use `partial()` to set this attribute.
 
 {% highlight py %}
 {% raw %}
@@ -546,7 +546,7 @@ dynamic_task_mapping_demo()
 Let's recap the key takeaways from our journey into Dynamic Task Mapping:
 
 * **Catchup and Backfill:** `catchup` and `backfill` can be used for processing historical data, but these come with limitations.
-* **Dynamic Task Mapping:** Dynamic Task Mapping offers a more flexible way for parallel task processing. Use `.expand()` for mapping and `.partial()` for constants.
+* **Dynamic Task Mapping:** Dynamic Task Mapping offers a more flexible way for parallel task processing. Use `expand()` for mapping and `partial()` for constants.
 * **Modern Airflow:** Airflow keeps adding more features for elegant DAG writing, like the `@task.virtualenv` decorator or DAG parameters.
 
 Our DuckDB example demonstrates the practical application of these concepts. We built a DAG that not only answers the Reddit user's question about leveraging partitions but also showcases modern Airflow features.
