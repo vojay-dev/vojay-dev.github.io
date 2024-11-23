@@ -17,7 +17,7 @@ In this article, we'll tackle a common challenge in Airflow development: the pro
 
 # The DAG Proliferation Nightmare
 
-A recent Reddit thread posed a common data engineering challenge: "[How to Leverage Data Partitions for Parallelizing ETL Workflows in Airflow?](https://www.reddit.com/r/dataengineering/comments/1ghdhtb/how_to_leverage_data_partitions_for_parallelizing/){:target="_blank"}" The user, like many of us, wanted to process partitioned data in parallel for increased efficiency. This sparks a crucial question: How can we achieve true parallel processing while maintaining a clean and manageable codebase?
+A recent Reddit discussion addressed a common challenge in Data Engineering: "[How to Leverage Data Partitions for Parallelizing ETL Workflows in Airflow?](https://www.reddit.com/r/dataengineering/comments/1ghdhtb/how_to_leverage_data_partitions_for_parallelizing/){:target="_blank"}" The user, like many of us, wanted to process partitioned data in parallel for increased efficiency. This sparks a crucial question: How can we achieve true parallel processing while maintaining a clean and manageable codebase?
 
 ![How to Leverage Data Partitions for Parallelizing ETL Workflows in Airflow?]({{site.baseurl}}/images/blog/2024-11-22-01.png)
 *Data Engineering Reddit, source: [Reddit](https://www.reddit.com/r/dataengineering/comments/1ghdhtb/how_to_leverage_data_partitions_for_parallelizing/){:target="_blank"}*
@@ -215,8 +215,6 @@ process_partition.expand(date=dates, country=countries)
 {% endraw %}
 {% endhighlight %}
 
-Here's a concise "Key Learnings" list for the "Enter Dynamic Task Mapping" chapter:
-
 ## Key Learnings
 
 * **Dynamic Task Generation:**  Airflow creates task instances at runtime based on the output of an upstream task, enabling flexible and data-driven workflows.
@@ -406,7 +404,7 @@ Want to learn more about DuckDB? Feel free to read my article [Gotta process 'em
 
 ## Putting it Together: Dynamic Task Mapping
 
-With the tasks prepared, we can setup the Dynamic Task Mapping in our DAG. The goal is to have a task per partition, each calculating a different date. For this purpose, we use the `.expand()` function. The number of random rows / events per partition remains the same for each task, consequently we use `.partial()` to set this attribute.
+With the tasks prepared, we can setup the Dynamic Task Mapping in our DAG. The goal is to have a task per partition, each calculating a different date. For this purpose, we use the `expand()` function. The number of random rows / events per partition remains the same for each task, consequently we use `partial()` to set this attribute.
 
 {% highlight py %}
 {% raw %}
