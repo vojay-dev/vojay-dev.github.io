@@ -48,7 +48,7 @@ PARTITION BY day;
 
 While partitioning improves query performance, it also presents an opportunity: parallel write operations. The Reddit user's question highlights this opportunity within Airflow. How can Airflow leverage table partitions for parallel processing?
 
-Airflow offers `catchup` and `backfill` features for processing historical data. Catchup automatically creates Directed Acyclic Graph (DAG) runs for past schedules. Backfill allows users to manually trigger DAG runs for a specified date range.
+Airflow offers `catchup` and `backfill` features for processing historical data. Catchup automatically creates DAG runs for past schedules. Backfill allows users to manually trigger DAG runs for a specified date range.
 
 {% highlight sh %}
 airflow dags backfill \
@@ -57,7 +57,7 @@ airflow dags backfill \
     dag_id
 {% endhighlight %}
 
-You can combine these features with `max_active_runs` to parallelize historical loads. These built-in tools offer convenient features, like clear separation of runs in the Airflow User Interface (UI). However, they also come with drawbacks:
+You can combine these features with `max_active_runs` to parallelize historical loads. These built-in tools offer convenient features, like clear separation of runs in the Airflow UI. However, they also come with drawbacks:
 
 - Overhead of creating many DAG runs.
 - Difficulty in managing backfills as a single operation.
