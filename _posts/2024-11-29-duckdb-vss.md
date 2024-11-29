@@ -10,16 +10,16 @@ toc: true
 
 # From Ancient Scrolls to Digital Movies
 
-You're standing in Ancient Egypt, around 250 years before the start of our modern calendar. As your eyes adjust to the warm light shining through high windows, you find yourself in the [Great Library of Alexandria](https://en.wikipedia.org/wiki/Library_of_Alexandria). What you see is overwhelming: shelves stretch in every direction, holding nearly half a million scrolls. The air is thick with the scent of papyrus and you're searching for writings about astronomy. You hear the quite rustling of [Callimachus](https://dcc.dickinson.edu/callimachus-aetia/callimachus), the library's most celebrated scholar, working on the solution for your problem.
+You're standing in Ancient Egypt, around 250 years before the start of our modern calendar. As your eyes adjust to the warm light shining through high windows, you find yourself in the [Great Library of Alexandria](https://en.wikipedia.org/wiki/Library_of_Alexandria){:target="_blank"}. What you see is overwhelming: shelves stretch in every direction, holding nearly half a million scrolls. The air is thick with the scent of papyrus and you're searching for writings about astronomy. You hear the quite rustling of [Callimachus](https://dcc.dickinson.edu/callimachus-aetia/callimachus){:target="_blank"}, the library's most celebrated scholar, working on the solution for your problem.
 
-He revolutionized information retrieval by creating the [Pinakes](https://en.wikipedia.org/wiki/Pinakes) - the world's first library catalog. Instead of organizing scrolls merely by author or title, he pioneered a system that **categorized works by their subject matter and content, enabling scholars to discover [related works](https://www.magellantv.com/articles/the-long-strange-story-of-search-from-ancient-scrolls-to-digital-books)** they might never have found through simple alphabetical browsing.
+He revolutionized information retrieval by creating the [Pinakes](https://en.wikipedia.org/wiki/Pinakes){:target="_blank"} - the world's first library catalog. Instead of organizing scrolls merely by author or title, he pioneered a system that **categorized works by their subject matter and content, enabling scholars to discover [related works](https://www.magellantv.com/articles/the-long-strange-story-of-search-from-ancient-scrolls-to-digital-books){:target="_blank"}** they might never have found through simple alphabetical browsing.
 
 ![Illustration of Callimachus]({{site.baseurl}}/images/blog/2024-11-29-01.png)
 *Illustration of Callimachus, source: generated with DALL-E 3*
 
 Over 2,000 years later, we face a similar challenge. In the digital archives of Netflix's early days, engineers worked on their own Alexandria-scale problem. Their movie recommendation system, built on simple rating matches, struggled to capture the essence of what makes films truly similar. A comedy about a wedding might share more DNA with a romantic drama than another comedy about sports, yet traditional categorization methods - much like organizing scrolls by their physical attributes - missed these subtle connections. This challenge of **semantic understanding** - capturing the true meaning and similarity between items - remains at the heart of modern search and recommendation systems.
 
-Today, we stand at an interesting crossroad. The evolution of vector search solutions, due to their prominent use in Retrieval-Augmented Generation (RAG) systems, promises to solve these semantic matching problems, but with a catch: most solutions demand complex infrastructure, significant resources, and careful maintenance. However, for some cases, there is a pragmatic answer to this complexity: [DuckDB's Vector Similarity Search (VSS) extension](https://duckdb.org/docs/extensions/vss.html).
+Today, we stand at an interesting crossroad. The evolution of vector search solutions, due to their prominent use in Retrieval-Augmented Generation (RAG) systems, promises to solve these semantic matching problems, but with a catch: most solutions demand complex infrastructure, significant resources, and careful maintenance. However, for some cases, there is a pragmatic answer to this complexity: [DuckDB's Vector Similarity Search (VSS) extension](https://duckdb.org/docs/extensions/vss.html){:target="_blank"}.
 
 In this guide, we'll build a movie recommendation engine that could have solved Netflix's early challenges, using modern tools that fit in your laptop's memory. By combining DuckDB's VSS extension with Gemini's embedding capabilities, we'll create a system that understands the essence of movies, not just their metadata. Whether you're building the next big recommendation engine or simply want to understand vector search better, this practical journey will equip you with the knowledge to tackle semantic search challenges in your own projects.
 
@@ -35,7 +35,7 @@ Once we have these numerical vectors, we need ways to measure how close or simil
 
 DuckDB introduced the _ARRAY_ data type in v0.10.0, which stores fixed-sized lists, to complement the variable-size _LIST_ data type.
 
-They also added a couple of distance metric functions for this new _ARRAY_ type: [array_distance](https://duckdb.org/docs/sql/functions/array.html#array_distancearray1-array2), [array_negative_inner_product](https://duckdb.org/docs/sql/functions/array.html#array_negative_inner_productarray1-array2) and [array_cosine_distance](https://duckdb.org/docs/sql/functions/array.html#array_cosine_distancearray1-array2). With these distance functions, similarity can be measured:
+They also added a couple of distance metric functions for this new _ARRAY_ type: [array_distance](https://duckdb.org/docs/sql/functions/array.html#array_distancearray1-array2){:target="_blank"}, [array_negative_inner_product](https://duckdb.org/docs/sql/functions/array.html#array_negative_inner_productarray1-array2){:target="_blank"} and [array_cosine_distance](https://duckdb.org/docs/sql/functions/array.html#array_cosine_distancearray1-array2){:target="_blank"}. With these distance functions, similarity can be measured:
 
 ![Euclidean Distance]({{site.baseurl}}/images/blog/2024-11-29-02.png)
 *Euclidean Distance, source: by author*
@@ -82,7 +82,7 @@ The search starts at the top level, quickly identifies promising areas, and dril
 ## Prerequisites
 - Python 3.12
 - Required packages: `duckdb ≥ 1.1.3`, `httpx`, `google-cloud-aiplatform`
-- [The Movie Database (TMDB) API key for movie data](https://developer.themoviedb.org/docs/getting-started)
+- [The Movie Database (TMDB) API key for movie data](https://developer.themoviedb.org/docs/getting-started){:target="_blank"}
 - Google Cloud Platform (GCP) service account with Vertex AI enabled
 
 ## Setup
