@@ -40,7 +40,7 @@ To delve deeper into the principles of Small Data, I highly recommend exploring 
 
 ## Example: Procedural Level Generation in Gaming
 
-The gaming industry provides another interesting example of how small, carefully curated datasets can drive significant advancements in AI. Generating engaging and playable game levels is a complex task, traditionally requiring extensive manual design. However, recent research demonstrates how AI, trained on relatively small datasets, can automate this process effectively.
+The gaming industry provides an interesting example of how small, carefully curated datasets can drive significant advancements in AI. Generating engaging and playable game levels is a complex task, traditionally requiring extensive manual design. However, recent research demonstrates how AI, trained on relatively small datasets, can automate this process effectively.
 
 The paper [Level Generation for Angry Birds with Sequential VAE and Latent Variable Evolution](https://arxiv.org/abs/2104.06106) tackles the challenge of procedurally generating levels for the popular game Angry Birds. Generating levels for physics-based puzzle games like Angry Birds presents unique difficulties. The levels must be structurally stable, playable, and offer a balanced challenge. Slight errors in object placement can lead to unstable structures, destroyed by the physics engine or trivial solutions, ruining the gameplay experience.
 
