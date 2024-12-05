@@ -8,16 +8,20 @@ tags: [data-engineering, tech, ai, small-data, big-data, ai-platforms]
 toc: true
 ---
 
-# Introduction
+# The AI Mirage: The Real Reason Your AI Projects Are Failing
 
-Recently, [Yaakov Bressler](https://www.linkedin.com/in/yaakovbressler), a highly respected Lead Data Engineer at Capital One, shared an inspiring question on LinkedIn:
+> Do I have enough data to use AI?
+
+Imagine sitting in a meeting room, surrounded by your team and walls of dashboards. You can feel the tension in the air. Your team has spent months collecting terabytes of data, building pipelines, and fine-tuning infrastructure. The board meeting is tomorrow, and they'll want to know why, despite millions invested in data systems, your AI initiatives haven't delivered the promised results. This scenario plays out in thousands of companies right now, all asking the same question that [Yaakov Bressler](https://www.linkedin.com/in/yaakovbressler), Lead Data Engineer at Capital One, recently brought into sharp focus.
 
 ![LinkedIn post]({{site.baseurl}}/images/blog/2024-11-04-01.png){:style="display:block; margin-left:auto; margin-right:auto"}
 *Source: [LinkedIn](https://www.linkedin.com/posts/activity-7257106759926849537-FxVx)*
 
-> I was chatting with a founder about their data capabilities. The conversation brought up, "Do I have enough data to use AI?" Yes, she does. However, my perspective is that human capital is the limitation. Am I wrong? Are there AI tools which have drag-and-drop functionality?
+The numbers tell a haunting story: According to [Gartner's latest survey](https://www.gartner.com/en/newsroom/press-releases/2024-05-07-gartner-survey-finds-generative-ai-is-now-the-most-frequently-deployed-ai-solution-in-organizations), less than half of AI projects ever make it into production. In meeting rooms across the globe, the same scene repeats with tragic predictability. Companies accumulate more data, build larger data lakes, and implement more sophisticated pipelines. Yet month after month, their AI initiatives remain stalled. The more they struggle to make AI work by gathering more data, the deeper they sink into this technical quicksand.
 
-This question highlights a common misconception in the field of AI: that data volume is the primary barrier to realize AI projects. While data is essential, the true bottleneck often lies elsewhere. So, what's the real hurdle? It's **human expertise**, so the technical skills necessary to effectively make use of AI technologies.
+The truth? Most organizations already have sufficient data. What they lack is far more rare: human expertise. According to the [IBM Global AI Adoption Index 2023](https://filecache.mediaroom.com/mr5mr_ibmspgi/179414/download/IBM%20Global%20AI%20Adoption%20Index%20Report%20Dec.%202023.pdf), the shortage of AI skills has emerged as the primary barrier to AI adoption, significantly outweighing data concerns.
+
+Let's learn why the real challenge isn't the volume of data, but the expertise needed to transform it into value. More importantly, let's reveal how some organizations are finding their way out of this trap, and why the solution might be simpler than you think.
 
 # The Misconception of Data Quantity
 
@@ -33,16 +37,6 @@ To delve deeper into the principles of Small Data, I highly recommend exploring 
 
 ![Small Data]({{site.baseurl}}/images/blog/2024-11-04-02.png){:style="display:block; margin-left:auto; margin-right:auto"}
 *Small Data, source: [https://www.smalldatasf.com](https://www.smalldatasf.com)*
-
-## Example: Medical Diagnosis with Focused Datasets
-
-In the realm of medical image analysis, acquiring large labeled datasets is often challenging due to privacy concerns, the need for expert annotations, and the rarity of certain conditions. The paper [Not-so-supervised: a survey of semi-supervised, multi-instance, and transfer learning in medical image analysis](https://arxiv.org/abs/1804.06353), highlights this challenge and explores alternative learning strategies that thrive on smaller datasets, underlining that less is sometimes more:
-
-- **Semi-Supervised Learning (SSL):** SSL leverages both labeled and unlabelled data. In medical imaging, where expert annotation is time-consuming and expensive, SSL can significantly improve model performance by incorporating readily available unlabelled images.
-- **Multiple Instance Learning (MIL):** MIL deals with situations where labels are available for groups of instances (e.g., a whole image) but not for individual instances (e.g., pixels or patches within the image). This is common in medical diagnoses where a doctor might label a scan as positive for a condition but not pinpoint the exact location.
-- **Transfer Learning (TL):** TL leverages knowledge gained from one domain or task to improve learning in a related but different domain or task. For instance, a model trained on a large dataset of general medical images can be fine-tuned with a smaller, specialized dataset for a specific condition, achieving high accuracy with limited data.
-
-The paper underscores how these techniques, combined with expert knowledge in data curation and annotation, enable effective AI models even with limited data. Their work demonstrates that focusing on highly relevant, carefully annotated examples can lead to better performance than simply amassing vast quantities of less pertinent data. This is particularly relevant in medical imaging, where the small data approach empowers AI to detect rare diseases, segment anatomical structures, and perform various diagnostic tasks with remarkable accuracy, even with limited labeled samples. This reinforces the idea that with strategic data selection and appropriate techniques, smaller can indeed be better.
 
 ## Example: Procedural Level Generation in Gaming
 
@@ -232,6 +226,16 @@ However, there are things to keep in mind, no matter which tool you choose:
 - 🎯 **Loosing focus on the why:** The ease of use offered by drag-and-drop solutions can sometimes lead to implementing AI for its own sake, rather than focusing on solving a specific business problem. Maintaining a clear understanding of the objectives and desired outcomes is essential.
 
 Talking about the "why": feel free to read my article about [Solving a Data Engineering task with pragmatism and asking WHY?](https://vojay.de/2024/04/27/keep-it-simple/) 😉.
+
+## Real-World Success with Low-Code AI
+
+When [Wayfair](https://www.wayfair.com/), one of the world's largest online destinations for home furnishings, needed to improve their Machine Learning capabilities, they faced a familiar challenge: plenty of data but complex AI infrastructure needs. [Using Google Cloud's Vertex AI, they achieved remarkable improvements in their ML operations](https://cloud.google.com/blog/products/ai-machine-learning/how-businesses-use-google-cloud-vertex-ai), running large model training jobs 5-10x faster than before.
+
+> We're doing ML at a massive scale, and we want to make that easy. That means accelerating time-to-value for new models, increasing reliability and speed of very large regular re-training jobs, and reducing the friction to build and deploy models at scale
+
+explains Matt Ferrari, Head of Ad Tech, Customer Intelligence, and Machine Learning at Wayfair.
+
+This success story demonstrates how the right tools can dramatically improve AI implementation, even with existing data. It's not about having more data—it's about having the right expertise and tools to effectively use what you have.
 
 # Conclusion
 
