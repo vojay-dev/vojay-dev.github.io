@@ -3,7 +3,6 @@ layout: page
 title: Speaking References
 permalink: /references/
 image: '/images/header/references.webp'
-order: 2
 ---
 
 I share my passion at various international conferences. This is a selection of my speaking references:

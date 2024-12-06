@@ -3,7 +3,6 @@ layout: page
 title: About
 permalink: /about/
 image: '/images/header/about.webp'
-order: 1
 ---
 
 My name is Volker and I am working as an Expert Data Engineer at [InnoGames](https://innogames.com/){:target="_blank"} in Hamburg, Germany. I love to share my passion about Big Data as a speaker at conferences and other events. Apart from work, I am a proud father, gym enthusiast, adventurer, gamer and hobby photographer. I am always looking for challenges and opportunities to share experiences and learn from others.

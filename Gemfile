@@ -1,10 +1,5 @@
 source 'https://rubygems.org'
-gem 'bundler'
-gem 'jekyll', "~> 4.3.3"
-gem 'jekyll-paginate'
-gem 'jekyll-tagging', :git => 'https://github.com/pattex/jekyll-tagging.git'
-gem 'jekyll-sitemap'
-gem 'jekyll-feed'
-gem 'jekyll-seo-tag'
-gem 'jekyll-toc'
-gem 'webrick'
+gem "bundler"
+gem "jekyll"
+gem "jekyll-paginate"
+gem "jekyll-sitemap"

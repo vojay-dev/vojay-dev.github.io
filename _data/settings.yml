@@ -1,0 +1,74 @@
+#-------------------------------
+# Site Settings
+title: vojay
+logo:
+description: Volker Janz - Thoughts, stories and ideas from a Data Engineer, Software Developer, Passionate Speaker, Gym Enthusiast and Adventurer
+
+
+#-------------------------------
+# Navigation Settings
+menu-settings:
+  menu-items:
+    - title: 'Home'
+      url: '/'
+    - title: 'About'
+      url: '/about/'
+    - title: 'Speaking References'
+      url: '/references/'
+    - title: 'Publications'
+      url: '/publications/'
+#    - title: 'Projects'
+#      url: '/projects/'
+    - title: 'Contact Me'
+      url: '/contact/'
+
+
+#-------------------------------
+# Author Settings
+author:
+  name: Volker Janz
+  avatar: '/images/avatar.webp'
+
+
+#-------------------------------
+# Hero Settings
+hero:
+  title: Volker Janz
+  description: Thoughts, stories and ideas from a Data Engineer, Software Developer, Passionate Speaker, Gym Enthusiast and Adventurer
+  image: '/images/header/home.webp'
+
+
+#-------------------------------
+# Contact Settings
+contact:
+  email: volker@janz.sh
+  description: I am always looking for challenges and opportunities to share experiences and learn from others. Feel free to reach out to me.
+
+
+#-------------------------------
+# Footer section
+social:
+- {icon: "fa-brands fa-linkedin", link: "https://www.linkedin.com/in/vjanz/"}
+- {icon: "fa-brands fa-instagram", link: "https://www.instagram.com/vojay.de"}
+- {icon: "fa-brands fa-x-twitter", link: "https://twitter.com/vojaydev"}
+- {icon: "fa-brands fa-github", link: "https://github.com/vojay-dev"}
+
+# Example of adding a new link to the footer - {icon: "fa-brands fa-mastodon", name: "Mastodon", link: "https://mastodon.social/"}
+# Other icons can be found at https://fontawesome.com/icons
+
+
+#-------------------------------
+# Comment Section (Disqus)
+disqus-identifier: # Enter Disqus user to enable
+
+
+#-------------------------------
+# Google Analytics
+google-analytics: G-Y1D1YZJQ7T
+
+
+#-------------------------------
+# Newsletter
+mailchimp: # To enable the mailchimp form, use value 'enable'
+mailchimp-identifier:
+mailchimp-button-text: Join

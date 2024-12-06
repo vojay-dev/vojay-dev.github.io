@@ -3,7 +3,6 @@ layout: page
 title: Publications
 permalink: /publications/
 image: '/images/header/publications.webp'
-order: 3
 ---
 
 Knowledge shared is knowledge squared. This is a selection of my publications:
