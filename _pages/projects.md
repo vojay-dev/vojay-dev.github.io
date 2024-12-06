@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Projects
-permalink: /Projects/
+permalink: /projects/
 image: '/images/header/projects.webp'
 ---
 
