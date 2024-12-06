@@ -7,6 +7,9 @@ image: '/images/header/publications.webp'
 
 Knowledge shared is knowledge squared. This is a selection of my publications:
 
+* **Article published in [Data Engineer Things](https://blog.det.life/), November, 2024**: [From Scrolls to Similarity Search: Building a Movie Recommender with DuckDB VSS](https://blog.det.life/from-scrolls-to-similarity-search-building-a-movie-recommender-with-duckdb-vss-8122e4d2e486)
+* **Article published in [Data Engineer Things](https://blog.det.life/), November, 2024**: [Stop Creating Multiple Airflow DAGs for Reloads and Parallel Processing](https://blog.det.life/stop-creating-multiple-airflow-dags-for-reloads-and-parallel-processing-3912974b5866)
+* **Article published in [Data Engineer Things](https://blog.det.life/), November, 2024**: [The AI Bottleneck — It’s Not Data, It’s People](https://blog.det.life/the-ai-bottleneck-its-not-data-it-s-people-c80468873a79)
 * **Article published in the German online magazine [Computerwoche](https://www.computerwoche.de/), October, 2024**: [Der GenAI-Alltag in Hamburgs größtem Gaming-Unternehmen](https://www.computerwoche.de/article/3553326)
 
 ![Computerwoche]({{site.baseurl}}/images/computerwoche.webp)
