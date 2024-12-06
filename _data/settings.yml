@@ -17,8 +17,8 @@ menu-settings:
       url: '/references/'
     - title: 'Publications'
       url: '/publications/'
-#    - title: 'Projects'
-#      url: '/projects/'
+    - title: 'Projects'
+      url: '/projects/'
     - title: 'Contact Me'
       url: '/contact/'
 
