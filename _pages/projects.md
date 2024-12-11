@@ -51,6 +51,9 @@ Movie Detectives tackles the challenge of maintaining student interest, improvin
 
 ## BiaSight
 
+{: .important }
+**Award winning project**: this project won at the [Google Women Techmakers AI Hackathon 2024](https://womentechmakers.devpost.com/) by Google with 3,693 participants.
+
 {: .note }
 **Tech stack**: Python, Poetry, Jinja, FastAPI, Beautiful Soup, Pydantic, Docker, Gemini via Vertex AI, VueJS, Vite, Tailwind CSS, daisyUI
 
