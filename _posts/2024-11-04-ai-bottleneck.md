@@ -1,6 +1,6 @@
 ---
 layout: post
-title: The AI Bottleneck - It's Not Data, It's People
+title: The AI Mirage - The Real Reason Your AI Projects Are Failing
 description: Effective AI implementation relies not only on the quantity of data but also on technical expertise. Let's explore the significance of having a skilled data team for AI projects, learn about the Small Data movement and examine how far we can go with no-code or low-code AI platforms.
 date: 2024-11-04 09:00:00 +0300
 image: '/images/blog/2024-11-04.jpg'
@@ -8,7 +8,7 @@ tags: [data-engineering, tech, ai, small-data, big-data, ai-platforms]
 toc: true
 ---
 
-# The AI Mirage: The Real Reason Your AI Projects Are Failing
+# The AI Mirage
 
 > Do I have enough data to use AI?
 
@@ -37,6 +37,15 @@ To delve deeper into the principles of Small Data, I highly recommend exploring 
 
 ![Small Data]({{site.baseurl}}/images/blog/2024-11-04-02.png){:style="display:block; margin-left:auto; margin-right:auto"}
 *Small Data, source: [https://www.smalldatasf.com](https://www.smalldatasf.com)*
+
+## Example: Medical Diagnosis with Focused Datasets
+In the realm of medical image analysis, acquiring large labeled datasets is often challenging due to privacy concerns, the need for expert annotations, and the rarity of certain conditions. The paper [Not-so-supervised: a survey of semi-supervised, multi-instance, and transfer learning in medical image analysis](https://arxiv.org/abs/1804.06353), highlights this challenge and explores alternative learning strategies that thrive on smaller datasets, underlining that less is sometimes more:
+
+- **Semi-Supervised Learning (SSL):** SSL leverages both labeled and unlabelled data. In medical imaging, where expert annotation is time-consuming and expensive, SSL can significantly improve model performance by incorporating readily available unlabelled images.
+- **Multiple Instance Learning (MIL):** MIL deals with situations where labels are available for groups of instances (e.g., a whole image) but not for individual instances (e.g., pixels or patches within the image). This is common in medical diagnoses where a doctor might label a scan as positive for a condition but not pinpoint the exact location.
+- **Transfer Learning (TL):** TL leverages knowledge gained from one domain or task to improve learning in a related but different domain or task. For instance, a model trained on a large dataset of general medical images can be fine-tuned with a smaller, specialized dataset for a specific condition, achieving high accuracy with limited data.
+
+The paper underscores how these techniques, combined with expert knowledge in data curation and annotation, enable effective AI models even with limited data. Their work demonstrates that focusing on highly relevant, carefully annotated examples can lead to better performance than simply amassing vast quantities of less pertinent data. This is particularly relevant in medical imaging, where the small data approach empowers AI to detect rare diseases, segment anatomical structures, and perform various diagnostic tasks with remarkable accuracy, even with limited labeled samples. This reinforces the idea that with strategic data selection and appropriate techniques, smaller can indeed be better.
 
 ## Example: Procedural Level Generation in Gaming
 
