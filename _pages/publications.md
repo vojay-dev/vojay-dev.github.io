@@ -7,6 +7,8 @@ image: '/images/header/publications.webp'
 
 Knowledge shared is knowledge squared. This is a selection of my publications:
 
+* **Article published in [Data Engineer Things](https://blog.det.life/), December, 2024**: [Talk to Airflow — Build an AI Agent Using PydanticAI and Gemini 2.0](https://blog.det.life/talk-to-airflow-build-an-ai-agent-using-pydanticai-and-gemini-2-0-fd645cf99fcb)
+* **Article published in [Data Engineer Things](https://blog.det.life/), December, 2024**: [Your Machine, Your AI — The Ultimate Local Productivity Stack with Ollama](https://blog.det.life/your-machine-your-ai-the-ultimate-local-productivity-stack-with-ollama-7a118f271479)
 * **Article published in the German online magazine [CIO](https://www.cio.de/), December, 2024**: [Der GenAI-Alltag in Hamburgs größtem Gaming-Unternehmen](https://www.cio.de/a/der-genai-alltag-in-hamburgs-groesstem-gaming-unternehmen,3747896)
 
 ![CIO]({{site.baseurl}}/images/cio.webp)
