@@ -8,7 +8,8 @@ tags: [data-engineering, local-ai, ollama, productivity, llm, gemma, llava, rayc
 toc: true
 ---
 
-> Note: This is not clickbait; it is genuinely impressive, and I use it daily. 🤫
+{: .tip }
+Note: This is not clickbait; it is genuinely impressive, and I use it daily. 🤫
 
 # Introduction
 
@@ -19,17 +20,20 @@ The alarm blares at 6:00 AM. You groggily reach for your phone, squinting at the
 
 As you scroll through the endless stream of information you're drowning in data, struggling to keep up. Then you remember the long Slack message from that colleague last night you put on read-later. Oh boy, we all know that one colleague.
 
-> At my job, I confess, this is totally me! So, to my colleagues: I'm sorry, and I hope this article will inspire you with some ideas on how modern AI can help you cope with my desperate need to write Slack essays.
+{: .warning }
+At my job, I confess, this is totally me! So, to my colleagues: I'm sorry, and I hope this article will inspire you with some ideas on how modern AI can help you cope with my desperate need to write Slack essays.
 
 And who knows what confidential information might be buried within that wall of text? You can't simply copy and paste it into an online AI tool; your company strictly prohibits sharing sensitive data with external services. But wait! Imagine this: you copy the text, run a simple shortcut, and instantly get a concise summary, all without leaving your machine. No worries about data privacy, no concerns about costs or subscription limits.
 
-> I remember the first time I experimented with running AI models on my own machine. It felt like magic! Suddenly, I had this incredible capability at my fingertips for free. Creating little helper scripts quickly became an addiction.
+{: .note }
+I remember the first time I experimented with running AI models on my own machine. It felt like magic! Suddenly, I had this incredible capability at my fingertips for free. Creating little helper scripts quickly became an addiction.
 
 It's all local, secure, and under your control. This is the power of local AI. It's not just about handling information overload; it's about doing so safely, privately, and efficiently. It's not about replacing your intelligence, but augmenting it, providing a lifeline in the sea of information while respecting the boundaries of confidentiality.
 
 In this article, we'll dive deep into the world of local AI, exploring how tools like [Ollama](https://ollama.com/) and state-of-the-art models like Gemma 2 and LLaVA can transform your daily workflow. We'll go beyond the hype and get practical, showing you how to turn complex tasks into simple, efficient processes. Unlock a new level of productivity and reclaim control over your digital life, all while keeping your sensitive data safe and secure, all before getting your first coffee.
 
-> Note from author: this is an exaggeration, I never run any script before my first coffee of course. Anyway, let's dive in!
+{: .note }
+Note from author: this is an exaggeration, I never run any script before my first coffee of course. Anyway, let's dive in!
 
 # Setup Ollama and pull Gemma 2 and LLaVA models
 
@@ -46,7 +50,8 @@ ollama pull llava
 
 Ollama empowers you to run powerful AI models right on your local machine, offering enhanced transparency, control, and customization compared to closed-source cloud-based solutions.
 
-> I have to admit that one downside is that you need to store and process the model on your local machine. While my MacBook is powerful enough to run Gemma 2 and it works well in most cases, more advanced models like Llama 3.3 70B can take a while to process requests. Additionally, Gemma 2 only requires 5.3 GB, whereas Llama 3.3 uses 43 GB of space. This means that when experimenting with Ollama, you can quickly fill up your disk. I was surprised when my Mac complained. 😅
+{: .note }
+I have to admit that one downside is that you need to store and process the model on your local machine. While my MacBook is powerful enough to run Gemma 2 and it works well in most cases, more advanced models like Llama 3.3 70B can take a while to process requests. Additionally, Gemma 2 only requires 5.3 GB, whereas Llama 3.3 uses 43 GB of space. This means that when experimenting with Ollama, you can quickly fill up your disk. I was surprised when my Mac complained. 😅
 
 Ollama is made up of two main components: the client and the server. The client is the part that users interact with, while the server serves as a backend service implemented in Go.
 
@@ -70,7 +75,8 @@ I bet everyone reading this is using **cmd+c** (or ctrl+c), **cmd+v** (or ctrl+
 
 You can go do the exact same thing in your Mac terminal with `pbcopy` and `pbpaste`. `pbcopy` will allow you to copy the output of a command right into your clipboard. Vice-versa for `pbpaste`, it will allow you to paste your clipboard right into your terminal.
 
-> I often use this for small helper Bash scripts. You can pipe your clipboard to any other command, such as `pbpaste | cat`. This provides many possibilities.
+{: .note }
+I often use this for small helper Bash scripts. You can pipe your clipboard to any other command, such as `pbpaste | cat`. This provides many possibilities.
 
 Unfortunately the `pbcopy` and `pbpaste` commands are exclusively for Mac, but you can recreate these commands on Linux by using `xsel`.
 
@@ -105,7 +111,8 @@ cat ~/projects/biasight/biasight/parse.py | ollama run gemma2 "Review the follow
 
 With `glow`, the code snippets suggested by the model have syntax highlighting, allowing you to receive quick feedback, even for internal, critical code, since it never leaves your laptop. You can review confidential code at no cost.
 
-> Of course, the quality of the review depends on the model you use. While Gemma 2 generally performs well, there are models specifically trained for code generation, such as CodeGemma, which is based on Gemma 2. Experimentation is essential; check out the [Ollama model library](https://ollama.com/library) for all available models.
+{: .note }
+Of course, the quality of the review depends on the model you use. While Gemma 2 generally performs well, there are models specifically trained for code generation, such as CodeGemma, which is based on Gemma 2. Experimentation is essential; check out the [Ollama model library](https://ollama.com/library) for all available models.
 
 ## Demo: Summarize
 
@@ -120,7 +127,8 @@ pbpaste | ollama run gemma2 "provide a concise and comprehensive summary of the 
 ![Summarize long Slack message with Ollama]({{site.baseurl}}/images/blog/2024-12-23-04.png)
 *Summarize long Slack message with Ollama, source: by author*
 
-> Honestly, I don't use this snippet in that way because copying it to your terminal would overwrite your clipboard. First, you would need to paste the snippet, then copy the text to summarize, and finally press enter in your terminal. I value efficiency, and that process is not efficient. Instead, I use this snippet in a script that I have bound to a shortcut I run via Raycast. I will explain this later in the article, so keep reading; there are still things to learn about improving productivity.
+{: .note }
+Honestly, I don't use this snippet in that way because copying it to your terminal would overwrite your clipboard. First, you would need to paste the snippet, then copy the text to summarize, and finally press enter in your terminal. I value efficiency, and that process is not efficient. Instead, I use this snippet in a script that I have bound to a shortcut I run via Raycast. I will explain this later in the article, so keep reading; there are still things to learn about improving productivity.
 
 ## Demo: Create a mind map
 
@@ -181,7 +189,8 @@ And here is the result:
 
 If you imagine reading the article and having a mind map as a reference for later, your learning process can become significantly more effective, almost like a cheat.
 
-> Keep in mind that a significant reason mind maps are so helpful is that the creation process requires you to distill complex information into a few bullet points and connect them in a logical order. This creative process plays a crucial role in internalizing and learning the information, such as from a great article like the on from Yaakov. This benefit is completely lost when an AI generates the content for you. Personally, I find these AI generated mind maps most useful as a reference tool. I create them after exploring an article or documentation to have a cheat sheet that triggers my memory later. Learning is an individual process, so find what works best for you. However, do not overlook AI; it can significantly enhance your learning productivity.
+{: .note }
+Keep in mind that a significant reason mind maps are so helpful is that the creation process requires you to distill complex information into a few bullet points and connect them in a logical order. This creative process plays a crucial role in internalizing and learning the information, such as from a great article like the on from Yaakov. This benefit is completely lost when an AI generates the content for you. Personally, I find these AI generated mind maps most useful as a reference tool. I create them after exploring an article or documentation to have a cheat sheet that triggers my memory later. Learning is an individual process, so find what works best for you. However, do not overlook AI; it can significantly enhance your learning productivity.
 
 Moreover, since everything runs locally, you can use this to create mind maps of confidential or internal information, such as project documentation or concepts.
 
@@ -189,7 +198,8 @@ Moreover, since everything runs locally, you can use this to create mind maps of
 
 This is just a short additional demo, to showcase that you can have multimodal AI locally. This could be useful in letting an AI helping you organizing your photos, without the need to upload them somewhere, keep everything local. If you have a model that supports it, you can simply add a path to an image on your local machine to your prompt, Ollama will take care of passing it to the model.
 
-> I recommend using a fully qualified path for the image. I often encountered issues when using a relative path. Ollama won't complain if the image is not found; it will simply generate something else, which can be quite frustrating. When you use this method, make sure to check for the output _Added image ..._ to confirm that it is actually using the image file.
+{: .note }
+I recommend using a fully qualified path for the image. I often encountered issues when using a relative path. Ollama won't complain if the image is not found; it will simply generate something else, which can be quite frustrating. When you use this method, make sure to check for the output _Added image ..._ to confirm that it is actually using the image file.
 
 Let's analyze a funny cat picture:
 
@@ -203,7 +213,8 @@ ollama run llava "Describe this image ./funny-cat.jpg" | glow -
 ![Local AI driven image summary]({{site.baseurl}}/images/blog/2024-12-23-09.png)
 *Local AI driven image summary, source: by author*
 
-> I found this particularly useful with structured output. Since December 2024, Ollama has supported structured output. This feature allows you to write a script to analyze images and ensure that the LLM consistently returns a properly structured object. For example, you can identify main colors, objects, or the type of an image. This capability enables the creation of a helpful AI application for managing your images. However, a local model may have performance limitations. Despite this, it can still be an enjoyable learning project.
+{: .note }
+I found this particularly useful with structured output. Since December 2024, Ollama has supported structured output. This feature allows you to write a script to analyze images and ensure that the LLM consistently returns a properly structured object. For example, you can identify main colors, objects, or the type of an image. This capability enables the creation of a helpful AI application for managing your images. However, a local model may have performance limitations. Despite this, it can still be an enjoyable learning project.
 
 ## AI Scripts, your little daily helpers
 
@@ -258,7 +269,8 @@ You can now copy any text, type `ai-summarize` in the terminal, and receive a co
 
 Think of [Raycast](https://www.raycast.com/) as Spotlight on steroids – it's a Mac launcher that does much more than just find files. From managing your calendar to controlling Spotify, everything via the minimalistic launcher.
 
-> While Raycast offers AI features in their Pro plan, we can utilize our local AI setup with their free script commands feature. Who needs a subscription when you have Ollama running locally? 😉 On a more serious note, I believe the Raycast project is amazing. The Pro features are excellent, and the team deserves our support, so I personally opted for it. It's well worth the price!
+{: .note }
+While Raycast offers AI features in their Pro plan, we can utilize our local AI setup with their free script commands feature. Who needs a subscription when you have Ollama running locally? 😉 On a more serious note, I believe the Raycast project is amazing. The Pro features are excellent, and the team deserves our support, so I personally opted for it. It's well worth the price!
 
 The magic happens through Raycast's script commands. You can create custom scripts that Raycast can execute, and they can be written in various languages including Bash. Let's integrate our AI helper scripts with Raycast:
 
@@ -275,7 +287,8 @@ Now you can trigger your AI workflows directly through Raycast. For example:
 - The text in your clipboard will be processed by your local Gemma 2 model
 - Get instant results, all while keeping your data private
 
-> Pro tip: You can assign custom hotkeys to your most-used AI commands. I use **cmd+shift+m** for summarize and **cmd+shift+m** for creating mind maps.
+{: .note }
+Pro tip: You can assign custom hotkeys to your most-used AI commands. I use **cmd+shift+m** for summarize and **cmd+shift+m** for creating mind maps.
 
 This combination of local AI and Raycast creates a powerful, private, and free productivity system. No need to open browser tabs, no data leaving your machine, and no subscription required. Just pure, keyboard-driven efficiency.
 
@@ -302,38 +315,45 @@ Here's a breakdown of what happens:
 - `--name open-webui`: Gives our container a friendly name.
 - `ghcr.io/open-webui/open-webui:main`: The latest version of Open WebUI from GitHub.
 
-> Pro tip: `host.docker.internal` is a special Docker Desktop for Mac feature that allows containers to communicate with services running on your Mac. It's like giving your Docker container a secret passage to your local Ollama server!
+{: .note }
+Pro tip: `host.docker.internal` is a special Docker Desktop for Mac feature that allows containers to communicate with services running on your Mac. It's like giving your Docker container a secret passage to your local Ollama server!
 
 After running this command, your own personal AI chat, with plenty of advanced features, all running local and for free is available at: [http://localhost:8080/](http://localhost:8080/). You can choose from all models which you have pulled via Ollama on the top left.
 
 ![Open WebUI to have your own, local AI chat]({{site.baseurl}}/images/blog/2024-12-23-13.png)
 *Open WebUI to have your own, local AI chat, source: by author*
 
-> If you want to avoid the hassle of setting up Open WebUI and you're using macOS, consider the excellent, pragmatic alternative called [Enchanted](https://github.com/AugustDev/enchanted). This open-source tool is compatible with Ollama. You can download it [directly from the App Store](https://apps.apple.com/gb/app/enchanted-llm/id6474268307), making it a great option for a lightweight start.
+{: .note }
+If you want to avoid the hassle of setting up Open WebUI and you're using macOS, consider the excellent, pragmatic alternative called [Enchanted](https://github.com/AugustDev/enchanted). This open-source tool is compatible with Ollama. You can download it [directly from the App Store](https://apps.apple.com/gb/app/enchanted-llm/id6474268307), making it a great option for a lightweight start.
 
 # Conclusion
 
 Remember that 6:00 AM scenario? The overwhelming flood of information, the long Slack messages, and the desperate need for that first coffee? Well, it's time to write a different ending to that story.
 
-> And yes, you should still get your coffee first. Some things even AI can't replace!
+{: .note }
+And yes, you should still get your coffee first. Some things even AI can't replace!
 
 Through this journey, we've discovered how local AI can transform our daily workflows. From instant code reviews to magical mind maps, from summarizing essays to analyzing images – all while keeping our sensitive data secure and under our control.
 
 But perhaps the most exciting part isn't just what these tools can do – it's what YOU can do with them. Those little helper scripts we created? They're just the beginning. Every time you find yourself performing a repetitive task, remember: there might be a local AI solution waiting to be crafted.
 
-> I started with simple scripts, but soon found myself building an entire ecosystem of AI-powered tools. It's like having a super-powered command line that actually understands what you need.
+{: .note }
+I started with simple scripts, but soon found myself building an entire ecosystem of AI-powered tools. It's like having a super-powered command line that actually understands what you need.
 
 So, what's next? Well, that's up to you. The tools are in your hands, the models are on your machine, and the possibilities are endless. Maybe you'll create that perfect workflow that saves your team hours each week. Or perhaps you'll build something entirely new that we haven't even thought of yet.
 
 Now, if you'll excuse me, I have some Slack essays to write... but don't worry, my colleagues have the tools to handle them now! 😉
 
-> Final note: How are YOU planning to use local AI in your workflow? Have these demos inspired you to create your own productivity hacks? Share your ideas and experiments in the comments below – I'd love to see how you're transforming your daily tasks with local AI! And if you're already using Ollama in creative ways, share it with the world. After all, the best productivity tips often come from the community.
+{: .important }
+Final note: How are YOU planning to use local AI in your workflow? Have these demos inspired you to create your own productivity hacks? Share your ideas and experiments in the comments below – I'd love to see how you're transforming your daily tasks with local AI! And if you're already using Ollama in creative ways, share it with the world. After all, the best productivity tips often come from the community.
 
 ---
 
-> 💡 Some updates based on the feedback and discussions regarding this article
+{: .tip }
+Some updates based on the feedback and discussions regarding this article
 
-- Although the article primarily showcases Bash scripts for interacting with Ollama, if you use Python, be sure to check out the structured output feature that Ollama added in December 2024: [https://ollama.com/blog/structured-outputs](https://ollama.com/blog/structured-outputs).
-- Another practical way to access your local models is through Page Assist, a simple Chrome extension: [https://github.com/n4ze3m/page-assist](https://github.com/n4ze3m/page-assist).
-- For Windows users, Raycast is coming to Windows: [https://www.raycast.com/windows](https://www.raycast.com/windows). In the meantime, the open-source cross-platform launcher Wox could serve as an alternative: [https://github.com/Wox-launcher/Wox](https://github.com/Wox-launcher/Wox).
-- If you fully commit to Raycast, I recommend exploring the Ollama extension, which is available for free: [https://www.raycast.com/massimiliano_pasquini/raycast-ollama](https://www.raycast.com/massimiliano_pasquini/raycast-ollama). It allows you to specify custom commands, making it compatible with the mind map example from the article.
+- Although the article primarily showcases Bash scripts for interacting with Ollama, if you use Python, be sure to check out the structured output feature that [Ollama added in December 2024](https://ollama.com/blog/structured-outputs).
+- Another practical way to access your local models is through [Page Assist](https://github.com/n4ze3m/page-assist), a simple open-source Chrome extension.
+- For Windows users, [Raycast is coming to Windows](https://www.raycast.com/windows). In the meantime, the [open-source cross-platform launcher Wox](https://github.com/Wox-launcher/Wox) could serve as an alternative.
+- If you fully commit to Raycast, I recommend exploring the Raycast [Raycast Ollama extension](https://www.raycast.com/massimiliano_pasquini/raycast-ollama), which is available for free. It allows you to specify custom commands, making it compatible with the mind map example from the article.
+- For those using [Obsidian](https://obsidian.md/), there is an [Ollama plugin](https://github.com/hinterdupfinger/obsidian-ollama) that covers basic writing tasks and allows for custom commands, but it is no longer actively maintained. It functions well, though it has limited model configuration. Despite this, it offers great simplicity and works effectively for most cases. As an alternative, the [Local GPT plugin](https://github.com/pfrankov/obsidian-local-gpt) for Obsidian is actively maintained and includes Ollama as a provider with various customization options. Additionally, it has a similar feature set to the Ollama plugin, making it a suitable drop-in replacement.

@@ -12,7 +12,8 @@ toc: true
 
 In the pioneering days of aviation, pilots flew through clouds with little more than basic instruments and raw instinct. Each flight was a dance between human judgment and mechanical power, relying heavily on experience and intuition for success. A slight miscalculation or unexpected weather change could spell disaster. They used amazing technology with little control over it.
 
-> When I first started integrating LLMs into production systems, I felt like one of those early pilots—commanding immense power with minimal instrumentation. Every deployment felt like a leap of faith.
+{: .note }
+When I first started integrating LLMs into production systems, I felt like one of those early pilots—commanding immense power with minimal instrumentation. Every deployment felt like a leap of faith.
 
 ![AI agents getting ready for Airflow]({{site.baseurl}}/images/blog/2024-12-24-03.jpg)
 *AI agents getting ready for Airflow, source: generated with Adobe Firefly*
@@ -27,8 +28,9 @@ Think of PydanticAI as your aircraft's modern cockpit—combining assistant syst
 
 In this article, we'll put PydanticAI to the test by building an AI agent that interacts with [Apache Airflow](https://airflow.apache.org/). We'll create a system that can understand natural language queries about your workflows, fetch real-time status updates, and respond with structured, reliable data. No more flying blind through your DAG operations.
 
-> 🚀 Want to jump straight into the code? Check out the project on GitHub:
-> [https://github.com/vojay-dev/pydantic-airflow-agent](https://github.com/vojay-dev/pydantic-airflow-agent)
+{: .important }
+🚀 Want to jump straight into the code? Check out the project on GitHub:
+[https://github.com/vojay-dev/pydantic-airflow-agent](https://github.com/vojay-dev/pydantic-airflow-agent)
 
 # Why PydanticAI? The FastAPI Feeling for AI Development
 
@@ -53,7 +55,8 @@ agent = Agent('gemini-1.5-flash', system_prompt='Be concise.')
 result = agent.run_sync('Why choose PydanticAI?')
 {% endhighlight %}
 
-> When I first saw the PydanticAI examples, it reminded me of my first FastAPI experience - clean, intuitive, and just right.
+{: .note }
+When I first saw the PydanticAI examples, it reminded me of my first FastAPI experience - clean, intuitive, and just right.
 
 What sets PydanticAI apart:
 
@@ -72,7 +75,8 @@ What sets PydanticAI apart:
 - Strong type checking
 - Intuitive error messages
 
-> Note: The integration with Logfire is simple yet elegant, allowing for a detailed understanding of the flow of agents. There are impressive examples on the official PydanticAI page, but I haven't tried them yet. I highly recommend checking it out if you want to explore the framework beyond this article. If you do, feel free to let me know how it goes. 😉
+{: .note }
+Note: The integration with Logfire is simple yet elegant, allowing for a detailed understanding of the flow of agents. There are impressive examples on the official PydanticAI page, but I haven't tried them yet. I highly recommend checking it out if you want to explore the framework beyond this article. If you do, feel free to let me know how it goes. 😉
 
 ## The Future of PydanticAI
 
@@ -87,13 +91,15 @@ When to consider alternatives? If you need LangChain's vast integrations, crewAI
 
 PydanticAI brings the "FastAPI feeling" to AI development - and that's exactly what this space needs. It's not just about writing less code; it's about writing better, more maintainable AI applications.
 
-> Note: PydanticAI is still in early development, but given the Pydantic team's track record, I'm confident in betting on its future. The framework is already showing what the future of AI development tools should look like.
+{: .note }
+Note: PydanticAI is still in early development, but given the Pydantic team's track record, I'm confident in betting on its future. The framework is already showing what the future of AI development tools should look like.
 
 # PydanticAI Basics: A Quick Start Guide
 
 PydanticAI makes building AI agents feel as natural as writing regular Python code. Let's look at three core patterns that make it powerful yet simple to use.
 
-> I will keep this brief because, honestly, the PydanticAI documentation is among the best I have ever read. Generally, Pydantic projects feature excellent documentation with an engaging, informative, and enjoyable writing style. Therefore, the best way to gain more information is to consult the documentation directly. This article aims to go beyond the documentation and explore a creative real-world application of the framework.
+{: .note }
+I will keep this brief because, honestly, the PydanticAI documentation is among the best I have ever read. Generally, Pydantic projects feature excellent documentation with an engaging, informative, and enjoyable writing style. Therefore, the best way to gain more information is to consult the documentation directly. This article aims to go beyond the documentation and explore a creative real-world application of the framework.
 
 **Basic Agents**
 
@@ -127,11 +133,13 @@ async def get_temperature(city: str) -> float:
 
 Tools are functions your agent can call. They extend your agent's capabilities beyond conversation to real actions like API calls or data fetching.
 
-> What's particularly clever about PydanticAI's tool system is how it handles function signatures. The framework automatically extracts parameters (except `RunContext`) to build the tool's schema, and even pulls parameter descriptions from your docstrings using [griffe](https://mkdocstrings.github.io/griffe/).
+{: .note }
+What's particularly clever about PydanticAI's tool system is how it handles function signatures. The framework automatically extracts parameters (except `RunContext`) to build the tool's schema, and even pulls parameter descriptions from your docstrings using [griffe](https://mkdocstrings.github.io/griffe/).
 
 This intelligent parsing means your tools are not just functional – they're self-documenting. The LLM understands exactly how to use them because the documentation is built right into the schema. No more manually maintaining separate descriptions of your tools!
 
-> What I love about PydanticAI is how these patterns compose naturally. Start with a basic agent, add structure when you need clean data, and sprinkle in tools when you need real-world interactions. It grows with your needs! 🛠️
+{: .note }
+What I love about PydanticAI is how these patterns compose naturally. Start with a basic agent, add structure when you need clean data, and sprinkle in tools when you need real-world interactions. It grows with your needs! 🛠️
 
 This foundation is all you need to start building powerful AI agents. In our Airflow example coming up, we'll see how these patterns work together in a real application.
 
@@ -143,13 +151,15 @@ The complete code for this tutorial is available on GitHub. While we'll walk thr
 git clone git@github.com:vojay-dev/pydantic-airflow-agent.git
 {% endhighlight %}
 
-> Bear in mind that PydanticAI is under heavy development, which is great, but it also means that details of this demo project might change in the future. However, it will definitely help you gain a good understanding of the basic principles and inspire your own PydanticAI project.
+{: .note }
+Bear in mind that PydanticAI is under heavy development, which is great, but it also means that details of this demo project might change in the future. However, it will definitely help you gain a good understanding of the basic principles and inspire your own PydanticAI project.
 
 With this project, we aim to go beyond the documentation and basic examples. Let's create an AI agent that can interact with Airflow via the [Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html). You will be able to ask it about the status of a DAG without needing to specify an exact DAG ID. Simply describe the DAG, and the agent will identify the most relevant one by retrieving all DAGs from the API. It will then fetch the status of the selected DAG and return the information in a structured format.
 
 For simplicity, we are using a local Airflow environment with Docker and [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview/) (install via `brew install astro`), which is an effective way to start Airflow projects. We will integrate our PydanticAI agent and Airflow setup within the same project for ease of use. Typically, these would be two separate components.
 
-> We are using the latest version of Airflow, **2.10.4**, as of the time of writing this article. If you are reading this after the release of Airflow 3, that’s amazing! I can’t wait for the new UI and other great features. However, this also means that things may have changed significantly. Still, you should be able to get an idea of how to adapt to it.
+{: .note }
+We are using the latest version of Airflow, **2.10.4**, as of the time of writing this article. If you are reading this after the release of Airflow 3, that’s amazing! I can’t wait for the new UI and other great features. However, this also means that things may have changed significantly. Still, you should be able to get an idea of how to adapt to it.
 
 First, let's set up the project using Poetry and install the required dependencies, starting with PydanticAI and then creating an Airflow environment via Astro CLI.
 
@@ -202,7 +212,8 @@ payment_report()
 customer_profile()
 {% endhighlight %}
 
-> If you don't know about `SmoothOperator` yet, check the logs for it in Airflow. It's a delightful little Easter egg that brings a smile to the faces of us Data Engineers.
+{: .note }
+If you don't know about `SmoothOperator` yet, check the logs for it in Airflow. It's a delightful little Easter egg that brings a smile to the faces of us Data Engineers.
 
 ![Local Airflow setup with two example DAGs]({{site.baseurl}}/images/blog/2024-12-24-01.png)
 *Local Airflow setup with two example DAGs, source: by author*
@@ -234,7 +245,8 @@ class DAGStatus(BaseModel):
 
 With that, we can define our model and Agent. For this example, we use the latest Gemini 2.0 Flash model.
 
-> Note: I experimented extensively with various models. Many models struggled to interact with tool functions in the correct order or to use the results for constructing the final structured output. Gemini 2.0 Flash provided the best results, but I also recommend trying other supported models. You can use models via Ollama, such as Mistral or Llama 3.3, both of which also support tool functions and structured output. However, for this demo, we will use the model that gave the best results. Ultimately, we want to have an agent we can trust. Would you fly on an airplane that only sometimes works?
+{: .note }
+Note: I experimented extensively with various models. Many models struggled to interact with tool functions in the correct order or to use the results for constructing the final structured output. Gemini 2.0 Flash provided the best results, but I also recommend trying other supported models. You can use models via Ollama, such as Mistral or Llama 3.3, both of which also support tool functions and structured output. However, for this demo, we will use the model that gave the best results. Ultimately, we want to have an agent we can trust. Would you fly on an airplane that only sometimes works?
 
 {% highlight py %}
 model = VertexAIModel(
@@ -474,7 +486,8 @@ if __name__ == "__main__":
     asyncio.run(main())
 {% endhighlight %}
 
-> What I found essential is having high transparency regarding how the agent makes tool and LLM calls during development. In the example above, we use logging. However, I highly recommend checking out the Logfire integration.
+{: .note }
+What I found essential is having high transparency regarding how the agent makes tool and LLM calls during development. In the example above, we use logging. However, I highly recommend checking out the Logfire integration.
 
 ## Demo
 
@@ -525,7 +538,8 @@ And finally used structured output to return a `DAGStatus` instance.
 ![The Airflow AI agent powered by PydanticAI in action]({{site.baseurl}}/images/blog/2024-12-24-02.png)
 *The Airflow AI agent powered by PydanticAI in action, source: by author*
 
-> Honestly, the first time I ran this successfully, it blew me away. This powerful prototype combines simplicity with type-safe integration, and I was immediately hooked. I began to think about how to generate value with such an agent. For example, imagine someone asks in the data team's Slack channel why a specific report did not update. Such an agent could autonomously find the related DAG and engage in a conversation with the user while the Data Engineering team enjoys their coffee in peace. ☕
+{: .note }
+Honestly, the first time I ran this successfully, it blew me away. This powerful prototype combines simplicity with type-safe integration, and I was immediately hooked. I began to think about how to generate value with such an agent. For example, imagine someone asks in the data team's Slack channel why a specific report did not update. Such an agent could autonomously find the related DAG and engage in a conversation with the user while the Data Engineering team enjoys their coffee in peace. ☕
 
 # From Blind Flight to Clear Skies
 
@@ -533,7 +547,8 @@ This article has shown that building production-grade AI applications doesn't ha
 
 The landscape of AI development is evolving rapidly, but frameworks like PydanticAI give us a steady foundation to build upon. Like modern aviation continues to advance while maintaining its core principles of safety and reliability, PydanticAI sets the stage for future innovations without sacrificing stability.
 
-> Keep an eye on the PydanticAI project. With the amazing team behind it and the framework's elegant design, I believe we are only seeing the beginning of its potential. 🚀
+{: .tip }
+Keep an eye on the PydanticAI project. With the amazing team behind it and the framework's elegant design, I believe we are only seeing the beginning of its potential. 🚀
 
 Whether you're building AI agents for Airflow monitoring, customer support, or any other use case, remember: you don't have to fly blind anymore. The instruments are here, the controls are intuitive, and the skies are clear for takeoff.
 
