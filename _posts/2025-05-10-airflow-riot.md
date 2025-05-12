@@ -2,7 +2,7 @@
 layout: post
 title: Airflow 3 and Airflow AI SDK in Action - Analyzing League of Legends
 description: Learn Key Airflow 3 and AI Features Through a Practical League of Legends Data Project
-date: 2025-05-10 09:00:00 +0300
+date: 2025-06-10 09:00:00 +0300
 image: '/images/blog/2025-05-10.jpg'
 tags: [data-engineering, airflow, python, dynamic-task-mapping, taskflow-api, airflow-ai-sdk, pydantic-ai, gemini, agent, riot-api]
 toc: true
