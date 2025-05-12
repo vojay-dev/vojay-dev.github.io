@@ -2,13 +2,13 @@
 layout: post
 title: Airflow 3 and Airflow AI SDK in Action - Analyzing League of Legends
 description: Learn Key Airflow 3 and AI Features Through a Practical League of Legends Data Project
-date: 2025-06-10 09:00:00 +0300
+date: 2025-05-10 09:00:00 +0300
 image: '/images/blog/2025-05-10.jpg'
 tags: [data-engineering, airflow, python, dynamic-task-mapping, taskflow-api, airflow-ai-sdk, pydantic-ai, gemini, agent, riot-api]
 toc: true
 ---
 
-The world of data orchestration is evolving at lightning speed. Are your Airflow patterns keeping up, or are they holding you back? In this article, we will cover an end-to-end Airflow 3 data pipeline. We will extract data from the Riot Games API and use the Airflow AI SDK, a modern SDK for working with LLMs from Apache Airflow based on PydanticAI, to generate a League of Legends report featuring a tier. The project highlights modern Airflow and AI features, and
+The world of data orchestration is evolving at lightning speed. Are your Airflow patterns keeping up, or are they holding you back? In this article, we will cover an end-to-end Airflow 3 data pipeline. We will extract data from the [Riot Games API](https://developer.riotgames.com/) and use the [Airflow AI SDK](https://github.com/astronomer/airflow-ai-sdk), a modern SDK for working with LLMs from Apache Airflow based on [PydanticAI](https://ai.pydantic.dev/), to generate a League of Legends report featuring a tier. The project highlights modern Airflow and AI features, and
 
 > by the end of this article you will be inspired to rethink deprecated DAG orchestration patterns.
 
@@ -25,7 +25,7 @@ You are Kha'Zix, an apex predator, crouching unseen within the dense, pulsating 
 ![League of Legends champions]({{site.baseurl}}/images/blog/2025-05-10-01.png)
 *League of Legends champions, source: [https://www.leagueoflegends.com/en-us/champions](https://www.leagueoflegends.com/en-us/champions)*
 
-League of Legends (LoL) is more than a team-based strategy game where two teams of five powerful champions face off to destroy the other’s base; it's a global cultural phenomenon. With more than 130 million monthly active players, LoL generates a relentless, high-velocity torrent of data. Its impact is so profound that it inspired *Arcane*, the award-winning animated series by French studio Fortiche, produced under Riot Games' supervision and successfully distributed by Netflix, captivating audiences worldwide. Each in-game match is a complex interplay of over 140 unique champions, hundreds of items, and countless strategic decisions, all unfolding in real-time. For a Data Engineer, this ecosystem isn't just player activity; it's a boundless source of high-dimensional, interconnected information, pulsating with potential insights.
+League of Legends (LoL) is more than a team-based strategy game where two teams of five powerful champions face off to destroy the other’s base; it's a global cultural phenomenon. With more than 130 million monthly active players, LoL generates a relentless, high-velocity torrent of data. Its impact is so profound that it inspired *Arcane*, the award-winning animated series by French studio [Fortiche](https://www.forticheprod.com/), produced under Riot Games' supervision and successfully distributed by Netflix, captivating audiences worldwide. Each in-game match is a complex interplay of over 140 unique champions, hundreds of items, and countless strategic decisions, all unfolding in real-time. For a Data Engineer, this ecosystem isn't just player activity; it's a boundless source of high-dimensional, interconnected information, pulsating with potential insights.
 
 Ekko, the young inventor from Zaun, captures the essence of technological progress in Arcane when he reflects:
 
@@ -38,7 +38,7 @@ _New in Airflow 3: Airflow 3 was released on April 2025. It's the biggest releas
 
 Silently accompanying these flagship advancements are tools like the Airflow AI SDK—a potent, if still somewhat under-the-radar, framework based on PydanticAI. This SDK allows to embed the usage of Large Language Models, such as Google's Gemini, directly within your DAGs, unlocking untapped potential for insight and automation.
 
-To demonstrate this synergy of advanced data orchestration and AI-driven insight, this article provides a comprehensive blueprint for constructing an end-to-end data analysis pipeline. We will learn about the essentials of the Riot Games API to acquire League of Legends data, make use of the power of Dynamic Task Mapping within Airflow—showcasing its modern capabilities—and then deploy the **Airflow AI SDK**. This will empower **Google's Gemini** to distill raw match data into a sophisticated, AI-generated champion performance tier list. We will not only build a functional system but also discover and highlight key advancements introduced in Airflow 3, showcasing how they redefine what's possible in intelligent data processing. With this article, you will be inspired to leave a few things behind.
+To demonstrate this synergy of advanced data orchestration and AI-driven insight, this article provides a comprehensive blueprint for constructing an end-to-end data analysis pipeline. We will learn about the essentials of the Riot Games API to acquire League of Legends data, make use of the power of Dynamic Task Mapping within Airflow—showcasing its modern capabilities—and then deploy the [**Airflow AI SDK**](https://github.com/astronomer/airflow-ai-sdk). This will empower **Google's Gemini** to distill raw match data into a sophisticated, AI-generated champion performance tier list. We will not only build a functional system but also discover and highlight key advancements introduced in Airflow 3, showcasing how they redefine what's possible in intelligent data processing. With this article, you will be inspired to leave a few things behind.
 
 # 🛠️ Assembling Your Workshop: Environment Setup
 
@@ -874,7 +874,7 @@ The HTML report should include:
 
 These polishing steps—refining the DAG's scheduling and display, and dramatically improving the utility and presentation of its output—demonstrate how a little extra effort can significantly elevate a Data Engineering project.
 
-## The final version of our End-to-end League of Legends analysis pipeline
+## The final version of our End-to-end League of Legends pipeline
 
 We've journeyed from the initial idea—analyzing the data behind League of Legends—through planning, client development, dynamic orchestration, AI integration, and finally, dedicated polishing. Each step has built upon the last, incorporating modern Data Engineering practices and leveraging the powerful new features of Apache Airflow 3 and the Airflow AI SDK.
 
@@ -999,7 +999,7 @@ _New in Airflow 3: Automatic DAG Versioning! Airflow now inherently tracks struc
 This internal versioning is distinct from **DAG Bundles**, which are how DAG code (like our `dags/lol.py`) is provided to Airflow. While the default `LocalDagBundle` reads from the filesystem, other bundles like `GitDagBundle` can use external versioning. Regardless of the bundle, Airflow's automatic versioning tracks changes in the parsed DAG files.
 
 {: .note}
-_New in Airflow 3 Concepts: Understand DAG Bundles (e.g., LocalDagBundle, GitDagBundle) as the method for packaging and supplying your DAG code. While Airflow's internal versioning is automatic, using versioned bundles like `GitDagBundle` can provide an additional layer of explicit, external version control for your DAG files._
+_New in Airflow 3: Understand DAG Bundles (e.g., `LocalDagBundle`, `GitDagBundle`) as the method for packaging and supplying your DAG code. While Airflow's internal versioning is automatic, using versioned bundles like `GitDagBundle` can provide an additional layer of explicit, external version control for your DAG files._
 
 The Airflow 3 UI seamlessly integrates these versioning insights. In the grid view, historical runs accurately reflect the DAG structure of their time, even if tasks were later altered. The _Code_ tab often allows inspection of past DAG definitions, while the graph view typically features a selector to display the DAG's structure from different historical versions. This dynamic reconstruction is important for understanding past executions or troubleshooting issues tied to older DAG iterations.
 
