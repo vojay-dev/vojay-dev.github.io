@@ -7,6 +7,17 @@ image: '/images/header/publications.webp'
 
 Knowledge shared is knowledge squared. This is a selection of my publications:
 
+* **Article published in [Data Engineer Things](https://blog.det.life/), May, 2025**: [Airflow 3 and Airflow AI SDK in Action — Analyzing League of Legends](https://blog.det.life/airflow-3-and-airflow-ai-sdk-in-action-analyzing-league-of-legends-490f5b4522f5)
+
+![CIO]({{site.baseurl}}/images/det-05-25.webp)
+*DET front page / May 2025*
+
+* **Interview published in local newspaper [Nordwest-Zeitung](https://www.nwzonline.de/) / [Anzeiger für Harlingerland](https://harlinger.de/)**: [Videospiel-Experte Volker Janz aus Esens lebt seinen "American Dream"](https://www.nwzonline.de/landkreis-wittmund/volker-janz-aus-esens-vom-videospiel-experten-zum-lebenstraum-in-kalifornien_a_4,2,90274753.html?fbclid=IwZXh0bgNhZW0CMTEAAR1-Kp8B1w4Z_fjxVpg7vCEL8v1Wm9qgc0Q_HjSFfKxliM_nvARkK6VxQbI_aem_iXqVxu8-xxYCxD8203sZKA#)
+
+![NWZ]({{site.baseurl}}/images/nwz.webp)
+*Local newspaper Anzeiger für Harlingerland front page (print) / March 2025*
+
+* **Article published in [Data Engineer Things](https://blog.det.life/), February, 2025**: [The American Dream ETL — A Data Engineer’s O-1A Journey](https://blog.det.life/the-american-dream-etl-a-data-engineers-o-1a-journey-32e7f8f791eb)
 * **Article published in [Data Engineer Things](https://blog.det.life/), December, 2024**: [Talk to Airflow — Build an AI Agent Using PydanticAI and Gemini 2.0](https://blog.det.life/talk-to-airflow-build-an-ai-agent-using-pydanticai-and-gemini-2-0-fd645cf99fcb)
 * **Article published in [Data Engineer Things](https://blog.det.life/), December, 2024**: [Your Machine, Your AI — The Ultimate Local Productivity Stack with Ollama](https://blog.det.life/your-machine-your-ai-the-ultimate-local-productivity-stack-with-ollama-7a118f271479)
 * **Article published in the German online magazine [CIO](https://www.cio.de/), December, 2024**: [Der GenAI-Alltag in Hamburgs größtem Gaming-Unternehmen](https://www.cio.de/a/der-genai-alltag-in-hamburgs-groesstem-gaming-unternehmen,3747896)
