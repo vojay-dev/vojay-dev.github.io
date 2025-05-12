@@ -18,7 +18,7 @@ The world of data orchestration is evolving at lightning speed. Are your Airflow
 {: .important }
 _Note: I published the final Airflow project on GitHub: [https://github.com/vojay-dev/airflow-riot](https://github.com/vojay-dev/airflow-riot)_
 
-# 💡 Engineering Insights from the League of Legends Universe
+# 💡 Insights from the League of Legends Universe
 
 You are Kha'Zix, an apex predator, crouching unseen within the dense, pulsating shadows of the jungle, senses sharp, every fiber of your being thrumming with anticipation. Your four teammates move with calculated precision across the lanes. The air is thick with the scent of unseen prey—jungle monsters that fuel your growth, champions from the enemy team venturing too close. Your objective: dismantle their defenses, to shatter their Nexus. But with every step, every clash of steel and surge of arcane energy, you are doing more than just fighting for victory. You are generating data—an invisible digital echo of your every action on the battleground. This is the essence of a game called League of Legends.
 
@@ -31,7 +31,7 @@ Ekko, the young inventor from Zaun, captures the essence of technological progre
 
 > Sometimes taking a leap forward means leaving a few things behind
 
-Ekko's insight mirrors a common struggle in Data Engineering: clinging to familiar methods even as new, more powerful tools emerge. Apache Airflow 3 isn't just another update; it's a direct response to the limitations of older approaches. It demands a conceptual leap, urging us to shed verbose, cumbersome operator patterns that can no longer keep pace with today's data complexities. We see a more profound emphasis on **dataset-driven scheduling**, allowing DAGs to react organically to data events rather than being tethered solely to rigid timelines—a clear and powerful step away from some traditional scheduling mindsets. The continued refinement of the **TaskFlow API** further streamlines Python-native DAG authoring, empowering developers to craft elegant pipelines and inspiring us to leave behind more verbose, older operator patterns for many tasks. This leap forward is about embracing more reactive and data-aware approaches, even if it means rethinking some familiar Airflow concepts to unlock greater efficiency and clarity.
+Ekko's insight mirrors a common struggle in Data Engineering: clinging to familiar methods even as new, more powerful tools emerge. Apache Airflow 3 isn't just a major update; it's a direct response to the limitations of older approaches. It demands a conceptual leap, urging us to forget verbose, cumbersome operator patterns that can no longer keep pace with today's data complexities. We see a more profound emphasis on **dataset-driven scheduling**, allowing DAGs to react organically to data events rather than being tethered solely to rigid timelines—a clear and powerful step away from some traditional scheduling mindsets. The continued refinement of the **TaskFlow API** further streamlines Python-native DAG authoring, empowering developers to craft elegant pipelines and inspiring us to leave behind more verbose, older operator patterns for many tasks. This leap forward is about embracing more reactive and data-aware approaches, even if it means rethinking some familiar Airflow concepts to unlock greater efficiency and clarity.
 
 {: .note}
 _New in Airflow 3: Airflow 3 was released on April 2025. It's the biggest release since 2.0 (2020) and marks years of evolution, now with 30M+ monthly downloads and 80K+ organizations._
