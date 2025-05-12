@@ -36,7 +36,7 @@ Ekko's insight mirrors a common struggle in Data Engineering: clinging to famili
 {: .note}
 _New in Airflow 3: Airflow 3 was released on April 2025. It's the biggest release since 2.0 (2020) and marks years of evolution, now with 30M+ monthly downloads and 80K+ organizations._
 
-Silently accompanying these flagship advancements are tools like the Airflow AI SDK—a potent, if still somewhat under-the-radar, framework based on PydanticAI. This SDK allows to embed the usage of Large Language Models, such as Google's Gemini, directly within your DAGs, unlocking untapped potential for insight and automation.
+Silently accompanying these flagship advancements are tools like the Airflow AI SDK—a potent, if still somewhat under-the-radar, framework based on PydanticAI. This SDK allows to embed the usage of Large Language Models (LLMs), such as Google's Gemini, directly within your DAGs, unlocking untapped potential for insight and automation.
 
 To demonstrate this synergy of advanced data orchestration and AI-driven insight, this article provides a comprehensive blueprint for constructing an end-to-end data analysis pipeline. We will learn about the essentials of the Riot Games API to acquire League of Legends data, make use of the power of Dynamic Task Mapping within Airflow—showcasing its modern capabilities—and then deploy the [**Airflow AI SDK**](https://github.com/astronomer/airflow-ai-sdk). This will empower **Google's Gemini** to distill raw match data into a sophisticated, AI-generated champion performance tier list. We will not only build a functional system but also discover and highlight key advancements introduced in Airflow 3, showcasing how they redefine what's possible in intelligent data processing. With this article, you will be inspired to leave a few things behind.
 
@@ -694,7 +694,7 @@ _Airflow tip: When you need to run the same task for each item in a list (e.g., 
 
 # 🤖 Use the Ultimate: AI-Powered Analysis with Airflow AI SDK & Gemini
 
-Having gathered and prepared our League of Legends match data, we've arrived at the exciting moment: transforming this raw information into strategic intelligence. For this, we unleash our ultimate skill—a powerful, yet perhaps still under-the-radar, framework known as the **Airflow AI SDK**. This innovative SDK, built upon the foundations of PydanticAI, is designed to seamlessly integrate Large Language Models (LLMs) and AI agent capabilities directly into your Apache Airflow pipelines.
+Having gathered and prepared our League of Legends match data, we've arrived at the exciting moment: transforming this raw information into strategic intelligence. For this, we unleash our ultimate skill—a powerful, yet perhaps still under-the-radar, framework known as the **Airflow AI SDK**. This innovative SDK, built upon the foundations of PydanticAI, is designed to seamlessly integrate LLMs and AI agent capabilities directly into your Apache Airflow pipelines.
 
 As AI workflows become increasingly integral to modern data strategies, organizations seek pragmatic, scalable, and reliable ways to orchestrate them. Airflow, already the de facto standard for complex data pipeline orchestration, is perfectly positioned to manage these AI-centric processes. The Airflow AI SDK bridges this gap beautifully by:
 
@@ -730,7 +730,7 @@ astro dev restart
 
 With these preparations complete, we are now truly ready to deploy our ultimate skill and infuse our data pipeline with intelligent analysis.
 
-The magic of the Airflow AI SDK shines through its decorator-based approach. We'll define a new task using `@task.llm`, which instructs Airflow to treat this task as an interaction with a Large Language Model.
+The magic of the Airflow AI SDK shines through its decorator-based approach. We'll define a new task using `@task.llm`, which instructs Airflow to treat this task as an interaction with a LLM.
 
 Let's add the `analyze` task to our DAG, along with a simple `send_report` task to save its output:
 
@@ -1015,7 +1015,7 @@ Collectively, these DAG Versioning features significantly enhance the Airflow ex
 
 Our journey began in the pulsating shadows of the jungle, witnessing the raw generation of data from every calculated move on the battlefield. We’ve since traversed the pathways of Data Engineering, transforming those digital echoes into actionable insights. From the initial exploration of the Riot Games API to the deployment of an AI-powered analyst generating sophisticated champion tier lists, we’ve constructed a complete, end-to-end pipeline—a demonstration of modern orchestration and intelligent automation.
 
-The heart of this transformation lies in the synergy of **Apache Airflow 3** and the **Airflow AI SDK**. We’ve seen firsthand how conceptual evolutions empower us to build more reactive, intuitive, and Python-native data workflows. This is about embracing a paradigm shift, one that allows for greater clarity and efficiency in how we command our data. Complementing this, the Airflow AI SDK, with its seamless integration of powerful Large Language Models like **Google's Gemini**, demonstrated how sophisticated AI capabilities are no longer confined to specialized environments but can be integrated into our everyday data pipelines.
+The heart of this transformation lies in the synergy of **Apache Airflow 3** and the **Airflow AI SDK**. We’ve seen firsthand how conceptual evolutions empower us to build more reactive, intuitive, and Python-native data workflows. This is about embracing a paradigm shift, one that allows for greater clarity and efficiency in how we command our data. Complementing this, the Airflow AI SDK, with its seamless integration of powerful LLMs like **Google's Gemini**, demonstrated how sophisticated AI capabilities are no longer confined to specialized environments but can be integrated into our everyday data pipelines.
 
 Ekko’s wisdom from Arcane, that _"Sometimes taking a leap forward means leaving a few things behind,"_ has been our guiding principle. By embracing these new tools and approaches, we consciously chose to move beyond some older, perhaps more cumbersome, patterns. The result? A more agile, intelligent, and ultimately more powerful way to engineer insights. I hope this practical exploration has not only illuminated the _how_ but also underlined the _why_—why this leap forward is essential for any Data Engineer looking to stay at the top of the field.
 
