@@ -8,7 +8,7 @@ tags: [data-engineering, airflow, python, dynamic-task-mapping, taskflow-api, ai
 toc: true
 ---
 
-The world of data orchestration is evolving at lightning speed. Are your Airflow patterns keeping up, or are they holding you back? In this article, we will cover an end-to-end Airflow 3 data pipeline. We will extract data from the [Riot Games API](https://developer.riotgames.com/) and use the [Airflow AI SDK](https://github.com/astronomer/airflow-ai-sdk), a modern SDK for working with LLMs from Apache Airflow based on [PydanticAI](https://ai.pydantic.dev/), to generate a League of Legends report featuring a tier. The project highlights modern Airflow and AI features, and
+The world of data orchestration is evolving at lightning speed. Are your Airflow patterns keeping up, or are they holding you back? In this article, we will cover an end-to-end Airflow 3 data pipeline. We will extract data from the [Riot Games API](https://developer.riotgames.com/) and use the [Airflow AI SDK](https://github.com/astronomer/airflow-ai-sdk), a modern SDK for working with LLMs from Apache Airflow based on [PydanticAI](https://ai.pydantic.dev/), to generate a League of Legends report featuring a champion tier list. The project highlights modern Airflow 3 and AI features, and
 
 > by the end of this article you will be inspired to rethink deprecated DAG orchestration patterns.
 
