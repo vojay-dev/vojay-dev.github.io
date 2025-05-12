@@ -16,9 +16,9 @@ The world of data orchestration is evolving at lightning speed. Are your Airflow
 *Airflow 3 based League of Legends DAG, source: by author*
 
 {: .important }
-_Note: I published the final Airflow project on Github: [https://github.com/vojay-dev/airflow-riot](https://github.com/vojay-dev/airflow-riot)_
+_Note: I published the final Airflow project on GitHub: [https://github.com/vojay-dev/airflow-riot](https://github.com/vojay-dev/airflow-riot)_
 
-# Engineering Insights from the League of Legends Universe
+# 💡 Engineering Insights from the League of Legends Universe
 
 You are Kha'Zix, an apex predator, crouching unseen within the dense, pulsating shadows of the jungle, senses sharp, every fiber of your being thrumming with anticipation. Your four teammates move with calculated precision across the lanes. The air is thick with the scent of unseen prey—jungle monsters that fuel your growth, champions from the enemy team venturing too close. Your objective: dismantle their defenses, to shatter their Nexus. But with every step, every clash of steel and surge of arcane energy, you are doing more than just fighting for victory. You are generating data—an invisible digital echo of your every action on the battleground. This is the essence of a game called League of Legends.
 
@@ -40,12 +40,12 @@ Silently accompanying these flagship advancements are tools like the Airflow AI 
 
 To demonstrate this synergy of advanced data orchestration and AI-driven insight, this article provides a comprehensive blueprint for constructing an end-to-end data analysis pipeline. We will learn about the essentials of the Riot Games API to acquire League of Legends data, make use of the power of Dynamic Task Mapping within Airflow—showcasing its modern capabilities—and then deploy the **Airflow AI SDK**. This will empower **Google's Gemini** to distill raw match data into a sophisticated, AI-generated champion performance tier list. We will not only build a functional system but also discover and highlight key advancements introduced in Airflow 3, showcasing how they redefine what's possible in intelligent data processing. With this article, you will be inspired to leave a few things behind.
 
-# Assembling Your Workshop: Environment Setup
+# 🛠️ Assembling Your Workshop: Environment Setup
 
 For simplicity, we are using a local Airflow environment with Docker and [Astro CLI](https://www.astronomer.io/docs/astro/cli/overview/) (install via `brew install astro`), which is an effective way to start Airflow projects.
 
 {: .note}
-_New in Airflow 3: With the release of Airflow 3, the Astro CLI will start an Airflow 3 environment per default, which makes exploring the new major release easy and convenient._
+_New in Airflow 3: With the release of Airflow 3, the Astro CLI will start an Airflow 3 environment by default, which makes exploring the new major release easy and convenient._
 
 ## The new Airflow 3 Architecture
 
@@ -137,12 +137,12 @@ Clicking on the DAG takes you to the DAG view. On the right side, you will see v
 ![Airflow 3 UI: DAG grid view]({{site.baseurl}}/images/blog/2025-05-10-11.png)
 *Airflow 3 UI: DAG grid view, source: by author*
 
-In the top right corner of the DAG view, you will find the _Reparse Dag_ button, which is worth noting. It will reparse the DAG source file, allowing you to see changes immediately. Below the button, you will notice a glimpse of the new DAG versioning feature, showing the DAG version, which increments with each change.
+In the top right corner of the DAG view, you will find the _Reparse Dag_ button, which is worth noting. It will reparse the DAG source file, allowing you to see changes immediately. Below the button, you will notice a glimpse of the new DAG Versioning feature, showing the DAG Version, which increments with each change.
 
 ![Airflow 3 UI: DAG graph view]({{site.baseurl}}/images/blog/2025-05-10-12.png)
 *Airflow 3 UI: DAG graph view, source: by author*
 
-Clicking on _Runs_ in the DAG view takes you to the DAG runs view, where you can see each run of the DAG along with its type, effective dates, DAG version, and options to rerun or mark it as a failure or success. By clicking on a run date, you will enter the run view.
+Clicking on _Runs_ in the DAG view takes you to the DAG runs view, where you can see each run of the DAG along with its type, effective dates, DAG Version, and options to rerun or mark it as a failure or success. By clicking on a run date, you will enter the run view.
 
 ![Airflow 3 UI: DAG runs view]({{site.baseurl}}/images/blog/2025-05-10-13.png)
 *Airflow 3 UI: DAG run view, source: by author*
@@ -160,16 +160,16 @@ Clicking on an individual task ID will open the new log view. This log view allo
 Now that we are more familiar with the new UI, let's dive into our end-to-end pipeline.
 
 {: .note}
-_New in Airflow 3: Key upgrades for the new Airflow UI include a modern React interface, UI-driven backfills, enhanced task logs, and integrated DAG versioning details, making DAG management much smoother._
+_New in Airflow 3: Key upgrades for the new Airflow UI include a modern React interface, UI-driven backfills, enhanced task logs, and integrated DAG Versioning details, making DAG management much smoother._
 
-# Scouting the Terrain: Understanding the Riot Games API
+# 🗺️ Scouting the Terrain: Understanding the Riot Games API
 
 Our mission to engineer insights from the League of Legends universe begins with understanding our primary data source: the Riot Games API. Riot generously provides the developer community with access to a wealth of game data, a key part of their commitment to empowering players and developers to enrich the LoL experience. This API is our gateway to the raw information that fuels our analysis.
 
-First, you'll need to establish your credentials. Navigate to the [Riot Games developer portal](https://developer.riotgames.com) to either log in with your existing Riot account or create a new one.
+First, you'll need to establish your credentials. Navigate to the [Riot Games Developer Portal](https://developer.riotgames.com) to either log in with your existing Riot account or create a new one.
 
-![Riot Games developer portal]({{site.baseurl}}/images/blog/2025-05-10-16.png)
-*Riot Games developer portal, source: [Riot Games](https://developer.riotgames.com)*
+![Riot Games Developer Portal]({{site.baseurl}}/images/blog/2025-05-10-16.png)
+*Riot Games Developer Portal, source: [Riot Games](https://developer.riotgames.com)*
 
 Once logged in, obtaining an API key is straightforward. Click on your user profile in the top right corner, then select _Dashboard_. Here, you'll find the option to _Generate API Key_. Secure this key, as it's your personal passport to the API.
 
@@ -252,7 +252,7 @@ This pragmatic, step-by-step exploration with basic CLI tools has allowed us to 
 {: .important}
 _Note: Manually probing an API's endpoints with simple tools before extensive coding is a cornerstone of effective Data Engineering. This initial exploration helps validate assumptions, understand data relationships (like the PUUID requirement here), and prevent costly design missteps in your client or pipeline. Always know your data source intimately before you code for it._
 
-# Forging Your Legendary Item: A Riot API Client
+# ⚔️ Forging Your Legendary Item: A Riot API Client
 
 With our initial exploration of the Riot Games API complete, it's time to move beyond simple `curl` commands and forge a legendary item: a dedicated Python API client. A common practice I follow, especially when dealing with more complex API integrations or when aiming for cleaner Airflow DAGs, is to encapsulate all API interaction logic within a standalone client. This separation of concerns keeps the DAG file focused on orchestration, enhancing readability and maintainability.
 
@@ -455,10 +455,10 @@ Executing this `riot.py` script directly will now demonstrate its capabilities, 
 ![Modern API client in Python]({{site.baseurl}}/images/blog/2025-05-10-20.png)
 *Modern API client in Python, source: by author*
 
-{: .not}
+{: .note}
 _Airflow tip: For cleaner Airflow DAGs and more robust data integrations, encapsulate API interaction logic within a dedicated, reusable client. This promotes separation of concerns, simplifies DAG readability, and allows for tailored features like type safety (with Pydantic) and custom retry logic._
 
-# Summoning the Data: Building the Airflow Data Pipeline
+# 🌊 Summoning the Data: Building the Airflow Data Pipeline
 
 With our _legendary item_—the robust `RiotApiClient`—forged and ready, we now stand at the threshold of orchestration. The next crucial step is to integrate this client into an Apache Airflow DAG, transforming our standalone data fetching capabilities into a repeatable, monitorable, and scalable data pipeline.
 
@@ -692,7 +692,7 @@ The `unique_matches` output from this task now represents the clean, consolidate
 {: .note}
 _Airflow tip: When you need to run the same task for each item in a list (e.g., processing files, fetching data per ID), Dynamic Task Mapping (`.expand()`) is your go-to. It simplifies DAGs by dynamically creating task instances at runtime based on upstream output._
 
-# Use the Ultimate: AI-Powered Analysis with Airflow AI SDK & Gemini
+# 🤖 Use the Ultimate: AI-Powered Analysis with Airflow AI SDK & Gemini
 
 Having gathered and prepared our League of Legends match data, we've arrived at the exciting moment: transforming this raw information into strategic intelligence. For this, we unleash our ultimate skill—a powerful, yet perhaps still under-the-radar, framework known as the **Airflow AI SDK**. This innovative SDK, built upon the foundations of PydanticAI, is designed to seamlessly integrate Large Language Models (LLMs) and AI agent capabilities directly into your Apache Airflow pipelines.
 
@@ -803,7 +803,7 @@ The initial outcome is already quite impressive, demonstrating the power of comb
 ![League of Legends AI generated tier list as Markdown]({{site.baseurl}}/images/blog/2025-05-10-30.jpg)
 *League of Legends AI generated tier list as Markdown, source: by author*
 
-# Polishing the Build: Enhanced Reporting and DAG Customization
+# ✨ Polishing the Build: Enhanced Reporting and DAG Customization
 
 Our end-to-end pipeline is now operational, successfully transforming raw League of Legends data into an AI-generated champion tier list. While we have a functional version, a crucial, often overlooked, phase in Data Engineering is **polishing**. This isn't about over-engineering or chasing perfection indefinitely; rather, it's about dedicating a focused period—be it a couple of hours or a business day—to refine the solution for better maintainability, usability, and value. As Martin Fowler wisely stated:
 
@@ -813,7 +813,7 @@ Our goal as Data Engineers extends beyond mere technical execution. We must also
 
 In this spirit, let's polish our demo project. We'll focus on two areas: enhancing our DAG definition with new Airflow 3 features and significantly upgrading our AI-generated report.
 
-A common requirement is to run a DAG on different schedules (e.g., twice daily at specific times, or different schedules for weekdays vs. weekends). Airflow 3 simplifies this with the `MultipleCronTriggerTimetable`. This not only allows for defining multiple CRON expressions but also for explicitly setting the timezone for these schedules, which is crucial for avoiding ambiguity.
+A common requirement is to run a DAG on different schedules (e.g., twice daily at specific times, or different schedules for weekdays vs. weekends). Airflow 3 simplifies this with the `MultipleCronTriggerTimetable`. This not only allows for defining multiple cron expressions but also for explicitly setting the timezone for these schedules, which is crucial for avoiding ambiguity.
 
 While the DAG ID must be unique and follow certain conventions, the `dag_display_name` parameter allows you to set a more human-readable (and even emoji-enhanced!) name that appears in the Airflow UI. This can significantly improve the browsability of your Airflow instance, especially with many DAGs.
 
@@ -833,11 +833,11 @@ def lol():
 	# ...
 {% endhighlight %}
 
-![Multiple CRON schedules per DAG]({{site.baseurl}}/images/blog/2025-05-10-31.png)
-*Multiple CRON schedules per DAG, source: by author*
+![Multiple cron schedules per DAG]({{site.baseurl}}/images/blog/2025-05-10-31.png)
+*Multiple cron schedules per DAG, source: by author*
 
 {: .note}
-_New in Airflow 3: Need your DAG to run on different CRON schedules? Airflow 3 introduces `MultipleCronTriggerTimetable`, allowing multiple, timezone-aware CRON schedules for enhanced flexibility._
+_New in Airflow 3: Need your DAG to run on different cron schedules? Airflow 3 introduces `MultipleCronTriggerTimetable`, allowing multiple, timezone-aware cron schedules for enhanced flexibility._
 
 {: .note}
 _Airflow Tip: Make your DAGs easier to spot! Use `dag_display_name` in your DAG definition to give them friendly, descriptive titles in the Airflow UI, improving discoverability. Also works on task-level._
@@ -989,9 +989,9 @@ The Airflow AI SDK, powered by Gemini, transforms our curated match statistics i
 
 ## See the evolution with DAG Versioning
 
-As our League of Legends pipeline has evolved, each change to its structure has effectively created a new DAG version. Airflow 3 embraces this with powerful **DAG Versioning**, offering clear visibility into how workflows change over time. This involves two key ideas: Airflow's inherent version tracking and the concept of DAG bundles.
+As our League of Legends pipeline has evolved, each change to its structure has effectively created a new DAG Version. Airflow 3 embraces this with powerful **DAG Versioning**, offering clear visibility into how workflows change over time. This involves two key ideas: Airflow's inherent version tracking and the concept of DAG Bundles.
 
-Airflow 3 **automatically and inherently versions your DAGs**. It recognizes a new DAG version whenever a DAG run starts for a DAG whose structure has changed since the last run. Structural changes include modifications to DAG/task parameters, dependencies, task IDs, or adding/removing tasks. Crucially, **each DAG run is now explicitly tied to the specific DAG code version active at its creation,** a link visible throughout the Airflow UI. New runs always use the latest DAG code.
+Airflow 3 **automatically and inherently versions your DAGs**. It recognizes a new DAG Version whenever a DAG run starts for a DAG whose structure has changed since the last run. Structural changes include modifications to DAG/task parameters, dependencies, task IDs, or adding/removing tasks. Crucially, **each DAG run is now explicitly tied to the specific DAG code version active at its creation,** a link visible throughout the Airflow UI. New runs always use the latest DAG code.
 
 {: .note}
 _New in Airflow 3: Automatic DAG Versioning! Airflow now inherently tracks structural changes to your DAGs. Each DAG run is tied to a specific code version, visible in the UI, providing a clear historical trace for easier debugging and auditing of evolving pipelines._
@@ -1001,7 +1001,7 @@ This internal versioning is distinct from **DAG Bundles**, which are how DAG cod
 {: .note}
 _New in Airflow 3 Concepts: Understand DAG Bundles (e.g., LocalDagBundle, GitDagBundle) as the method for packaging and supplying your DAG code. While Airflow's internal versioning is automatic, using versioned bundles like `GitDagBundle` can provide an additional layer of explicit, external version control for your DAG files._
 
-The Airflow 3 UI seamlessly integrates these versioning insights. In the Grid view, historical runs accurately reflect the DAG structure of their time, even if tasks were later altered. The _Code_ tab often allows inspection of past DAG definitions, while the Graph view typically features a selector to display the DAG's structure from different historical versions. This dynamic reconstruction is important for understanding past executions or troubleshooting issues tied to older DAG iterations.
+The Airflow 3 UI seamlessly integrates these versioning insights. In the grid view, historical runs accurately reflect the DAG structure of their time, even if tasks were later altered. The _Code_ tab often allows inspection of past DAG definitions, while the graph view typically features a selector to display the DAG's structure from different historical versions. This dynamic reconstruction is important for understanding past executions or troubleshooting issues tied to older DAG iterations.
 
 ![DAG Versioning in grid and code view]({{site.baseurl}}/images/blog/2025-05-10-34.png)
 *DAG Versioning in grid and code view, source: by author*
@@ -1009,9 +1009,9 @@ The Airflow 3 UI seamlessly integrates these versioning insights. In the Grid vi
 ![DAG Versioning in graph view]({{site.baseurl}}/images/blog/2025-05-10-35.png)
 *DAG Versioning in graph view, source: by author*
 
-Collectively, these DAG versioning features significantly enhance the Airflow experience, offering a traceable history that aids development, debugging, and auditing, ensuring the context of past DAG runs remains clear as pipelines evolve.
+Collectively, these DAG Versioning features significantly enhance the Airflow experience, offering a traceable history that aids development, debugging, and auditing, ensuring the context of past DAG runs remains clear as pipelines evolve.
 
-# GG WP: Conclusion and Next Steps
+# 🏆 GG WP: Conclusion and Next Steps
 
 Our journey began in the pulsating shadows of the jungle, witnessing the raw generation of data from every calculated move on the battlefield. We’ve since traversed the pathways of Data Engineering, transforming those digital echoes into actionable insights. From the initial exploration of the Riot Games API to the deployment of an AI-powered analyst generating sophisticated champion tier lists, we’ve constructed a complete, end-to-end pipeline—a demonstration of modern orchestration and intelligent automation.
 
