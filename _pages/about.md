@@ -5,7 +5,7 @@ permalink: /about/
 image: '/images/header/about.webp'
 ---
 
-My name is Volker and I am working as an Expert Data Engineer at [InnoGames](https://innogames.com/){:target="_blank"} in Hamburg, Germany. I love to share my passion about Big Data as a speaker at conferences and other events. Apart from work, I am a proud father, gym enthusiast, adventurer, gamer and hobby photographer. I am always looking for challenges and opportunities to share experiences and learn from others.
+As a Senior Developer Advocate at [Astronomer](https://www.astronomer.io/), I focus on empowering the global data community by sharing my extensive, real-world experience in architecting and scaling business-critical data platforms. My role involves creating technical content, speaking at international conferences, and evangelizing best practices for modern DataOps with Apache Airflow and Astro. I am passionate about blending deep technical expertise with a love for communication to help shape the future of data orchestration.
 
 > The only way to do great work is to love what you do.
 >
@@ -25,15 +25,17 @@ My name is Volker and I am working as an Expert Data Engineer at [InnoGames](htt
 
 ## Work
 
-| Timeframe                              | Description                                                                                                         |
-|----------------------------------------|---------------------------------------------------------------------------------------------------------------------|
-| Apr.&nbsp;2020 - <br /> Now            | [**InnoGames GmbH**](https://innogames.com){:target="_blank"} <br /> Expert Data Engineer                           |
-| Aug.&nbsp;2018 - <br /> Apr.&nbsp;2020 | [**InnoGames GmbH**](https://innogames.com){:target="_blank"} <br /> Senior Data Engineer                           |
-| Aug.&nbsp;2014 - <br /> Aug.&nbsp;2018 | [**InnoGames GmbH**](https://innogames.com){:target="_blank"} <br /> Technical Product Lead - Data Engineering      |
-| Sep.&nbsp;2011 - <br /> Aug.&nbsp;2014 | [**InnoGames GmbH**](https://innogames.com){:target="_blank"} <br /> Software Developer - Backend Systems           |
-| Apr.&nbsp;2011 - <br /> Sep.&nbsp;2011 | [**InnoGames GmbH**](https://innogames.com){:target="_blank"} <br /> Student - Master's thesis                      |
-| Jan.&nbsp;2010 - <br /> Jan.&nbsp;2011 | [**Carl von Ossietzky University of Oldenburg**](https://uol.de){:target="_blank"} <br /> Graduate Assistant        |
-| Oct.&nbsp;2008 - <br /> Dec.&nbsp;2009 | [**OFFIS Institute for Information Technology**](https://www.offis.de){:target="_blank"} <br /> Graduate Assistant  |
+| Timeframe                              | Description                                                                                                                                     |
+|----------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| Aug.&nbsp;2025 - <br /> Now            | [**Astronomer**](https://www.astronomer.io/){:target="_blank"} <br /> Senior Developer Advocate <br /> _California, USA_                        |
+| May.&nbsp;2025 - <br /> Aug.&nbsp;2025 | [**InnoGames GmbH**](https://innogames.com){:target="_blank"} <br /> Principal Data Engineer <br /> _California, USA_                           |
+| Apr.&nbsp;2020 - <br /> May.&nbsp;2025 | [**InnoGames GmbH**](https://innogames.com){:target="_blank"} <br /> Expert Data Engineer <br /> _Hamburg, Germany (remote)_                    |
+| Aug.&nbsp;2018 - <br /> Apr.&nbsp;2020 | [**InnoGames GmbH**](https://innogames.com){:target="_blank"} <br /> Senior Data Engineer <br /> _Hamburg, Germany_                             |
+| Aug.&nbsp;2014 - <br /> Aug.&nbsp;2018 | [**InnoGames GmbH**](https://innogames.com){:target="_blank"} <br /> Technical Product Lead - Data Engineering <br /> _Hamburg, Germany_        |
+| Sep.&nbsp;2011 - <br /> Aug.&nbsp;2014 | [**InnoGames GmbH**](https://innogames.com){:target="_blank"} <br /> Software Developer - Backend Systems <br /> _Hamburg, Germany_             |
+| Apr.&nbsp;2011 - <br /> Sep.&nbsp;2011 | [**InnoGames GmbH**](https://innogames.com){:target="_blank"} <br /> Student - Master's thesis <br /> _Hamburg, Germany_                        |
+| Jan.&nbsp;2010 - <br /> Jan.&nbsp;2011 | [**Carl von Ossietzky University of Oldenburg**](https://uol.de){:target="_blank"} <br /> Graduate Assistant <br /> _Oldenburg, Germany_        |
+| Oct.&nbsp;2008 - <br /> Dec.&nbsp;2009 | [**OFFIS Institute for Information Technology**](https://www.offis.de){:target="_blank"} <br /> Graduate Assistant <br /> _Oldenburg, Germany_  |
 
 ## Education
 
