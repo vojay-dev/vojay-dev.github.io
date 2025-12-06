@@ -3,4 +3,4 @@ all:
 
 .PHONY run:
 run:
-	uv run mkdocs serve
+	bundle exec jekyll serve --livereload
