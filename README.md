@@ -1,3 +1,1 @@
 # vojay.io
-
-Personal website.
