@@ -225,7 +225,7 @@ const mobileCmdInput = document.getElementById('mobile-cmd-input');
 if (mobileCmdInput) {
     mobileCmdInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
-            const val = mobileCmdInput.value;
+            const val = mobileCmdInput.value.toLowerCase();
             if (val.trim() !== '') {
                 executeCmd(val); // Reuse existing command logic
                 mobileCmdInput.value = ''; // Clear input
