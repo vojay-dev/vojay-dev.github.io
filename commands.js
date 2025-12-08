@@ -88,6 +88,57 @@ const customCommands = {
         fn: (args, sys) => {
             sys.closeBuffer();
         }
-    }
+    },
+
+    'matrix': {
+        desc: "Wake up, Neo... (Tokyo Night Edition)",
+        fn: (args, sys) => {
+            const canvas = document.createElement('canvas');
+            Object.assign(canvas.style, {
+                position: 'fixed', top: '0', left: '0',
+                width: '100vw', height: '100vh', zIndex: '99999',
+                background: '#1a1b26', // Theme BG Color
+                transition: 'opacity 1s'
+            });
+            document.body.appendChild(canvas);
+
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const chars = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            const fontSize = 16;
+            const columns = canvas.width / fontSize;
+            const drops = Array(Math.floor(columns)).fill(1);
+
+            let animationId;
+            const draw = () => {
+                // Fade effect using Theme BG with low opacity
+                ctx.fillStyle = 'rgba(26, 27, 38, 0.1)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                // Theme Blue Text
+                ctx.fillStyle = '#7aa2f7';
+                ctx.font = fontSize + 'px monospace';
+
+                for(let i = 0; i < drops.length; i++) {
+                    const text = chars.charAt(Math.floor(Math.random() * chars.length));
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                    if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                    drops[i]++;
+                }
+                animationId = requestAnimationFrame(draw);
+            };
+            draw();
+
+            setTimeout(() => {
+                canvas.style.opacity = '0';
+                setTimeout(() => {
+                    cancelAnimationFrame(animationId);
+                    document.body.removeChild(canvas);
+                }, 1000);
+            }, 5000);
+        }
+    },
 
 };
