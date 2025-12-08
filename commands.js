@@ -63,17 +63,14 @@ const customCommands = {
     'whoami': {
         desc: "Identify current user session (IP & System)",
         fn: async (args, sys) => {
-            // 1. Loading State
             sys.print(`<p style="color:var(--comment)">Scanning network nodes... <span class="cursor">|</span></p>`);
 
-            // 2. Gather Data
             const width = window.screen.width;
             const height = window.screen.height;
             const lang = navigator.language.toUpperCase();
             const platform = navigator.platform;
             const cores = navigator.hardwareConcurrency || "?";
 
-            // Simple User Agent Parser
             const ua = navigator.userAgent;
             let os = "Unknown OS";
             if (ua.indexOf("Win") !== -1) os = "Windows";
@@ -82,7 +79,6 @@ const customCommands = {
             if (ua.indexOf("Android") !== -1) os = "Android";
             if (ua.indexOf("like Mac") !== -1) os = "iOS";
 
-            // 3. Fetch IP (Async)
             let ip = "127.0.0.1";
             let city = "Unknown";
             try {
@@ -95,7 +91,6 @@ const customCommands = {
                 ip = "Hidden/VPN";
             }
 
-            // 4. Render Report
             const html = `
                 <h1>Session Established</h1>
                 <div style="display: grid; grid-template-columns: 100px 1fr; gap: 10px; background: rgba(0,0,0,0.2); padding: 20px; border: 1px solid var(--line-nr);">
@@ -113,7 +108,7 @@ const customCommands = {
                     <div>${width}x${height}px</div>
 
                     <div style="color:var(--orange)">HARDWARE</div>
-                    <div>${cores} Cores / GPU Active</div>
+                    <div>${cores} Cores</div>
 
                     <div style="color:var(--red)">LOCALE</div>
                     <div>${lang}</div>
