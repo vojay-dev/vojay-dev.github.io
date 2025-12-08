@@ -94,6 +94,7 @@ async function openFile(filename) {
 
         el.output.innerHTML = marked.parse(text);
 
+        if(window.Prism) window.Prism.highlightAllUnder(el.output);
         attachImageListeners();
         requestAnimationFrame(updateLineNumbers);
         updateUI();
