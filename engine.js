@@ -20,6 +20,7 @@ const el = {
 
 // --- Initialization ---
 document.title = config.title;
+initLightbox();
 renderSidebar();
 openFile(config.startPage);
 
@@ -50,6 +51,36 @@ function parseIcons(markdown) {
     });
 }
 
+function initLightbox() {
+    if (!document.getElementById('lightbox')) {
+        const lb = document.createElement('div');
+        lb.id = 'lightbox';
+        lb.onclick = () => {
+            lb.classList.remove('active');
+            setTimeout(() => lb.style.display = 'none', 300);
+        };
+        document.body.appendChild(lb);
+    }
+}
+
+function attachImageListeners() {
+    const images = el.output.querySelectorAll('img');
+    const lb = document.getElementById('lightbox');
+
+    images.forEach(img => {
+        img.onclick = (e) => {
+            e.stopPropagation(); // Don't trigger other clicks
+            lb.innerHTML = ''; // Clear previous
+            const clone = document.createElement('img');
+            clone.src = img.src;
+            lb.appendChild(clone);
+            lb.style.display = 'flex';
+            // Small timeout to allow display:flex to apply before opacity transition
+            setTimeout(() => lb.classList.add('active'), 10);
+        };
+    });
+}
+
 async function openFile(filename) {
     if(state.currentFile === filename) return;
     try {
@@ -63,6 +94,7 @@ async function openFile(filename) {
 
         el.output.innerHTML = marked.parse(text);
 
+        attachImageListeners();
         requestAnimationFrame(updateLineNumbers);
         updateUI();
         el.scroll.scrollTop = 0;
