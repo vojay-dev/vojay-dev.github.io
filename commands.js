@@ -65,10 +65,11 @@ const customCommands = {
         fn: (args, sys) => {
             sys.print(`
                 <h1>User Session</h1>
-                <p><strong>User:</strong> visitor@internet</p>
-                <p><strong>Role:</strong> Guest</p>
-                <p><strong>Access Level:</strong> Read-Only</p>
-                <br>
+                <ul>
+                <li><strong>User:</strong> visitor@internet</li>
+                <li><strong>Role:</strong> Guest</li>
+                <li><strong>Access Level:</strong> Read-Only</li>
+                </ul>
                 <blockquote>"I am a visitor, browsing the portfolio of Volker Janz."</blockquote>
             `);
         }
