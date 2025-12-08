@@ -224,6 +224,12 @@ function executeCmd(val) {
     const cmd = parts[0];
     const args = parts.slice(1);
 
+    if (typeof gtag === 'function') {
+        gtag('event', 'command_execute', {
+            'command_name': cmd
+        });
+    }
+
     if (config.files.includes(cmd)) {
         openFile(cmd);
     } else if (customCommands && customCommands[cmd]) {
@@ -234,7 +240,7 @@ function executeCmd(val) {
                 state.currentFile = null;
                 el.output.innerHTML = html;
                 requestAnimationFrame(updateLineNumbers);
-                el.statusFile.innerText = '[Command Output]';
+                el.statusFile.innerText = '[cmd out]';
                 document.querySelectorAll('.file-node').forEach(elem => elem.classList.remove('active'));
             },
             alert: (msg) => alert(msg)
