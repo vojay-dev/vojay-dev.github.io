@@ -193,6 +193,24 @@ code[class*="language-"], pre[class*="language-"] {
     opacity: 0.5;
 }
 
+#mobile-cmd-btn {
+    background: transparent;
+    border: none;
+    color: var(--blue); /* Highlight color */
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0 0 0 10px; /* Space from text */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#mobile-cmd-btn:active {
+    color: var(--green);
+    transform: translateX(2px);
+}
+
+
 /* Show it ONLY in the mobile media query */
 @media (max-width: 768px) {
     #mobile-cmd-wrapper {

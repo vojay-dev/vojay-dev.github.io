@@ -221,18 +221,27 @@ function toggleTree(force) {
 // --- Mobile Command Logic ---
 
 const mobileCmdInput = document.getElementById('mobile-cmd-input');
+const mobileCmdBtn = document.getElementById('mobile-cmd-btn');
+
+function triggerMobileCmd() {
+    const val = mobileCmdInput.value.toLowerCase();
+    if (val.trim() !== '') {
+        executeCmd(val);
+        mobileCmdInput.value = '';
+        mobileCmdInput.blur();
+        toggleTree(false);
+    }
+}
 
 if (mobileCmdInput) {
+    // 1. Handle Enter Key
     mobileCmdInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-            const val = mobileCmdInput.value.toLowerCase();
-            if (val.trim() !== '') {
-                executeCmd(val); // Reuse existing command logic
-                mobileCmdInput.value = ''; // Clear input
-                mobileCmdInput.blur(); // Hide keyboard
-                toggleTree(false); // Close sidebar
-            }
-        }
+        if (e.key === 'Enter') triggerMobileCmd();
+    });
+
+    // 2. Handle Button Click
+    mobileCmdBtn.addEventListener('click', () => {
+        triggerMobileCmd();
     });
 }
 
