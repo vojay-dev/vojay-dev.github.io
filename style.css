@@ -19,7 +19,24 @@ body { margin: 0; background-color: var(--bg); color: var(--fg); font-family: 'J
 .glow-text { text-shadow: 0 0 2px rgba(122, 162, 247, 0.3); }
 
 .app-container { display: flex; flex-direction: column; height: 100%; position: relative; z-index: 1; }
-.buffer-bar { background-color: var(--bg-dark); height: var(--header-h); display: flex; align-items: flex-end; padding-left: 0; overflow-x: auto; border-bottom: 1px solid #111; }
+
+.buffer-bar {
+    background-color: var(--bg-dark);
+    height: var(--header-h);
+    display: flex;
+    align-items: flex-end;
+    padding-left: 0;
+
+    overflow-x: auto;
+    flex-shrink: 0;
+    white-space: nowrap;
+
+    border-bottom: 1px solid #111;
+
+    scrollbar-width: none;
+}
+.buffer-bar::-webkit-scrollbar { display: none; }
+
 .tab { background-color: var(--bg-dark); color: var(--comment); padding: 5px 15px; display: flex; align-items: center; gap: 8px; cursor: pointer; border-right: 1px solid #111; font-size: 0.8rem; height: 100%; user-select: none; min-width: 120px; transition: background 0.1s; line-height: normal; }
 .tab:hover { background-color: var(--bg); }
 .tab.active { background-color: var(--bg); color: var(--fg); border-top: 2px solid var(--blue); }
