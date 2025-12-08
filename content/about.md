@@ -1,8 +1,3 @@
----
-hide:
-    - toc
----
-
 # About Me
 
 As a Senior Developer Advocate at [Astronomer](https://www.astronomer.io/), I focus on empowering the global data community by sharing my extensive, real-world experience in architecting and scaling business-critical data platforms. My role involves creating technical content, speaking at international conferences, and evangelizing best practices for modern DataOps with Apache Airflow and Astro. I am passionate about blending deep technical expertise with a love for communication to help shape the future of data orchestration.

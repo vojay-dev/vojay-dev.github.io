@@ -1,8 +1,3 @@
----
-hide:
-    - toc
----
-
 # Volker Janz
 
 **Senior Developer Advocate** @ [Astronomer](https://astronomer.io) *California, USA*
@@ -11,7 +6,7 @@ hide:
 
 ## Connect
 
-- [:fontawesome-brands-linkedin: LinkedIn](https://www.linkedin.com/in/vjanz)
-- [:fontawesome-brands-github: GitHub](https://github.com/vojay-dev)
-- [:fontawesome-brands-x-twitter: X](https://twitter.com/vojaydev)
-- [:fontawesome-brands-instagram: Instagram](https://instagram.com/vojay.io)
+- [:fab fa-linkedin: LinkedIn](https://www.linkedin.com/in/vjanz)
+- [:fab fa-github: GitHub](https://github.com/vojay-dev)
+- [:fab fa-x-twitter: X](https://twitter.com/vojaydev)
+- [:fab fa-instagram: Instagram](https://instagram.com/vojay.io)

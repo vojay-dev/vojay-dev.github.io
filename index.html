@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Loading...</title>
+
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="scanlines"></div>
+
+    <div class="app-container">
+        <!-- Buffer Tabs -->
+        <div class="buffer-bar glow-text" id="tab-container"></div>
+
+        <div class="workspace">
+            <!-- Sidebar -->
+            <div class="nvim-tree" id="nvim-tree">
+                <div class="tree-header"><i class="fas fa-project-diagram"></i> Explorer</div>
+                <div id="file-list-container"></div>
+                <div class="tree-header" style="margin-top:auto; border-top: 1px solid #333; padding-top:10px;">Links</div>
+                <div id="link-list-container"></div>
+                <div style="height: 10px;"></div>
+            </div>
+
+            <!-- Editor -->
+            <div class="editor-container">
+                <div class="gutter" id="gutter"></div>
+                <div class="content-scroll" id="scroll-container" tabindex="0">
+                    <div id="markdown-output" class="markdown-body glow-text"></div>
+                    <br><br><div style="color: var(--comment)">~</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="status-line">
+            <div style="display:flex; height:100%">
+                <div class="segment mode-normal" id="mode-segment">NORMAL</div>
+                <div class="segment seg-dark"><i class="fas fa-code-branch" style="font-size: 10px;"></i> main</div>
+                <div class="segment seg-light" id="status-filename">[No Name]</div>
+            </div>
+            <div style="display:flex; height:100%">
+                <div class="segment seg-light">markdown</div>
+                <div class="segment seg-dark" id="status-percent">TOP</div>
+            </div>
+        </div>
+
+        <!-- Command Bar -->
+        <div class="cmd-bar">
+            <span id="cmd-display" style="color: var(--comment)">:help</span>
+            <input type="text" id="cmd-input" class="cmd-input">
+        </div>
+    </div>
+    <div class="mobile-toggle" onclick="toggleTree()"><i class="fas fa-bars"></i></div>
+
+    <!-- Scripts (Load Order Matters) -->
+    <script src="config.js"></script>
+    <script src="commands.js"></script>
+    <script src="engine.js"></script>
+
+</body>
+</html>
