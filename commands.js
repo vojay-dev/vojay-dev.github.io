@@ -61,17 +61,69 @@ const customCommands = {
     },
 
     'whoami': {
-        desc: "Display current user session",
-        fn: (args, sys) => {
-            sys.print(`
-                <h1>User Session</h1>
-                <ul>
-                <li><strong>User:</strong> visitor@internet</li>
-                <li><strong>Role:</strong> Guest</li>
-                <li><strong>Access Level:</strong> Read-Only</li>
-                </ul>
-                <blockquote>"I am a visitor, browsing the portfolio of Volker Janz."</blockquote>
-            `);
+        desc: "Identify current user session (IP & System)",
+        fn: async (args, sys) => {
+            // 1. Loading State
+            sys.print(`<p style="color:var(--comment)">Scanning network nodes... <span class="cursor">|</span></p>`);
+
+            // 2. Gather Data
+            const width = window.screen.width;
+            const height = window.screen.height;
+            const lang = navigator.language.toUpperCase();
+            const platform = navigator.platform;
+            const cores = navigator.hardwareConcurrency || "?";
+
+            // Simple User Agent Parser
+            const ua = navigator.userAgent;
+            let os = "Unknown OS";
+            if (ua.indexOf("Win") !== -1) os = "Windows";
+            if (ua.indexOf("Mac") !== -1) os = "macOS";
+            if (ua.indexOf("Linux") !== -1) os = "Linux";
+            if (ua.indexOf("Android") !== -1) os = "Android";
+            if (ua.indexOf("like Mac") !== -1) os = "iOS";
+
+            // 3. Fetch IP (Async)
+            let ip = "127.0.0.1";
+            let city = "Unknown";
+            try {
+                // We use a free IP API to get the data
+                const res = await fetch('https://ipapi.co/json/');
+                const data = await res.json();
+                ip = data.ip;
+                city = `${data.city}, ${data.country_code}`;
+            } catch (e) {
+                ip = "Hidden/VPN";
+            }
+
+            // 4. Render Report
+            const html = `
+                <h1>Session Established</h1>
+                <div style="display: grid; grid-template-columns: 100px 1fr; gap: 10px; background: rgba(0,0,0,0.2); padding: 20px; border: 1px solid var(--line-nr);">
+
+                    <div style="color:var(--blue)">USER</div>
+                    <div>visitor@${ip}</div>
+
+                    <div style="color:var(--purple)">LOCATION</div>
+                    <div>${city}</div>
+
+                    <div style="color:var(--green)">SYSTEM</div>
+                    <div>${os} (${platform})</div>
+
+                    <div style="color:var(--yellow)">DISPLAY</div>
+                    <div>${width}x${height}px</div>
+
+                    <div style="color:var(--orange)">HARDWARE</div>
+                    <div>${cores} Cores / GPU Active</div>
+
+                    <div style="color:var(--red)">LOCALE</div>
+                    <div>${lang}</div>
+                </div>
+                <br>
+                <p style="color:var(--comment)">// Agent: ${ua}</p>
+                <p>> Access level: <span style="color:var(--green)">GUEST</span> (Read Only)</p>
+            `;
+
+            sys.print(html);
         }
     },
 
@@ -121,8 +173,8 @@ const customCommands = {
             train.innerText = `
       ====        ________                ___________
   _D _|  |_______/        \\__I_I_____===__|_________|
-   |(_)---  |   H\\________/ |   |        =|___ ___|      _________________
-   /     |  |   H  |  |     |   |         ||_|   |_|     /                |
+   |(_)---  |   H\\________/ |   |        =|___ ___|     _________________
+   /     |  |   H  |  |     |   |         ||_|   |_|   /                |
   |      |  |   H  |__--------------------| [___] |   =|                |
   | ________|___H__/__|_____/[][]~\\_______|       |   -|                |
   |/ |   |-----------I_____I [][] []  D   |=======|____|________________|_
