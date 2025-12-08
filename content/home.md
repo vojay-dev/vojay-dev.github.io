@@ -10,3 +10,5 @@
 - [:fab fa-github: GitHub](https://github.com/vojay-dev)
 - [:fab fa-x-twitter: X](https://twitter.com/vojaydev)
 - [:fab fa-instagram: Instagram](https://instagram.com/vojay.io)
+
+:fas fa-circle-question: Hint: type `:help`!
