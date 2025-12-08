@@ -87,7 +87,7 @@ const customCommands = {
     },
 
     'theme': {
-        desc: "Cycle through visual themes",
+        desc: "Cycle through themes",
         fn: (args, sys) => {
             const themes = window.THEMES || ['tokyo', 'gruvbox'];
 
@@ -101,17 +101,49 @@ const customCommands = {
         }
     },
 
-    'clear': {
-        desc: "Clear the current buffer",
+    'sl': {
+        desc: "Don't mistype ls",
         fn: (args, sys) => {
-            sys.print("");
-        }
-    },
+            const train = document.createElement('pre');
+            train.style.position = 'fixed';
+            train.style.top = 'calc(50% - 100px)';
+            train.style.left = '100vw'; // Start off-screen right
+            train.style.zIndex = '10000';
+            train.style.color = 'var(--fg)'; // Theme adaptive color
+            train.style.fontFamily = 'monospace';
+            train.style.fontWeight = 'bold';
+            train.style.fontSize = '12px';
+            train.style.lineHeight = '12px';
+            train.style.pointerEvents = 'none';
+            train.style.transition = 'transform 6s linear'; // Speed of the train
 
-    'q': {
-        desc: "Close the current buffer",
-        fn: (args, sys) => {
-            sys.closeBuffer();
+            // The ASCII Art
+            train.innerText = `
+      ====        ________                ___________
+  _D _|  |_______/        \\__I_I_____===__|_________|
+   |(_)---  |   H\\________/ |   |        =|___ ___|      _________________
+   /     |  |   H  |  |     |   |         ||_|   |_|     /                |
+  |      |  |   H  |__--------------------| [___] |   =|                |
+  | ________|___H__/__|_____/[][]~\\_______|       |   -|                |
+  |/ |   |-----------I_____I [][] []  D   |=======|____|________________|_
+__/ =| o |=-~~\\  /~\\  /~\\  /~\\ ____Y___________|__|_________________|
+ |/-=|___|=O=====O=====O=====O   |_____/~\\___/          |_D__D__D_|  D
+  \\_/      \\__/  \\__/  \\__/  \\__/      \\_/               \\_/   \\_/   \\_/
+            `;
+
+            document.body.appendChild(train);
+
+            // Trigger Animation
+            requestAnimationFrame(() => {
+                // Calculate distance: Screen width + Train width
+                const distance = window.innerWidth + 600;
+                train.style.transform = `translateX(-${distance}px)`;
+            });
+
+            // Cleanup after animation (6s)
+            setTimeout(() => {
+                document.body.removeChild(train);
+            }, 6000);
         }
     },
 
@@ -171,6 +203,20 @@ const customCommands = {
                     document.body.removeChild(canvas);
                 }, 1000);
             }, 5000);
+        }
+    },
+
+    'clear': {
+        desc: "Clear the current buffer",
+        fn: (args, sys) => {
+            sys.print("");
+        }
+    },
+
+    'q': {
+        desc: "Close the current buffer",
+        fn: (args, sys) => {
+            sys.closeBuffer();
         }
     },
 
