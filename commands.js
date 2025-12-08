@@ -75,6 +75,17 @@ const customCommands = {
         }
     },
 
+    'contact': {
+        desc: "Send a subspace signal (mail)",
+        fn: (args, sys) => {
+            sys.print(`<p>Initiating transmission to <strong style="color:var(--green)">volker@janz.sh</strong>...</p>`);
+
+            setTimeout(() => {
+                window.location.href = "mailto:volker@janz.sh";
+            }, 800);
+        }
+    },
+
     'clear': {
         desc: "Clear the current buffer",
         fn: (args, sys) => {
