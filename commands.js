@@ -86,6 +86,21 @@ const customCommands = {
         }
     },
 
+    'theme': {
+        desc: "Toggle color theme (tokyo/gruvbox)",
+        fn: (args, sys) => {
+            const current = localStorage.getItem('theme') || 'tokyo';
+            const next = current === 'tokyo' ? 'gruvbox' : 'tokyo';
+
+            // We need to call the function we defined in engine.js
+            // Since it's global, we can just call it, or access via sys if we attached it
+            window.setTheme(next);
+
+            sys.print(`<p>Switched theme to <strong style="color:var(--orange)">${next.toUpperCase()}</strong></p>`);
+        }
+    },
+
+
     'clear': {
         desc: "Clear the current buffer",
         fn: (args, sys) => {

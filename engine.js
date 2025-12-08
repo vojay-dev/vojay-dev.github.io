@@ -42,6 +42,36 @@ function renderSidebar() {
     `).join('');
 }
 
+// --- Theme Logic ---
+
+function setTheme(themeName) {
+    const label = document.getElementById('theme-name');
+
+    if (themeName === 'gruvbox') {
+        document.documentElement.setAttribute('data-theme', 'gruvbox');
+        localStorage.setItem('theme', 'gruvbox');
+        if(label) label.innerText = "GRUVBOX";
+    } else {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'tokyo');
+        if(label) label.innerText = "TOKYO";
+    }
+}
+
+const savedTheme = localStorage.getItem('theme') || 'tokyo';
+setTheme(savedTheme);
+
+const themeSwitch = document.getElementById('theme-switch');
+if (themeSwitch) {
+    themeSwitch.addEventListener('click', () => {
+        const current = localStorage.getItem('theme') || 'tokyo';
+        const next = current === 'tokyo' ? 'gruvbox' : 'tokyo';
+        setTheme(next);
+    });
+}
+
+window.setTheme = setTheme;
+
 function parseIcons(markdown) {
     return markdown.replace(/:([a-z0-9- ]+):/g, (match, iconClass) => {
         if(iconClass.includes('fa') || iconClass.includes('brands')) {
