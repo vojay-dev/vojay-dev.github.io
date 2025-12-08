@@ -1,13 +1,12 @@
 // --- Validation ---
-
 if (typeof config === 'undefined') throw new Error("config.js missing");
 if (typeof customCommands === 'undefined') console.warn("commands.js missing");
 
-const colors = ['var(--blue)', 'var(--purple)', 'var(--yellow)', 'var(--green)', 'var(--red)', 'var(--cyan)', 'var(--orange)', 'var(--magenta)'];
+const THEMES = ['tokyo', 'gruvbox', 'dracula'];
+const COLORS = ['var(--blue)', 'var(--purple)', 'var(--yellow)', 'var(--green)', 'var(--red)', 'var(--cyan)', 'var(--orange)', 'var(--magenta)'];
 const state = { currentFile: null, openBuffers: [], mode: 'NORMAL' };
 
 // --- DOM Elements ---
-
 const el = {
     output: document.getElementById('markdown-output'),
     gutter: document.getElementById('gutter'),
@@ -21,7 +20,6 @@ const el = {
 };
 
 // --- Initialization ---
-
 document.title = config.title;
 initLightbox();
 renderSidebar();
@@ -34,7 +32,7 @@ function renderSidebar() {
     const linkContainer = document.getElementById('link-list-container');
 
     container.innerHTML = config.files.map((file, index) => {
-        const color = colors[index % colors.length];
+        const color = COLORS[index % COLORS.length];
         return `<div class="file-node" id="node-${file}" onclick="openFile('${file}')"><i class="fab fa-markdown" style="color: ${color}"></i> ${file}.md</div>`;
     }).join('');
 
@@ -47,39 +45,34 @@ function renderSidebar() {
 
 // --- Theme Logic ---
 
-// --- Theme Logic ---
-
 function setTheme(themeName) {
+    if (!THEMES.includes(themeName)) themeName = THEMES[0];
     const label = document.getElementById('theme-name');
 
     localStorage.setItem('theme', themeName);
 
-    if (themeName === 'tokyo') {
+    if (themeName === THEMES[0]) {
         document.documentElement.removeAttribute('data-theme');
     } else {
         document.documentElement.setAttribute('data-theme', themeName);
     }
 
     if (label) {
-        label.className = `theme-${themeName}`;
+        THEMES.forEach(t => label.classList.remove(`theme-${t}`));
+        label.classList.add(`theme-${themeName}`);
     }
 }
 
-
-const savedTheme = localStorage.getItem('theme') || 'tokyo';
+const savedTheme = localStorage.getItem('theme') || THEMES[0];
 setTheme(savedTheme);
 
 const themeSwitch = document.getElementById('theme-switch');
 if (themeSwitch) {
     themeSwitch.addEventListener('click', () => {
-        const current = localStorage.getItem('theme') || 'tokyo';
-
-        let next;
-        if (current === 'tokyo') next = 'gruvbox';
-        else if (current === 'gruvbox') next = 'dracula';
-        else next = 'tokyo';
-
-        setTheme(next);
+        const current = localStorage.getItem('theme') || THEMES[0];
+        const currentIndex = THEMES.indexOf(current);
+        const nextIndex = (currentIndex + 1) % THEMES.length;
+        setTheme(THEMES[nextIndex]);
     });
 }
 
@@ -180,7 +173,7 @@ function updateUI() {
     el.tabContainer.innerHTML = state.openBuffers.map(file => {
         const active = file === state.currentFile ? 'active' : '';
         const fileIndex = config.files.indexOf(file);
-        const color = fileIndex > -1 ? colors[fileIndex % colors.length] : 'var(--blue)';
+        const color = fileIndex > -1 ? COLORS[fileIndex % COLORS.length] : 'var(--blue)';
         return `
             <div class="tab ${active}" onclick="openFile('${file}')">
                 <i class="fas fa-file-code" style="color: ${color}"></i> ${file}.md

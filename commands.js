@@ -117,13 +117,19 @@ const customCommands = {
     },
 
     'matrix': {
-        desc: "Wake up, Neo... (Tokyo Night Edition)",
+        desc: "Wake up, Neo... (Theme Aware)",
         fn: (args, sys) => {
+            const getThemeColor = (varName) => getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+
+            // Capture current theme colors once at start
+            const bgHex = getThemeColor('--bg');
+            const fgHex = getThemeColor('--blue'); // Uses main accent color
+
             const canvas = document.createElement('canvas');
             Object.assign(canvas.style, {
                 position: 'fixed', top: '0', left: '0',
                 width: '100vw', height: '100vh', zIndex: '99999',
-                background: '#1a1b26', // Theme BG Color
+                background: 'var(--bg)', // CSS handles this one fine
                 transition: 'opacity 1s'
             });
             document.body.appendChild(canvas);
@@ -139,12 +145,14 @@ const customCommands = {
 
             let animationId;
             const draw = () => {
-                // Fade effect using Theme BG with low opacity
-                ctx.fillStyle = 'rgba(26, 27, 38, 0.1)';
+                // 1. Draw semi-transparent background to create "trail" effect
+                ctx.globalAlpha = 0.1;
+                ctx.fillStyle = bgHex;
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-                // Theme Blue Text
-                ctx.fillStyle = '#7aa2f7';
+                // 2. Draw Text
+                ctx.globalAlpha = 1.0;
+                ctx.fillStyle = fgHex;
                 ctx.font = fontSize + 'px monospace';
 
                 for(let i = 0; i < drops.length; i++) {
