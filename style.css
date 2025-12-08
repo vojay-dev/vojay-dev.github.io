@@ -28,7 +28,7 @@ body { margin: 0; background-color: var(--bg); color: var(--fg); font-family: 'J
 
 .workspace { display: flex; flex: 1; overflow: hidden; position: relative; }
 
-.nvim-tree { width: 240px; background-color: var(--bg-dark); display: flex; flex-direction: column; padding: 10px; border-right: none; transition: transform 0.2s ease; font-size: 0.9rem; }
+.nvim-tree { width: 240px; background-color: var(--bg-dark); display: flex; flex-direction: column; padding: 10px; border-right: 1px solid #111; transition: transform 0.2s ease; font-size: 0.9rem; }
 .tree-header { color: var(--blue); font-weight: bold; margin-bottom: 15px; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; margin-top: 10px; line-height: normal; }
 .file-node { padding: 4px 8px; cursor: pointer; display: flex; align-items: center; gap: 10px; color: var(--comment); border-radius: 4px; margin-bottom: 2px; transition: 0.1s; line-height: normal; }
 .file-node:hover { color: var(--fg); background: rgba(255,255,255,0.03); }
