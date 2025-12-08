@@ -73,11 +73,34 @@ body { margin: 0; background-color: var(--bg); color: var(--fg); font-family: 'J
 
 .mobile-toggle { display: none; position: absolute; bottom: 80px; right: 20px; background: var(--blue); color: #000; width: 45px; height: 45px; border-radius: 50%; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.5); z-index: 50; }
 
-/* Mobile Query - Fixed Shadow */
 @media (max-width: 768px) {
-    .nvim-tree { position: absolute; height: 100%; z-index: 20; transform: translateX(-100%); border-right: 1px solid #111; }
-    .nvim-tree.open { transform: translateX(0); }
-    .mobile-toggle { display: flex; }
-    .gutter { display: none; }
-    .content-scroll { padding-left: 15px; }
+    .nvim-tree {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        z-index: 20;
+        transform: translateX(-100%);
+        border-right: 1px solid #111;
+
+        overflow-y: auto;
+        padding-bottom: 120px;
+    }
+
+    .nvim-tree.open {
+        transform: translateX(0);
+    }
+
+    .mobile-toggle {
+        display: flex;
+    }
+
+    .gutter {
+        display: none;
+    }
+
+    .content-scroll {
+        padding-left: 15px;
+        padding-bottom: 80px;
+    }
 }
