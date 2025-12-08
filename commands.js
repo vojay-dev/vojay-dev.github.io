@@ -87,19 +87,20 @@ const customCommands = {
     },
 
     'theme': {
-        desc: "Toggle color theme (tokyo/gruvbox)",
+        desc: "Toggle color theme",
         fn: (args, sys) => {
             const current = localStorage.getItem('theme') || 'tokyo';
-            const next = current === 'tokyo' ? 'gruvbox' : 'tokyo';
+            let next;
 
-            // We need to call the function we defined in engine.js
-            // Since it's global, we can just call it, or access via sys if we attached it
+            // Cycle: Tokyo -> Gruvbox -> Dracula -> Tokyo
+            if (current === 'tokyo') next = 'gruvbox';
+            else if (current === 'gruvbox') next = 'dracula';
+            else next = 'tokyo';
+
             window.setTheme(next);
-
-            sys.print(`<p>Switched theme to <strong style="color:var(--orange)">${next.toUpperCase()}</strong></p>`);
+            sys.print(`<p>Switched theme to <strong style="color:var(--magenta)">${next.toUpperCase()}</strong></p>`);
         }
     },
-
 
     'clear': {
         desc: "Clear the current buffer",

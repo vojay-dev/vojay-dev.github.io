@@ -47,21 +47,24 @@ function renderSidebar() {
 
 // --- Theme Logic ---
 
+// --- Theme Logic ---
+
 function setTheme(themeName) {
     const label = document.getElementById('theme-name');
 
-    if (themeName === 'gruvbox') {
-        document.documentElement.setAttribute('data-theme', 'gruvbox');
-        localStorage.setItem('theme', 'gruvbox');
-    } else {
+    localStorage.setItem('theme', themeName);
+
+    if (themeName === 'tokyo') {
         document.documentElement.removeAttribute('data-theme');
-        localStorage.setItem('theme', 'tokyo');
+    } else {
+        document.documentElement.setAttribute('data-theme', themeName);
     }
 
     if (label) {
         label.className = `theme-${themeName}`;
     }
 }
+
 
 const savedTheme = localStorage.getItem('theme') || 'tokyo';
 setTheme(savedTheme);
@@ -70,7 +73,12 @@ const themeSwitch = document.getElementById('theme-switch');
 if (themeSwitch) {
     themeSwitch.addEventListener('click', () => {
         const current = localStorage.getItem('theme') || 'tokyo';
-        const next = current === 'tokyo' ? 'gruvbox' : 'tokyo';
+
+        let next;
+        if (current === 'tokyo') next = 'gruvbox';
+        else if (current === 'gruvbox') next = 'dracula';
+        else next = 'tokyo';
+
         setTheme(next);
     });
 }

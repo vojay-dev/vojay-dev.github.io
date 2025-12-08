@@ -43,6 +43,25 @@
     --status-bg: #32302f;
 }
 
+/* --- DRACULA THEME (Vampire) --- */
+[data-theme="dracula"] {
+    --bg: #282a36;
+    --bg-dark: #21222c;
+    --fg: #f8f8f2;
+    --comment: #6272a4;
+    --blue: #8be9fd;
+    --cyan: #8be9fd;
+    --purple: #bd93f9;
+    --orange: #ffb86c;
+    --yellow: #f1fa8c;
+    --green: #50fa7b;
+    --red: #ff5555;
+    --magenta: #ff79c6;
+    --line-nr: #44475a;
+    --selection: #44475a;
+    --status-bg: #191a21;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -572,12 +591,14 @@ code[class*="language-"], pre[class*="language-"] {
 
 /* --- RESPONSIVE THEME LABELS --- */
 
-/* Desktop: Full Name */
+/* Desktop */
 .theme-tokyo::after { content: "TOKYO"; }
 .theme-gruvbox::after { content: "GRUVBOX"; }
+.theme-dracula::after { content: "DRACULA"; }
 
-/* Mobile: Single Letter */
+/* Mobile */
 @media (max-width: 768px) {
     .theme-tokyo::after { content: "T"; }
     .theme-gruvbox::after { content: "G"; }
+    .theme-dracula::after { content: "D"; }
 }
