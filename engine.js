@@ -2,9 +2,11 @@
 if (typeof config === 'undefined') throw new Error("config.js missing");
 if (typeof customCommands === 'undefined') console.warn("commands.js missing");
 
-const THEMES = ['tokyo', 'gruvbox', 'dracula'];
+const THEMES = ['tokyo', 'gruvbox', 'dracula', 'cyberpunk'];
 const COLORS = ['var(--blue)', 'var(--purple)', 'var(--yellow)', 'var(--green)', 'var(--red)', 'var(--cyan)', 'var(--orange)', 'var(--magenta)'];
 const state = { currentFile: null, openBuffers: [], mode: 'NORMAL' };
+
+window.THEMES = THEMES;
 
 // --- DOM Elements ---
 const el = {

@@ -87,18 +87,17 @@ const customCommands = {
     },
 
     'theme': {
-        desc: "Toggle color theme",
+        desc: "Cycle through visual themes",
         fn: (args, sys) => {
-            const current = localStorage.getItem('theme') || 'tokyo';
-            let next;
+            const themes = window.THEMES || ['tokyo', 'gruvbox'];
 
-            // Cycle: Tokyo -> Gruvbox -> Dracula -> Tokyo
-            if (current === 'tokyo') next = 'gruvbox';
-            else if (current === 'gruvbox') next = 'dracula';
-            else next = 'tokyo';
+            const current = localStorage.getItem('theme') || themes[0];
+            const currentIndex = themes.indexOf(current);
+            const nextIndex = (currentIndex + 1) % themes.length;
+            const nextTheme = themes[nextIndex];
 
-            window.setTheme(next);
-            sys.print(`<p>Switched theme to <strong style="color:var(--magenta)">${next.toUpperCase()}</strong></p>`);
+            window.setTheme(nextTheme);
+            sys.print(`<p>System theme updated: <strong style="color:var(--blue)">${nextTheme.toUpperCase()}</strong></p>`);
         }
     },
 
