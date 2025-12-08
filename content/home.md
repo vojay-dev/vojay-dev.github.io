@@ -4,17 +4,6 @@
 
 > I'm a Senior Developer Advocate and experienced Data Engineer, dedicated to building bridges between complex technology and the global data community. My mission is to bring data orchestration to life, blending deep, real-world technical expertise with a foundational love for communication and a passion for teaching, writing, and inspiring developers everywhere.
 
-```python
-@asset(
-    schedule=(a & (b | c)),
-    extra={"team": "astronomer"}  # static metadata
-)
-def hello_asset(self):  # self refers to current asset instance
-    df = ...  # Get a Pandas DataFrame, e.g. from a database or API
-    yield Metadata(self, {"row_count": len(df)})  # dynamic metadata
-    return df
-```
-
 ## Connect
 
 - [:fab fa-linkedin: LinkedIn](https://www.linkedin.com/in/vjanz)
