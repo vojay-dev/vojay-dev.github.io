@@ -1,0 +1,108 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.10"
+# dependencies = [
+#     "Pillow",
+# ]
+# ///
+
+import os
+import sys
+import argparse
+from PIL import Image, ImageOps
+
+TARGET_DIR = "images/photography"
+SUFFIX = "_opt"
+MAX_WIDTH = 1800
+QUALITY = 92
+VALID_EXTS = {".jpg", ".jpeg", ".png", ".webp", ".tiff"}
+
+def optimize():
+    parser = argparse.ArgumentParser(description="Optimize gallery images for web.")
+    parser.add_argument("--delete", "-d", action="store_true", help="Delete source files after optimization")
+    args = parser.parse_args()
+
+    if not os.path.exists(TARGET_DIR):
+        print(f"❌ Error: Folder '{TARGET_DIR}' not found.")
+        sys.exit(1)
+
+    print(f"🔍 Scanning {TARGET_DIR}...\n")
+    if args.delete:
+        print("⚠️  WARNING: Source files will be DELETED after processing.\n")
+
+    # List all files
+    all_files = sorted(os.listdir(TARGET_DIR))
+
+    # Identify source files (exclude already optimized ones)
+    source_files = [
+        f for f in all_files
+        if os.path.splitext(f)[1].lower() in VALID_EXTS
+        and SUFFIX not in f
+    ]
+
+    final_html_list = []
+
+    for filename in source_files:
+        name_root = os.path.splitext(filename)[0]
+
+        # Define target filename
+        opt_filename = f"{name_root}{SUFFIX}.webp"
+        opt_path = os.path.join(TARGET_DIR, opt_filename)
+        source_path = os.path.join(TARGET_DIR, filename)
+
+        # 1. Check if optimized version exists
+        if os.path.exists(opt_path):
+            print(f"⏩ Found existing: {opt_filename}")
+            final_html_list.append(opt_filename)
+            # If delete flag is on, we should clean up the source even if opt exists
+            if args.delete and os.path.exists(source_path):
+                print(f"   🗑️  Deleting source: {filename}")
+                os.remove(source_path)
+            continue
+
+        # 2. Process Image
+        try:
+            print(f"⚙️  Optimizing {filename} -> {opt_filename}...", end=" ", flush=True)
+
+            with Image.open(source_path) as img:
+                # Fix rotation
+                img = ImageOps.exif_transpose(img)
+
+                # Convert to RGB (if needed)
+                if img.mode not in ("RGB", "RGBA"):
+                    img = img.convert("RGB")
+
+                # Resize logic
+                if img.width > MAX_WIDTH:
+                    ratio = MAX_WIDTH / img.width
+                    new_height = int(img.height * ratio)
+                    img = img.resize((MAX_WIDTH, new_height), Image.Resampling.LANCZOS)
+
+                # Save as webp
+                img.save(opt_path, "WEBP", quality=QUALITY, method=6)
+                print("Done.")
+                final_html_list.append(opt_filename)
+
+            # 3. Delete source if flag is set
+            if args.delete:
+                print(f"   🗑️  Deleting source: {filename}")
+                os.remove(source_path)
+
+        except Exception as e:
+            print(f"❌ Error: {e}")
+
+    # Generate HTML
+    final_html_list.sort()
+
+    print("\n✅ Gallery snippet:\n")
+    print("-" * 50)
+    print('<div class="gallery-grid">')
+
+    for filename in final_html_list:
+        print(f'  <img src="{TARGET_DIR}/{filename}" alt="{filename}" loading="lazy">')
+
+    print('</div>')
+    print("-" * 50 + "\n")
+
+if __name__ == "__main__":
+    optimize()
