@@ -131,6 +131,12 @@ async function openFile(filename) {
 
         el.output.innerHTML = marked.parse(text);
 
+        el.output.querySelectorAll('a').forEach(a => {
+            if (a.href && a.href.startsWith('http')) {
+                a.target = '_blank';
+            }
+        });
+
         if (window.Prism) window.Prism.highlightAllUnder(el.output);
         attachImageListeners();
         requestAnimationFrame(updateLineNumbers);
