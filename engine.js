@@ -53,11 +53,13 @@ function setTheme(themeName) {
     if (themeName === 'gruvbox') {
         document.documentElement.setAttribute('data-theme', 'gruvbox');
         localStorage.setItem('theme', 'gruvbox');
-        if (label) label.innerText = "GRUVBOX";
     } else {
         document.documentElement.removeAttribute('data-theme');
         localStorage.setItem('theme', 'tokyo');
-        if (label) label.innerText = "TOKYO";
+    }
+
+    if (label) {
+        label.className = `theme-${themeName}`;
     }
 }
 
@@ -272,6 +274,13 @@ if (mobileCmdInput && mobileCmdBtn) {
 }
 
 // --- Event Listeners ---
+
+const gitBranch = document.getElementById('git-branch');
+if (gitBranch) {
+    gitBranch.addEventListener('click', () => {
+        window.open('https://github.com/vojay-dev/vojay-dev.github.io', '_blank');
+    });
+}
 
 document.addEventListener('keydown', e => {
     if (state.mode === 'COMMAND') {

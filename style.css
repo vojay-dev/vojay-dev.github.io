@@ -569,3 +569,15 @@ code[class*="language-"], pre[class*="language-"] {
         display: flex;
     }
 }
+
+/* --- RESPONSIVE THEME LABELS --- */
+
+/* Desktop: Full Name */
+.theme-tokyo::after { content: "TOKYO"; }
+.theme-gruvbox::after { content: "GRUVBOX"; }
+
+/* Mobile: Single Letter */
+@media (max-width: 768px) {
+    .theme-tokyo::after { content: "T"; }
+    .theme-gruvbox::after { content: "G"; }
+}
