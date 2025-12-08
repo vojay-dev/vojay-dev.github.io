@@ -166,3 +166,36 @@ code[class*="language-"], pre[class*="language-"] {
     border-radius: 4px;
     margin-bottom: var(--line-height);
 }
+
+/* --- MOBILE COMMAND INPUT --- */
+#mobile-cmd-wrapper {
+    display: none; /* Hidden on Desktop */
+    margin-top: 20px;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.2); /* Darker box */
+    border-radius: 4px;
+    align-items: center;
+    border: 1px solid var(--line-nr);
+}
+
+#mobile-cmd-input {
+    background: transparent;
+    border: none;
+    color: var(--fg);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    width: 100%;
+    outline: none;
+}
+
+#mobile-cmd-input::placeholder {
+    color: var(--comment);
+    opacity: 0.5;
+}
+
+/* Show it ONLY in the mobile media query */
+@media (max-width: 768px) {
+    #mobile-cmd-wrapper {
+        display: flex;
+    }
+}

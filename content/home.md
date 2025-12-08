@@ -11,4 +11,4 @@
 - [:fab fa-x-twitter: X](https://twitter.com/vojaydev)
 - [:fab fa-instagram: Instagram](https://instagram.com/vojay.io)
 
-:fas fa-circle-question: Hint: type `:help`!
+:fas fa-circle-question: Hint: type `:` to enter command mode (_or use sidebar on mobile_), use `help` to list all commands!

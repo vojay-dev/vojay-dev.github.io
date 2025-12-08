@@ -55,7 +55,13 @@
             <div class="nvim-tree" id="nvim-tree">
                 <div class="tree-header"><i class="fas fa-project-diagram"></i> Explorer</div>
                 <div id="file-list-container"></div>
-                <div class="tree-header" style="margin-top:auto; border-top: none; padding-top:10px;">Links</div>
+
+                <div id="mobile-cmd-wrapper">
+                    <span style="color: var(--green); margin-right: 8px;">❯</span>
+                    <input type="text" id="mobile-cmd-input" placeholder="Enter cmd..." autocomplete="off">
+                </div>
+
+                <div class="tree-header" style="margin-top:auto; border-top: 1px solid #333; padding-top:10px;">Links</div>
                 <div id="link-list-container"></div>
                 <div style="height: 10px;"></div>
             </div>

@@ -218,6 +218,24 @@ function toggleTree(force) {
     el.tree.classList.toggle('open', force);
 }
 
+// --- Mobile Command Logic ---
+
+const mobileCmdInput = document.getElementById('mobile-cmd-input');
+
+if (mobileCmdInput) {
+    mobileCmdInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            const val = mobileCmdInput.value;
+            if (val.trim() !== '') {
+                executeCmd(val); // Reuse existing command logic
+                mobileCmdInput.value = ''; // Clear input
+                mobileCmdInput.blur(); // Hide keyboard
+                toggleTree(false); // Close sidebar
+            }
+        }
+    });
+}
+
 // --- Event Listeners ---
 
 document.addEventListener('keydown', e => {
