@@ -168,14 +168,16 @@ code[class*="language-"], pre[class*="language-"] {
 }
 
 /* --- MOBILE COMMAND INPUT --- */
+
 #mobile-cmd-wrapper {
-    display: none; /* Hidden on Desktop */
+    display: none;
     margin-top: 20px;
-    padding: 12px;
-    background: rgba(0, 0, 0, 0.2); /* Darker box */
+    padding: 8px 12px;
+    background: rgba(0, 0, 0, 0.2);
     border-radius: 4px;
     align-items: center;
     border: 1px solid var(--line-nr);
+    display: none;
 }
 
 #mobile-cmd-input {
@@ -183,9 +185,10 @@ code[class*="language-"], pre[class*="language-"] {
     border: none;
     color: var(--fg);
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.9rem;
-    width: 100%;
+    font-size: 14px;
+    flex: 1;
     outline: none;
+    min-width: 0;
 }
 
 #mobile-cmd-input::placeholder {
@@ -196,22 +199,23 @@ code[class*="language-"], pre[class*="language-"] {
 #mobile-cmd-btn {
     background: transparent;
     border: none;
-    color: var(--blue); /* Highlight color */
-    font-size: 1rem;
+    padding: 10px;
+    margin: 0;
+    margin-left: 5px;
     cursor: pointer;
-    padding: 0 0 0 10px; /* Space from text */
+    color: var(--blue);
     display: flex;
     align-items: center;
     justify-content: center;
+    -webkit-appearance: none;
+    appearance: none;
 }
 
 #mobile-cmd-btn:active {
     color: var(--green);
-    transform: translateX(2px);
+    transform: scale(0.9);
 }
 
-
-/* Show it ONLY in the mobile media query */
 @media (max-width: 768px) {
     #mobile-cmd-wrapper {
         display: flex;

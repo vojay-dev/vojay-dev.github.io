@@ -233,14 +233,18 @@ function triggerMobileCmd() {
     }
 }
 
-if (mobileCmdInput) {
-    // 1. Handle Enter Key
+if (mobileCmdInput && mobileCmdBtn) {
     mobileCmdInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') triggerMobileCmd();
     });
 
-    // 2. Handle Button Click
-    mobileCmdBtn.addEventListener('click', () => {
+    mobileCmdBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        triggerMobileCmd();
+    });
+
+    mobileCmdBtn.addEventListener('touchend', (e) => {
+        e.preventDefault();
         triggerMobileCmd();
     });
 }
