@@ -13,7 +13,22 @@
 }
 
 * { box-sizing: border-box; }
-body { margin: 0; background-color: var(--bg); color: var(--fg); font-family: 'JetBrains Mono', monospace; height: 100vh; overflow: hidden; font-size: var(--font-size); line-height: var(--line-height); }
+
+body {
+    margin: 0;
+    background-color: var(--bg);
+    color: var(--fg);
+    font-family: 'JetBrains Mono', monospace;
+
+    /* THE FIX: Use Dynamic Viewport Height */
+    height: 100vh;       /* Fallback for old browsers */
+    height: 100dvh;      /* Adapts to mobile address bars */
+
+    overflow: hidden;
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+}
+
 
 .scanlines { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1)); background-size: 100% 4px; pointer-events: none; z-index: 999; opacity: 0.6; }
 .glow-text { text-shadow: 0 0 2px rgba(122, 162, 247, 0.3); }
