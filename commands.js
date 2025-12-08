@@ -49,10 +49,8 @@ const customCommands = {
     'socials': {
         desc: "List social media links",
         fn: (args, sys) => {
-            // You can use the config.links array here if you want to be dynamic
-            let html = `<h1>Social Uplinks</h1><ul>`;
+            let html = `<h1>Social Links</h1><ul>`;
 
-            // Assuming 'config' is globally available (it is)
             config.links.forEach(link => {
                 html += `<li><i class="${link.icon}"></i> <a href="${link.url}">${link.label}</a></li>`;
             });
@@ -79,7 +77,7 @@ const customCommands = {
     'clear': {
         desc: "Clear the current buffer",
         fn: (args, sys) => {
-            sys.print(""); // Prints empty string
+            sys.print("");
         }
     },
 
