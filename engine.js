@@ -45,6 +45,36 @@ function renderSidebar() {
     `).join('');
 }
 
+// --- Toast Logic ---
+
+function showToast(msg, type = 'info') {
+    let container = document.getElementById('toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'toast-container';
+        document.body.appendChild(container);
+    }
+
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+
+    // Icon based on type
+    let icon = 'info-circle';
+    if (type === 'error') icon = 'exclamation-triangle';
+    else if (type === 'success') icon = 'check-circle';
+
+    toast.innerHTML = `<i class="fas fa-${icon}"></i> ${msg}`;
+
+    container.appendChild(toast);
+
+    setTimeout(() => {
+        toast.style.animation = 'fade-out 0.3s ease forwards'; // 0.6s duration
+        setTimeout(() => toast.remove(), 600); // 600ms wait
+    }, 3000);
+}
+
+window.showToast = showToast;
+
 // --- Theme Logic ---
 
 function setTheme(themeName) {
@@ -225,9 +255,7 @@ function executeCmd(val) {
     const args = parts.slice(1);
 
     if (typeof gtag === 'function') {
-        gtag('event', 'command_execute', {
-            'command_name': cmd
-        });
+        gtag('event', 'command_execute', { 'command_name': cmd });
     }
 
     if (config.files.includes(cmd)) {
@@ -240,14 +268,21 @@ function executeCmd(val) {
                 state.currentFile = null;
                 el.output.innerHTML = html;
                 requestAnimationFrame(updateLineNumbers);
-                el.statusFile.innerText = '[cmd out]';
+                el.statusFile.innerText = '[Command Output]';
                 document.querySelectorAll('.file-node').forEach(elem => elem.classList.remove('active'));
             },
-            alert: (msg) => alert(msg)
+            // Updated to use Toast
+            alert: (msg) => showToast(msg, 'info'),
+            error: (msg) => showToast(msg, 'error'),
+            success: (msg) => showToast(msg, 'success')
         };
         customCommands[cmd].fn(args, sys);
     } else {
-        alert(`E492: Not an editor command: ${cmd}`);
+        showToast(`E492: Not an editor command: ${cmd}`, 'error');
+
+        if (typeof gtag === 'function') {
+            gtag('event', 'command_error', { 'invalid_input': cmd });
+        }
     }
 
     setMode('NORMAL');

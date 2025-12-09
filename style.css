@@ -608,6 +608,49 @@ code[class*="language-"], pre[class*="language-"] {
     }
 }
 
+/* --- TOAST NOTIFICATIONS --- */
+#toast-container {
+    position: fixed;
+    bottom: 40px; /* Above status bar */
+    right: 20px;
+    display: flex;
+    flex-direction: column-reverse; /* Newest at bottom */
+    gap: 10px;
+    z-index: 10002;
+    pointer-events: none;
+}
+
+.toast {
+    background: var(--bg-dark);
+    color: var(--fg);
+    border: 1px solid var(--line-nr);
+    border-left: 4px solid var(--blue); /* Accent color */
+    padding: 12px 20px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    opacity: 0;
+    transform: translateX(50px);
+    animation: slide-in 0.3s forwards;
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.toast.error { border-left-color: var(--red); }
+.toast.success { border-left-color: var(--green); }
+.toast.warning { border-left-color: var(--yellow); }
+
+@keyframes slide-in {
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fade-out {
+    from { opacity: 1; transform: translateX(0); } /* Keep it visible at start */
+    to { opacity: 0; transform: translateX(20px); }
+}
+
 /* --- RESPONSIVE THEME LABELS --- */
 
 /* Desktop */
