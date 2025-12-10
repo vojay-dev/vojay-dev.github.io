@@ -61,7 +61,7 @@ const customCommands = {
     },
 
     'whoami': {
-        desc: "Identify current user session (IP & System)",
+        desc: "Identify current user session",
         fn: async (args, sys) => {
             sys.print(`<p style="color:var(--comment)">Scanning network nodes... <span class="cursor">|</span></p>`);
 
@@ -123,7 +123,7 @@ const customCommands = {
     },
 
     'contact': {
-        desc: "Send a subspace signal (mail)",
+        desc: "Send a mail",
         fn: (args, sys) => {
             sys.print(`<p>Initiating transmission to <strong style="color:var(--green)">volker@janz.sh</strong>...</p>`);
 
@@ -195,7 +195,7 @@ __/ =| o |=-~~\\  /~\\  /~\\  /~\\ ____Y___________|__|_________________|
     },
 
     'matrix': {
-        desc: "Wake up, Neo... (Theme Aware)",
+        desc: "Wake up, Neo...",
         fn: (args, sys) => {
             const getThemeColor = (varName) => getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
 
@@ -254,14 +254,14 @@ __/ =| o |=-~~\\  /~\\  /~\\  /~\\ ____Y___________|__|_________________|
     },
 
     'clear': {
-        desc: "Clear the current buffer",
+        desc: "Clear current buffer",
         fn: (args, sys) => {
             sys.print("");
         }
     },
 
     'q': {
-        desc: "Close the current buffer",
+        desc: "Close current buffer",
         fn: (args, sys) => {
             sys.closeBuffer();
         }
