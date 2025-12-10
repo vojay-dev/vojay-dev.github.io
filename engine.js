@@ -268,7 +268,7 @@ function executeCmd(val) {
                 state.currentFile = null;
                 el.output.innerHTML = html;
                 requestAnimationFrame(updateLineNumbers);
-                el.statusFile.innerText = '[Command Output]';
+                el.statusFile.innerText = '[cmd out]';
                 document.querySelectorAll('.file-node').forEach(elem => elem.classList.remove('active'));
             },
             // Updated to use Toast
