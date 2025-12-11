@@ -651,6 +651,54 @@ code[class*="language-"], pre[class*="language-"] {
     to { opacity: 0; transform: translateX(20px); }
 }
 
+/* --- SNAKE MOBILE CONTROLS --- */
+
+#snake-controls {
+    display: none; /* Hidden by default */
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 150px;
+    height: 150px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 5px;
+    z-index: 10005;
+}
+
+.snake-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--comment);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: var(--blue);
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.snake-btn:active {
+    background: var(--blue);
+    color: var(--bg);
+}
+
+/* Specific Grid Placements for D-Pad */
+#btn-up    { grid-column: 2; grid-row: 1; }
+#btn-left  { grid-column: 1; grid-row: 2; }
+#btn-down  { grid-column: 2; grid-row: 3; }
+#btn-right { grid-column: 3; grid-row: 2; }
+#btn-quit  { grid-column: 1; grid-row: 1; border-color: var(--red); color: var(--red); font-size: 0.8rem; }
+
+/* Show only on mobile when game is active */
+@media (max-width: 768px) {
+    .game-active #snake-controls {
+        display: grid;
+    }
+}
+
 /* --- RESPONSIVE THEME LABELS --- */
 
 /* Desktop */

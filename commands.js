@@ -253,6 +253,129 @@ __/ =| o |=-~~\\  /~\\  /~\\  /~\\ ____Y___________|__|_________________|
         }
     },
 
+    'snake': {
+        desc: "Play snake",
+        fn: (args, sys) => {
+            const container = document.getElementById('markdown-output');
+            const width = Math.min(container.clientWidth, window.innerWidth - 40); // Safe width
+            const height = 400;
+
+            // 1. Inject Game + Mobile Controls HTML
+            container.innerHTML = `
+                <div id="snake-ui" style="text-align:center; margin-bottom:10px;">
+                    <h2 style="margin:0; color:var(--green)">VIM SNAKE</h2>
+                    <p class="desktop-only" style="color:var(--comment)">h, j, k, l or arrows to move, q to quit</p>
+                    <div>Score: <span id="score" style="color:var(--yellow)">0</span> | High: <span id="highscore" style="color:var(--purple)">0</span></div>
+                </div>
+                <canvas id="snake-game" width="${width}" height="${height}" style="border:2px solid var(--line-nr); background:var(--bg-dark); display:block; margin:0 auto; max-width:100%;"></canvas>
+
+                <!-- Mobile D-Pad -->
+                <div id="snake-controls">
+                    <div class="snake-btn" id="btn-quit">Q</div>
+                    <div class="snake-btn" id="btn-up">▲</div>
+                    <div class="snake-btn" id="btn-left">◀</div>
+                    <div class="snake-btn" id="btn-down">▼</div>
+                    <div class="snake-btn" id="btn-right">▶</div>
+                </div>
+            `;
+
+            // Enable Mobile CSS
+            document.body.classList.add('game-active');
+
+            const canvas = document.getElementById('snake-game');
+            const ctx = canvas.getContext('2d');
+            const scoreEl = document.getElementById('score');
+            const highEl = document.getElementById('highscore');
+
+            // Game State
+            const gridSize = 20;
+            const tileCountX = Math.floor(width / gridSize);
+            const tileCountY = Math.floor(height / gridSize);
+            let score = 0;
+            let highScore = localStorage.getItem('snake_highscore') || 0;
+            highEl.innerText = highScore;
+
+            let x = 10, y = 10, dx = 0, dy = 0;
+            let trail = [], tail = 5;
+            let foodX = 15, foodY = 15;
+            let gameInterval, isRunning = true;
+
+            // Logic
+            function game() {
+                if (!isRunning) return;
+                x += dx; y += dy;
+
+                if (x < 0) x = tileCountX - 1;
+                if (x > tileCountX - 1) x = 0;
+                if (y < 0) y = tileCountY - 1;
+                if (y > tileCountY - 1) y = 0;
+
+                const getCol = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+                ctx.fillStyle = getCol('--bg-dark');
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                ctx.fillStyle = getCol('--blue');
+                for (let i = 0; i < trail.length; i++) {
+                    ctx.fillRect(trail[i].x * gridSize, trail[i].y * gridSize, gridSize - 2, gridSize - 2);
+                    if (trail[i].x === x && trail[i].y === y && (dx !== 0 || dy !== 0)) {
+                        tail = 5; score = 0; scoreEl.innerText = score; dx = 0; dy = 0;
+                    }
+                }
+                trail.push({ x: x, y: y });
+                while (trail.length > tail) trail.shift();
+
+                ctx.fillStyle = getCol('--red');
+                ctx.fillRect(foodX * gridSize, foodY * gridSize, gridSize - 2, gridSize - 2);
+
+                if (x === foodX && y === foodY) {
+                    tail++; score++; scoreEl.innerText = score;
+                    if (score > highScore) { highScore = score; localStorage.setItem('snake_highscore', highScore); highEl.innerText = highScore; }
+                    foodX = Math.floor(Math.random() * tileCountX);
+                    foodY = Math.floor(Math.random() * tileCountY);
+                }
+            }
+
+            // Input Handlers
+            function move(dir) {
+                if (!isRunning) return;
+                if (dir === 'left' && dx !== 1) { dx = -1; dy = 0; }
+                if (dir === 'up' && dy !== 1) { dx = 0; dy = -1; }
+                if (dir === 'right' && dx !== -1) { dx = 1; dy = 0; }
+                if (dir === 'down' && dy !== -1) { dx = 0; dy = 1; }
+            }
+
+            function keyPush(evt) {
+                switch (evt.key) {
+                    case 'h': case 'ArrowLeft':  move('left'); break;
+                    case 'k': case 'ArrowUp':    move('up'); break;
+                    case 'l': case 'ArrowRight': move('right'); break;
+                    case 'j': case 'ArrowDown':  move('down'); break;
+                    case 'q': quitGame(); break;
+                }
+            }
+
+            function quitGame() {
+                isRunning = false;
+                clearInterval(gameInterval);
+                document.removeEventListener('keydown', keyPush);
+                document.body.classList.remove('game-active'); // Remove mobile class
+                sys.openFile(config.startPage);
+            }
+
+            // Bind Keys
+            document.addEventListener('keydown', keyPush);
+
+            // Bind Touch Buttons
+            document.getElementById('btn-up').addEventListener('touchstart', (e) => { e.preventDefault(); move('up'); });
+            document.getElementById('btn-down').addEventListener('touchstart', (e) => { e.preventDefault(); move('down'); });
+            document.getElementById('btn-left').addEventListener('touchstart', (e) => { e.preventDefault(); move('left'); });
+            document.getElementById('btn-right').addEventListener('touchstart', (e) => { e.preventDefault(); move('right'); });
+            document.getElementById('btn-quit').addEventListener('touchstart', (e) => { e.preventDefault(); quitGame(); });
+
+            gameInterval = setInterval(game, 1000 / 15);
+        }
+    },
+
     'clear': {
         desc: "Clear current buffer",
         fn: (args, sys) => {
