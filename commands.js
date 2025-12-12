@@ -357,8 +357,11 @@ __/ =| o |=-~~\\  /~\\  /~\\  /~\\ ____Y___________|__|_________________|
             function quitGame() {
                 isRunning = false;
                 clearInterval(gameInterval);
+
                 document.removeEventListener('keydown', keyPush);
-                document.body.classList.remove('game-active'); // Remove mobile class
+                document.body.classList.remove('game-active');
+
+                container.innerHTML = "";
                 sys.openFile(config.startPage);
             }
 
