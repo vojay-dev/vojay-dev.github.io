@@ -148,8 +148,8 @@ function attachImageListeners() {
     });
 }
 
-async function openFile(filename) {
-    if (state.currentFile === filename) return;
+async function openFile(filename, force = false) {
+    if (state.currentFile === filename && !force) return;
     try {
         const res = await fetch(`content/${filename}.md`);
         if (!res.ok) throw new Error("File not found");

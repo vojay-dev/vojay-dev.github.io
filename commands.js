@@ -362,7 +362,7 @@ __/ =| o |=-~~\\  /~\\  /~\\  /~\\ ____Y___________|__|_________________|
                 document.body.classList.remove('game-active');
 
                 container.innerHTML = "";
-                sys.openFile(config.startPage);
+                sys.openFile(config.startPage, true);
             }
 
             // Bind Keys
