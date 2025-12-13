@@ -428,17 +428,31 @@ __/ =| o |=-~~\\  /~\\  /~\\  /~\\ ____Y___________|__|_________________|
                 });
                 html += `</tr>`;
 
+                const escapeHtml = (unsafe) => {
+                    return String(unsafe)
+                        .replace(/&/g, "&amp;")
+                        .replace(/</g, "&lt;")
+                        .replace(/>/g, "&gt;")
+                        .replace(/"/g, "&quot;")
+                        .replace(/'/g, "&#039;");
+                }
+
                 result.forEach(row => {
                     html += `<tr>`;
                     columns.forEach(col => {
                         let val = row[col];
+
                         if (typeof val === 'object' && val !== null) val = JSON.stringify(val);
-                        if (typeof val === 'string' && val.length > 100) val = val.substring(0, 100) + "...";
+                        if (typeof val === 'string') {
+                            if (val.length > 100) val = val.substring(0, 100) + "...";
+                            val = escapeHtml(val);
+                        }
 
                         html += `<td style="padding:8px; border-bottom:1px solid var(--line-nr); border-right:1px solid var(--line-nr);">${val}</td>`;
                     });
                     html += `</tr>`;
                 });
+
 
                 html += `</table></div>
                          <p style="color:var(--comment); font-size:0.8rem; margin-top:5px;">${result.length} rows returned.</p>`;
