@@ -230,6 +230,85 @@ window.closeBufferEvent = (e, filename) => {
     closeBuffer(filename);
 };
 
+// --- DUCKDB LOGIC ---
+
+window.duckDB = null;
+window.duckConn = null;
+
+window.initDuckDB = async function(sys) {
+    if (window.duckConn) return;
+
+    sys.print(`<p style="color:var(--yellow)">> Downloading engine...</p>`);
+
+    try {
+        const duckdb = await import('https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@1.28.0/+esm');
+        const cdn_base = "https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@1.28.0/dist/";
+
+        const bundles = {
+            mvp: {
+                mainModule: `${cdn_base}duckdb-mvp.wasm`,
+                mainWorker: `${cdn_base}duckdb-browser-mvp.worker.js`,
+            },
+            eh: {
+                mainModule: `${cdn_base}duckdb-eh.wasm`,
+                mainWorker: `${cdn_base}duckdb-browser-eh.worker.js`,
+            },
+        };
+
+        const bundle = await duckdb.selectBundle(bundles);
+        const workerUrl = URL.createObjectURL(
+            new Blob([`importScripts("${bundle.mainWorker}");`], { type: 'text/javascript' })
+        );
+
+        const worker = new Worker(workerUrl);
+        const logger = new duckdb.ConsoleLogger();
+        const db = new duckdb.AsyncDuckDB(logger, worker);
+
+        await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
+
+        window.duckDB = db;
+        window.duckConn = await db.connect();
+
+        sys.print(`<p style="color:var(--blue)">> Ingesting site pages...</p>`);
+
+        // Pages schema
+        await window.duckConn.query(`
+            CREATE TABLE pages (
+                filename VARCHAR,
+                word_count INTEGER,
+                content VARCHAR
+            );
+        `);
+
+        // Ingest pages
+        const inserts = config.files.map(async (file) => {
+            try {
+                const res = await fetch(`content/${file}.md`);
+                if (!res.ok) return;
+                const text = await res.text();
+
+                const safeContent = text.replace(/'/g, "''").replace(/\n/g, " ");
+                const wordCount = text.split(/\s+/).length;
+
+                await window.duckConn.query(`
+                    INSERT INTO pages VALUES ('${file}.md', ${wordCount}, '${safeContent}');
+                `);
+            } catch (e) {
+                console.warn(`Skipped ${file}`, e);
+            }
+        });
+
+        await Promise.all(inserts);
+        window.showToast("DuckDB ready", "success");
+    } catch (e) {
+        console.error(e);
+        sys.print(`<p style="color:var(--red)">Database error: ${e.message}</p>`);
+    }
+};
+
+
+
+
 // --- Command Logic ---
 
 function setMode(mode) {

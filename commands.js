@@ -379,6 +379,78 @@ __/ =| o |=-~~\\  /~\\  /~\\  /~\\ ____Y___________|__|_________________|
         }
     },
 
+    'sql': {
+        desc: "Query this website using DuckDB",
+        fn: async (args, sys) => {
+            if (!window.duckConn) {
+                await window.initDuckDB(sys);
+
+                if (!window.duckConn) {
+                    sys.print(`<p style="color:var(--red)">Error: Database failed to initialize.</p>`);
+                    return;
+                }
+            }
+
+            // 2. Handle Help / Empty Input
+            const query = args.join(" ");
+            if (!query || query.trim() === "") {
+                sys.print(`
+                    <h1>DuckDB SQL Console</h1>
+                    <p>Enter a standard SQL query.</p>
+                    <p>Tables: <code>pages</code></p>
+                    <p style="margin-bottom:10px">Examples:</p>
+                    <ul>
+                        <li><code>:sql SELECT * FROM pages</code></li>
+                        <li><code>:sql SELECT filename, word_count FROM pages ORDER BY 2 DESC</code></li>
+                    </ul>
+                `);
+                return;
+            }
+
+            try {
+                const arrowResult = await window.duckConn.query(query);
+                const result = arrowResult.toArray().map((row) => row.toJSON());
+
+                if (result.length === 0) {
+                    sys.print(`<p>Query executed successfully. 0 rows returned.</p>`);
+                    return;
+                }
+
+                // Render table
+                const columns = Object.keys(result[0]);
+
+                let html = `<div style="overflow-x:auto; margin-top:15px; border:1px solid var(--line-nr);">
+                    <table style="width:100%; border-collapse: collapse; font-family:monospace; font-size:0.8rem;">
+                        <tr style="background:var(--bg-dark); color:var(--blue);">`;
+
+                columns.forEach(col => {
+                    html += `<th style="padding:10px; border-bottom:1px solid var(--line-nr); text-align:left;">${col}</th>`;
+                });
+                html += `</tr>`;
+
+                result.forEach(row => {
+                    html += `<tr>`;
+                    columns.forEach(col => {
+                        let val = row[col];
+                        if (typeof val === 'object' && val !== null) val = JSON.stringify(val);
+                        if (typeof val === 'string' && val.length > 100) val = val.substring(0, 100) + "...";
+
+                        html += `<td style="padding:8px; border-bottom:1px solid var(--line-nr); border-right:1px solid var(--line-nr);">${val}</td>`;
+                    });
+                    html += `</tr>`;
+                });
+
+                html += `</table></div>
+                         <p style="color:var(--comment); font-size:0.8rem; margin-top:5px;">${result.length} rows returned.</p>`;
+
+                sys.print(html);
+
+            } catch (err) {
+                sys.print(`<p style="color:var(--red)">SQL Error: ${err.message}</p>`);
+            }
+        }
+    },
+
     'clear': {
         desc: "Clear current buffer",
         fn: (args, sys) => {
