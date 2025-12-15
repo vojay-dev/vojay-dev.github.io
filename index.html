@@ -32,6 +32,7 @@
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" href="favicon.png">
 
     <!-- Primary Meta Tags -->
     <meta name="title" content="Volker Janz | Senior Developer Advocate">
@@ -56,8 +57,14 @@
     <div class="scanlines"></div>
 
     <div class="app-container">
-        <!-- Buffer Tabs -->
-        <div class="buffer-bar glow-text" id="tab-container"></div>
+        <!-- Buffer Tabs & Top Widgets -->
+        <div class="buffer-bar glow-text">
+            <div id="tab-container" class="tabs-left"></div>
+            <div class="widgets-right">
+                <div class="widget widget-blue"><i class="fas fa-wifi"></i> ONLINE</div>
+                <div class="widget widget-purple"><i class="fas fa-clock"></i> <span id="clock-widget"></span></div>
+            </div>
+        </div>
 
         <div class="workspace">
             <!-- Sidebar -->

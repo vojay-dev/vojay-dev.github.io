@@ -545,6 +545,74 @@ body {
     box-shadow: 0 0 50px rgba(0,0,0,0.5);
 }
 
+/* --- BUFFER BAR --- */
+
+.buffer-bar {
+    background-color: var(--bg-dark);
+    height: var(--header-h);
+    display: flex;
+    align-items: center; /* Center vertically */
+    justify-content: space-between; /* Split Left/Right */
+    padding-left: 0;
+    border-bottom: 1px solid var(--bg);
+    flex-shrink: 0;
+}
+
+/* Left side (Tabs) */
+.tabs-left {
+    display: flex;
+    overflow-x: auto;
+    height: 100%;
+    scrollbar-width: none;
+    flex-grow: 1; /* Take available space */
+}
+.tabs-left::-webkit-scrollbar { display: none; }
+
+/* Right side (Widgets) */
+.widgets-right {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    z-index: 2;
+    background: var(--bg-dark);
+}
+
+.widget {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 12px;
+    height: 100%;
+    font-size: 0.75rem;
+    font-weight: bold;
+    user-select: none;
+    border-left: 1px solid var(--bg);
+}
+
+.widget-blue {
+    color: var(--blue);
+    background: rgba(122, 162, 247, 0.1);
+}
+
+.widget-purple {
+    color: var(--purple);
+    background: rgba(187, 154, 247, 0.1);
+}
+
+.widget-green {
+    color: var(--green);
+    background: rgba(158, 206, 106, 0.1);
+}
+
+.widget:hover {
+    filter: brightness(1.2);
+}
+
+/* Mobile: Hide widgets */
+@media (max-width: 768px) {
+    .widgets-right { display: none; }
+}
+
 /* --- PRISMJS OVERRIDE --- */
 
 code[class*="language-"], pre[class*="language-"] {
