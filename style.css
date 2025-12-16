@@ -151,7 +151,7 @@ body {
     overflow-x: auto;
     flex-shrink: 0;
     white-space: nowrap;
-    border-bottom: 1px solid #111; /* Restored Dark Border */
+    border-bottom: 1px solid #111;
     scrollbar-width: none;
 }
 
@@ -167,7 +167,7 @@ body {
     align-items: center;
     gap: 8px;
     cursor: pointer;
-    border-right: 1px solid #111; /* Restored Dark Border */
+    border-right: 1px solid #111;
     font-size: 0.8rem;
     height: 100%;
     user-select: none;
@@ -210,7 +210,7 @@ body {
     display: flex;
     flex-direction: column;
     padding: 10px;
-    border-right: 1px solid #111; /* Restored Dark Border */
+    border-right: 1px solid #111;
     transition: transform 0.2s ease;
     font-size: 0.9rem;
 }
@@ -415,7 +415,7 @@ body {
     display: flex;
     align-items: center;
     padding: 0 10px;
-    border-top: 1px solid #111; /* Restored Dark Border */
+    border-top: 1px solid #111;
     background: var(--bg);
     line-height: normal;
 }
@@ -554,7 +554,7 @@ body {
     align-items: center; /* Center vertically */
     justify-content: space-between; /* Split Left/Right */
     padding-left: 0;
-    border-bottom: 1px solid var(--bg);
+    border-bottom: 1px solid #111;
     flex-shrink: 0;
 }
 
