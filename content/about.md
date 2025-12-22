@@ -12,6 +12,11 @@ As a Senior Developer Advocate at [Astronomer](https://www.astronomer.io/), I fo
     - Senior Data Engineer
     - Technical Product Lead
 
+## Volunteering
+
+- **Data Engineer Things** (2025 - Present)
+    - Newsletter Lead
+
 ## Education
 
 - **MSc, Business Informatics** (grade: 1.37) *Carl von Ossietzky University of Oldenburg*
