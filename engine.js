@@ -570,7 +570,8 @@ function openTelescope() {
             });
             row.addEventListener('mouseenter', () => {
                 selectedIndex = i;
-                render();
+                results.querySelectorAll('.telescope-row.selected').forEach(r => r.classList.remove('selected'));
+                row.classList.add('selected');
             });
             results.appendChild(row);
         });
