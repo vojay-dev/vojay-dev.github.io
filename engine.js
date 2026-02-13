@@ -25,7 +25,7 @@ const el = {
 document.title = config.title;
 initLightbox();
 renderSidebar();
-openFile(config.startPage);
+showAlpha();
 
 // --- Core Logic ---
 
@@ -130,6 +130,113 @@ function initLightbox() {
         document.body.appendChild(lb);
     }
 }
+
+// --- Alpha Dashboard ---
+
+function runAlphaAction(cmd) {
+    if (cmd.startsWith(':')) {
+        executeCmd(cmd);
+    } else {
+        openFile(cmd);
+    }
+}
+
+// Build keyboard shortcut map from config
+const alphaKeyMap = {};
+if (config.alpha && config.alpha.actions) {
+    config.alpha.actions.forEach(a => {
+        alphaKeyMap[a.key] = () => runAlphaAction(a.cmd);
+    });
+}
+
+function showAlpha() {
+    const ac = config.alpha || {};
+    let dash = document.getElementById('alpha-dashboard');
+
+    if (!dash) {
+        dash = document.createElement('div');
+        dash.id = 'alpha-dashboard';
+        dash.className = 'alpha-dashboard';
+
+        const content = document.createElement('div');
+        content.className = 'alpha-content';
+
+        // Animated logo
+        const logo = document.createElement('div');
+        logo.className = 'alpha-logo';
+
+        const titleText = ac.title || 'vojay';
+        const accentText = ac.titleAccent || '';
+        const titleColor = ac.titleColor || 'var(--blue)';
+        const accentColor = ac.titleAccentColor || 'var(--comment)';
+        const chars = (titleText + accentText).split('');
+        const titleLen = titleText.length;
+
+        chars.forEach((ch, i) => {
+            const span = document.createElement('span');
+            span.textContent = ch;
+            span.className = 'alpha-char';
+            span.style.setProperty('--i', i);
+            span.style.setProperty('--char-color', i >= titleLen ? accentColor : titleColor);
+            logo.appendChild(span);
+        });
+
+        // Blinking cursor
+        const cursor = document.createElement('span');
+        cursor.className = 'alpha-cursor';
+        cursor.textContent = '_';
+        cursor.style.setProperty('--i', chars.length);
+        logo.appendChild(cursor);
+
+        // Subtitle
+        const subtitle = document.createElement('div');
+        subtitle.className = 'alpha-subtitle';
+        subtitle.textContent = ac.subtitle || '';
+        if (ac.subtitleColor) subtitle.style.color = ac.subtitleColor;
+
+        // Action buttons
+        const buttons = document.createElement('div');
+        buttons.className = 'alpha-buttons';
+
+        (ac.actions || []).forEach((a, i) => {
+            const btn = document.createElement('div');
+            btn.className = 'alpha-btn';
+            btn.style.setProperty('--i', i);
+            btn.innerHTML = `<span class="alpha-key">${a.key}</span> <i class="${a.icon}"></i> ${a.label}`;
+            btn.addEventListener('click', () => { hideAlpha(); runAlphaAction(a.cmd); });
+            buttons.appendChild(btn);
+        });
+
+        // Footer
+        const footer = document.createElement('div');
+        footer.className = 'alpha-footer';
+        footer.innerHTML = `<span>${titleText}${accentText}</span> &nbsp; ${config.files.length} files &nbsp; ${Object.keys(customCommands).length} commands`;
+
+        content.appendChild(logo);
+        content.appendChild(subtitle);
+        content.appendChild(buttons);
+        content.appendChild(footer);
+        dash.appendChild(content);
+        document.body.appendChild(dash);
+    }
+
+    dash.style.display = 'flex';
+    requestAnimationFrame(() => dash.classList.add('active'));
+
+    state.mode = 'ALPHA';
+    el.modeSeg.innerText = 'ALPHA';
+    el.modeSeg.className = 'segment mode-alpha';
+}
+
+function hideAlpha() {
+    const dash = document.getElementById('alpha-dashboard');
+    if (!dash) return;
+    dash.classList.remove('active');
+    setTimeout(() => { dash.style.display = 'none'; }, 300);
+    setMode('NORMAL');
+}
+
+window.showAlpha = showAlpha;
 
 function attachImageListeners() {
     const images = el.output.querySelectorAll('img');
@@ -309,6 +416,222 @@ window.initDuckDB = async function(sys) {
 
 
 
+// --- Telescope Fuzzy Finder ---
+
+let telescopeState = null;
+
+function fuzzyMatch(query, text) {
+    let qi = 0;
+    for (let ti = 0; ti < text.length && qi < query.length; ti++) {
+        if (text[ti] === query[qi]) qi++;
+    }
+    return qi === query.length;
+}
+
+function highlightFuzzy(text, query) {
+    if (!query) return text;
+    const lowerText = text.toLowerCase();
+    const lowerQuery = query.toLowerCase().trim();
+    let result = '';
+    let qi = 0;
+    for (let i = 0; i < text.length; i++) {
+        if (qi < lowerQuery.length && lowerText[i] === lowerQuery[qi]) {
+            result += `<span class="telescope-match">${text[i]}</span>`;
+            qi++;
+        } else {
+            result += text[i];
+        }
+    }
+    return result;
+}
+
+function buildTelescopeItems() {
+    const items = [];
+
+    config.files.forEach((file, index) => {
+        const color = COLORS[index % COLORS.length];
+        items.push({
+            section: 'Files',
+            label: `${file}.md`,
+            icon: 'fab fa-markdown',
+            iconColor: color,
+            desc: '',
+            searchText: file,
+            action: () => openFile(file)
+        });
+    });
+
+    for (const [key, cmd] of Object.entries(customCommands)) {
+        items.push({
+            section: 'Commands',
+            label: `:${key}`,
+            icon: 'fas fa-terminal',
+            iconColor: 'var(--cyan)',
+            desc: cmd.desc,
+            searchText: `${key} ${cmd.desc}`,
+            action: () => executeCmd(`:${key}`)
+        });
+    }
+
+    config.links.forEach(link => {
+        items.push({
+            section: 'Links',
+            label: link.label,
+            icon: link.icon,
+            iconColor: 'var(--purple)',
+            desc: link.url,
+            searchText: `${link.label} ${link.url}`,
+            action: () => window.open(link.url, '_blank')
+        });
+    });
+
+    return items;
+}
+
+function openTelescope() {
+    if (state.mode === 'TELESCOPE' || state.mode === 'ALPHA') return;
+
+    state.mode = 'TELESCOPE';
+    el.modeSeg.innerText = 'TELESCOPE';
+    el.modeSeg.className = 'segment mode-telescope';
+
+    const items = buildTelescopeItems();
+
+    let overlay = document.getElementById('telescope-overlay');
+    if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.id = 'telescope-overlay';
+        overlay.className = 'telescope-overlay';
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) closeTelescope();
+        });
+        document.body.appendChild(overlay);
+    }
+
+    overlay.innerHTML = '';
+
+    const panel = document.createElement('div');
+    panel.className = 'telescope-panel';
+
+    const header = document.createElement('div');
+    header.className = 'telescope-header';
+
+    const icon = document.createElement('span');
+    icon.className = 'telescope-icon';
+    icon.innerHTML = '<i class="fas fa-search"></i> Telescope';
+    header.appendChild(icon);
+
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.className = 'telescope-input';
+    input.placeholder = 'Search files, commands, links...';
+    input.autocomplete = 'off';
+    input.spellcheck = false;
+    header.appendChild(input);
+
+    const results = document.createElement('div');
+    results.className = 'telescope-results';
+
+    panel.appendChild(header);
+    panel.appendChild(results);
+    overlay.appendChild(panel);
+
+    let selectedIndex = 0;
+    let filteredItems = [...items];
+
+    function render() {
+        results.innerHTML = '';
+        if (filteredItems.length === 0) {
+            results.innerHTML = '<div class="telescope-empty">No results found</div>';
+            return;
+        }
+
+        let currentSection = '';
+        filteredItems.forEach((item, i) => {
+            if (item.section !== currentSection) {
+                currentSection = item.section;
+                const sectionEl = document.createElement('div');
+                sectionEl.className = 'telescope-section';
+                sectionEl.textContent = currentSection;
+                results.appendChild(sectionEl);
+            }
+
+            const row = document.createElement('div');
+            row.className = 'telescope-row' + (i === selectedIndex ? ' selected' : '');
+
+            const highlighted = input.value ? highlightFuzzy(item.label, input.value) : item.label;
+            const descHtml = item.desc ? `<span class="telescope-desc">${item.desc}</span>` : '';
+            row.innerHTML = `<i class="${item.icon}" style="color: ${item.iconColor}; width: 18px; text-align: center;"></i>
+                <span>${highlighted}</span>${descHtml}`;
+
+            row.addEventListener('click', () => {
+                closeTelescope();
+                item.action();
+            });
+            row.addEventListener('mouseenter', () => {
+                selectedIndex = i;
+                render();
+            });
+            results.appendChild(row);
+        });
+
+        const selectedRow = results.querySelector('.telescope-row.selected');
+        if (selectedRow) selectedRow.scrollIntoView({ block: 'nearest' });
+    }
+
+    function search(query) {
+        query = query.toLowerCase().trim();
+        if (!query) {
+            filteredItems = [...items];
+        } else {
+            filteredItems = items.filter(item => fuzzyMatch(query, item.searchText.toLowerCase()));
+        }
+        selectedIndex = 0;
+        render();
+    }
+
+    input.addEventListener('input', () => search(input.value));
+
+    telescopeState = {
+        get selectedIndex() { return selectedIndex; },
+        set selectedIndex(v) { selectedIndex = v; },
+        get filteredItems() { return filteredItems; },
+        render
+    };
+
+    overlay.style.display = 'flex';
+    requestAnimationFrame(() => overlay.classList.add('active'));
+
+    render();
+    setTimeout(() => input.focus(), 50);
+}
+
+function closeTelescope() {
+    const overlay = document.getElementById('telescope-overlay');
+    if (!overlay) return;
+    overlay.classList.remove('active');
+    setTimeout(() => { overlay.style.display = 'none'; }, 200);
+    telescopeState = null;
+    setMode('NORMAL');
+}
+
+function telescopeNav(delta) {
+    if (!telescopeState || telescopeState.filteredItems.length === 0) return;
+    telescopeState.selectedIndex = Math.max(0,
+        Math.min(telescopeState.filteredItems.length - 1,
+            telescopeState.selectedIndex + delta));
+    telescopeState.render();
+}
+
+function telescopeSelect() {
+    if (!telescopeState || telescopeState.filteredItems.length === 0) return;
+    const item = telescopeState.filteredItems[telescopeState.selectedIndex];
+    closeTelescope();
+    item.action();
+}
+
+window.openTelescope = openTelescope;
+
 // --- Command Logic ---
 
 function setMode(mode) {
@@ -424,14 +747,43 @@ if (gitBranch) {
 }
 
 document.addEventListener('keydown', e => {
+    // Alpha mode: shortcut keys or dismiss
+    if (state.mode === 'ALPHA') {
+        e.preventDefault();
+        const key = e.key.toLowerCase();
+        if (key === ':') { hideAlpha(); setMode('COMMAND'); return; }
+        if (alphaKeyMap[key]) { hideAlpha(); alphaKeyMap[key](); return; }
+        if (key !== 'shift' && key !== 'control' && key !== 'alt' && key !== 'meta') {
+            hideAlpha();
+            openFile(config.startPage);
+        }
+        return;
+    }
+
+    // Telescope mode: navigation
+    if (state.mode === 'TELESCOPE') {
+        if (e.key === 'Escape') { e.preventDefault(); closeTelescope(); return; }
+        if (e.key === 'ArrowDown' || (e.ctrlKey && e.key === 'n')) { e.preventDefault(); telescopeNav(1); return; }
+        if (e.key === 'ArrowUp' || (e.ctrlKey && e.key === 'p')) { e.preventDefault(); telescopeNav(-1); return; }
+        if (e.key === 'Enter') { e.preventDefault(); telescopeSelect(); return; }
+        return;
+    }
+
+    // Command mode
     if (state.mode === 'COMMAND') {
         if (e.key === 'Enter') executeCmd(el.cmdInput.value);
         if (e.key === 'Escape') setMode('NORMAL');
         return;
     }
+
+    // Normal mode — skip if typing in an input
+    const active = document.activeElement;
+    if (active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA')) return;
+
     if (e.key === 'j') el.scroll.scrollBy({ top: 50, behavior: 'smooth' });
     if (e.key === 'k') el.scroll.scrollBy({ top: -50, behavior: 'smooth' });
     if (e.key === ':') { e.preventDefault(); setMode('COMMAND'); }
+    if (e.key === '/' || (e.ctrlKey && e.key === 'p')) { e.preventDefault(); openTelescope(); }
 });
 
 el.scroll.addEventListener('scroll', () => {

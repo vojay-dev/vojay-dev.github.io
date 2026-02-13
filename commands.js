@@ -465,6 +465,20 @@ __/ =| o |=-~~\\  /~\\  /~\\  /~\\ ____Y___________|__|_________________|
         }
     },
 
+    'alpha': {
+        desc: "Show startup dashboard",
+        fn: (args, sys) => {
+            setTimeout(() => window.showAlpha(), 0);
+        }
+    },
+
+    'telescope': {
+        desc: "Fuzzy finder for files, commands, and links",
+        fn: (args, sys) => {
+            setTimeout(() => window.openTelescope(), 0);
+        }
+    },
+
     'clear': {
         desc: "Clear current buffer",
         fn: (args, sys) => {

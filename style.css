@@ -249,6 +249,37 @@ body {
     background-color: var(--selection);
 }
 
+.tree-hint {
+    padding: 6px 8px;
+    margin-top: 10px;
+    color: var(--comment);
+    font-size: 0.75rem;
+    cursor: pointer;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.6;
+    transition: 0.15s;
+    line-height: normal;
+}
+
+.tree-hint:hover {
+    opacity: 1;
+    color: var(--fg);
+    background: rgba(255,255,255,0.03);
+}
+
+.tree-hint-key {
+    margin-left: auto;
+    background: var(--bg);
+    border: 1px solid var(--line-nr);
+    border-radius: 3px;
+    padding: 0 6px;
+    font-size: 0.7rem;
+    color: var(--comment);
+}
+
 /* --- EDITOR --- */
 
 .editor-container {
@@ -407,6 +438,8 @@ body {
 
 .mode-normal { background: var(--blue); color: #1a1b26; font-weight: bold; }
 .mode-command { background: var(--orange); color: #1a1b26; font-weight: bold; }
+.mode-alpha { background: var(--green); color: #1a1b26; font-weight: bold; }
+.mode-telescope { background: var(--cyan); color: #1a1b26; font-weight: bold; }
 .seg-dark { background: #3b4261; color: var(--fg); }
 .seg-light { background: transparent; color: var(--comment); }
 
@@ -781,4 +814,313 @@ code[class*="language-"], pre[class*="language-"] {
     .theme-gruvbox::after { content: "G"; }
     .theme-dracula::after { content: "D"; }
     .theme-cyberpunk::after { content: "C"; }
+}
+
+/* --- ALPHA DASHBOARD --- */
+
+.alpha-dashboard {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--bg);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    overflow-y: auto;
+}
+
+/* CRT scanlines on alpha dashboard */
+.alpha-dashboard::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1));
+    background-size: 100% 4px;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.alpha-dashboard.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.alpha-content {
+    text-align: center;
+    max-width: 600px;
+    width: 90%;
+    padding: 40px 0;
+}
+
+.alpha-logo {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-bottom: 24px;
+    letter-spacing: -1px;
+    display: block;
+}
+
+.alpha-char {
+    display: inline-block;
+    opacity: 0;
+    color: var(--char-color, var(--blue));
+    animation: alphaTypeIn 0.05s forwards;
+    animation-delay: calc(var(--i) * 0.07s);
+    text-shadow: 0 0 20px color-mix(in srgb, var(--char-color, var(--blue)) 40%, transparent);
+}
+
+.alpha-cursor {
+    display: inline-block;
+    opacity: 0;
+    color: var(--green);
+    animation: alphaTypeIn 0.05s forwards, alphaBlink 1s step-end infinite;
+    animation-delay: calc(var(--i) * 0.07s), calc(var(--i) * 0.07s + 0.5s);
+}
+
+@keyframes alphaTypeIn {
+    to { opacity: 1; }
+}
+
+@keyframes alphaBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.alpha-subtitle {
+    color: var(--comment);
+    font-size: 0.85rem;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: alphaFadeUp 0.5s ease forwards;
+    animation-delay: 0.7s;
+}
+
+@keyframes alphaFadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.alpha-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 40px;
+}
+
+.alpha-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 20px;
+    color: var(--comment);
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 1.4;
+    min-width: 220px;
+    opacity: 0;
+    animation: alphaFadeUp 0.3s ease forwards;
+    animation-delay: calc(0.8s + var(--i) * 0.06s);
+}
+
+.alpha-btn:hover {
+    color: var(--fg);
+    background: var(--selection);
+}
+
+.alpha-btn .alpha-key {
+    color: var(--yellow);
+    font-weight: bold;
+    min-width: 20px;
+    text-align: center;
+}
+
+.alpha-btn i {
+    color: var(--blue);
+    width: 18px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.alpha-footer {
+    color: var(--comment);
+    font-size: 0.75rem;
+    margin-top: 20px;
+    opacity: 0;
+    animation: alphaFadeUp 0.4s ease forwards;
+    animation-delay: 1.5s;
+}
+
+.alpha-footer span {
+    color: var(--green);
+}
+
+@media (max-width: 768px) {
+    .alpha-logo {
+        font-size: 2.5rem;
+    }
+    .alpha-btn {
+        font-size: 0.8rem;
+        min-width: 180px;
+        padding: 10px 16px;
+    }
+}
+
+/* --- TELESCOPE FUZZY FINDER --- */
+
+.telescope-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 10001;
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 15vh;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+}
+
+.telescope-overlay.active {
+    opacity: 1;
+}
+
+.telescope-panel {
+    background: var(--bg-dark);
+    border: 1px solid var(--line-nr);
+    border-radius: 8px;
+    width: 500px;
+    max-width: 90vw;
+    max-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    transform: translateY(-10px) scale(0.98);
+    transition: transform 0.15s ease;
+}
+
+.telescope-overlay.active .telescope-panel {
+    transform: translateY(0) scale(1);
+}
+
+.telescope-header {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line-nr);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.telescope-icon {
+    color: var(--cyan);
+    font-size: 0.7rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.telescope-input {
+    background: var(--bg);
+    border: 1px solid var(--line-nr);
+    border-radius: 4px;
+    padding: 8px 12px;
+    color: var(--fg);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.telescope-input:focus {
+    border-color: var(--blue);
+}
+
+.telescope-results {
+    overflow-y: auto;
+    max-height: 50vh;
+    padding: 8px 0;
+    scrollbar-width: none;
+}
+
+.telescope-results::-webkit-scrollbar {
+    display: none;
+}
+
+.telescope-section {
+    padding: 8px 16px 4px;
+    color: var(--comment);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
+.telescope-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 16px;
+    cursor: pointer;
+    color: var(--fg);
+    font-size: 0.85rem;
+    transition: background 0.05s;
+}
+
+.telescope-row:hover,
+.telescope-row.selected {
+    background: var(--selection);
+}
+
+.telescope-row.selected {
+    border-left: 2px solid var(--blue);
+    padding-left: 14px;
+}
+
+.telescope-desc {
+    color: var(--comment);
+    margin-left: auto;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+}
+
+.telescope-match {
+    color: var(--yellow);
+    font-weight: bold;
+}
+
+.telescope-empty {
+    padding: 20px;
+    text-align: center;
+    color: var(--comment);
+    font-style: italic;
+}
+
+@media (max-width: 768px) {
+    .telescope-overlay {
+        padding-top: 5vh;
+    }
+    .telescope-panel {
+        max-height: 80vh;
+    }
+    .telescope-desc {
+        display: none;
+    }
 }
