@@ -564,14 +564,10 @@ function openTelescope() {
             row.innerHTML = `<i class="${item.icon}" style="color: ${item.iconColor}; width: 18px; text-align: center;"></i>
                 <span>${highlighted}</span>${descHtml}`;
 
-            row.addEventListener('click', () => {
+            row.addEventListener('click', (e) => {
+                e.stopPropagation();
                 closeTelescope();
                 item.action();
-            });
-            row.addEventListener('mouseenter', () => {
-                selectedIndex = i;
-                results.querySelectorAll('.telescope-row.selected').forEach(r => r.classList.remove('selected'));
-                row.classList.add('selected');
             });
             results.appendChild(row);
         });
