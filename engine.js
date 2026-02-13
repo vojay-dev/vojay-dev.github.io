@@ -564,14 +564,20 @@ function openTelescope() {
             row.innerHTML = `<i class="${item.icon}" style="color: ${item.iconColor}; width: 18px; text-align: center;"></i>
                 <span>${highlighted}</span>${descHtml}`;
 
-            function activateRow(e) {
-                e.preventDefault();
+            row.addEventListener('click', (e) => {
                 e.stopPropagation();
                 closeTelescope();
                 item.action();
-            }
-            row.addEventListener('click', activateRow);
-            row.addEventListener('touchend', activateRow);
+            });
+            let rowTouchY;
+            row.addEventListener('touchstart', (e) => { rowTouchY = e.touches[0].clientY; }, { passive: true });
+            row.addEventListener('touchend', (e) => {
+                if (Math.abs(e.changedTouches[0].clientY - rowTouchY) < 10) {
+                    e.preventDefault();
+                    closeTelescope();
+                    item.action();
+                }
+            });
             results.appendChild(row);
         });
 
@@ -702,8 +708,15 @@ function toggleTree(force) {
             backdrop.id = 'tree-backdrop';
             backdrop.className = 'tree-backdrop';
             backdrop.addEventListener('click', () => toggleTree(false));
-            backdrop.addEventListener('touchend', (e) => { e.preventDefault(); toggleTree(false); });
-            document.body.appendChild(backdrop);
+            let backdropTouchY;
+            backdrop.addEventListener('touchstart', (e) => { backdropTouchY = e.touches[0].clientY; }, { passive: true });
+            backdrop.addEventListener('touchend', (e) => {
+                if (Math.abs(e.changedTouches[0].clientY - backdropTouchY) < 10) {
+                    e.preventDefault();
+                    toggleTree(false);
+                }
+            });
+            document.querySelector('.app-container').appendChild(backdrop);
         }
         backdrop.style.display = 'block';
     } else if (backdrop) {
