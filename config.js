@@ -21,7 +21,7 @@ const config = {
         titleColor: "var(--blue)",
         titleAccent: ".io",
         titleAccentColor: "var(--comment)",
-        subtitle: "Senior Developer Advocate & Data Engineer",
+        subtitle: "Developer Advocate and Data Engineer",
         subtitleColor: "var(--comment)",
         actions: [
             { key: 'h', icon: 'fas fa-home',     label: 'Home',   cmd: 'home' },
