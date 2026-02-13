@@ -773,8 +773,8 @@ code[class*="language-"], pre[class*="language-"] {
 #snake-controls {
     display: none; /* Hidden by default */
     position: fixed;
-    bottom: 80px;
-    right: 20px;
+    bottom: 55px;
+    right: 75px;
     width: 150px;
     height: 150px;
     grid-template-columns: 1fr 1fr 1fr;
