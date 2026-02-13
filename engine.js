@@ -564,11 +564,14 @@ function openTelescope() {
             row.innerHTML = `<i class="${item.icon}" style="color: ${item.iconColor}; width: 18px; text-align: center;"></i>
                 <span>${highlighted}</span>${descHtml}`;
 
-            row.addEventListener('click', (e) => {
+            function activateRow(e) {
+                e.preventDefault();
                 e.stopPropagation();
                 closeTelescope();
                 item.action();
-            });
+            }
+            row.addEventListener('click', activateRow);
+            row.addEventListener('touchend', activateRow);
             results.appendChild(row);
         });
 
@@ -688,7 +691,24 @@ function executeCmd(val) {
 }
 
 function toggleTree(force) {
-    el.tree.classList.toggle('open', force);
+    const isOpen = typeof force === 'boolean' ? force : !el.tree.classList.contains('open');
+    el.tree.classList.toggle('open', isOpen);
+
+    // Backdrop for closing on outside tap (mobile)
+    let backdrop = document.getElementById('tree-backdrop');
+    if (isOpen) {
+        if (!backdrop) {
+            backdrop = document.createElement('div');
+            backdrop.id = 'tree-backdrop';
+            backdrop.className = 'tree-backdrop';
+            backdrop.addEventListener('click', () => toggleTree(false));
+            backdrop.addEventListener('touchend', (e) => { e.preventDefault(); toggleTree(false); });
+            document.body.appendChild(backdrop);
+        }
+        backdrop.style.display = 'block';
+    } else if (backdrop) {
+        backdrop.style.display = 'none';
+    }
 }
 
 // --- Mobile Command Logic ---
