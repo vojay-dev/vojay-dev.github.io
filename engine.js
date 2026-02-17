@@ -7,6 +7,9 @@ const state = { currentFile: null, openBuffers: [], mode: 'NORMAL' };
 
 window.THEMES = THEMES;
 
+let asciiAnimId = null;
+const asciiAngles = { A: 0, B: 0 };
+
 const el = {
     output: document.getElementById('markdown-output'),
     scroll: document.getElementById('scroll-container'),
@@ -144,6 +147,66 @@ if (config.alpha && config.alpha.actions) {
     });
 }
 
+function startAsciiDonut(container) {
+    let pre = container.querySelector('.alpha-ascii-bg');
+    if (!pre) {
+        pre = document.createElement('div');
+        pre.className = 'alpha-ascii-bg';
+        container.insertBefore(pre, container.firstChild);
+    }
+
+    const W = 80, H = 24;
+    const chars = '.,-~:;=!*#$@';
+
+    function render() {
+        const b = new Array(W * H).fill(' ');
+        const z = new Array(W * H).fill(0);
+        const { A, B } = asciiAngles;
+
+        for (let j = 0; j < 6.28; j += 0.07) {
+            for (let i = 0; i < 6.28; i += 0.02) {
+                const sA = Math.sin(A), cA = Math.cos(A);
+                const sB = Math.sin(B), cB = Math.cos(B);
+                const sj = Math.sin(j), cj = Math.cos(j);
+                const si = Math.sin(i), ci = Math.cos(i);
+
+                const h = cj + 2;
+                const D = 1 / (si * h * sA + sj * cA + 5);
+                const t = si * h * cA - sj * sA;
+
+                const x = Math.floor(W / 2 + 30 * D * (ci * h * cB - t * sB));
+                const y = Math.floor(H / 2 + 15 * D * (ci * h * sB + t * cB));
+                const o = x + W * y;
+                const N = Math.floor(8 * ((sj * sA - si * cj * cA) * cB - si * cj * sA - sj * cA - ci * cj * sB));
+
+                if (y >= 0 && y < H && x >= 0 && x < W && D > z[o]) {
+                    z[o] = D;
+                    b[o] = chars[N > 0 ? N : 0];
+                }
+            }
+        }
+
+        let out = '';
+        for (let k = 0; k < W * H; k++) {
+            out += k % W === W - 1 ? '\n' : b[k];
+        }
+        pre.textContent = out;
+
+        asciiAngles.A += 0.02;
+        asciiAngles.B += 0.01;
+        asciiAnimId = requestAnimationFrame(render);
+    }
+
+    render();
+}
+
+function stopAsciiDonut() {
+    if (asciiAnimId) {
+        cancelAnimationFrame(asciiAnimId);
+        asciiAnimId = null;
+    }
+}
+
 function showAlpha() {
     const ac = config.alpha || {};
     let dash = document.getElementById('alpha-dashboard');
@@ -202,16 +265,35 @@ function showAlpha() {
         footer.className = 'alpha-footer';
         footer.innerHTML = `<span>${titleText}${accentText}</span> &nbsp; ${config.files.length} files &nbsp; ${Object.keys(customCommands).length} commands`;
 
+        const themeSwitcher = document.createElement('div');
+        themeSwitcher.className = 'alpha-theme-switcher';
+        THEMES.forEach(t => {
+            const dot = document.createElement('span');
+            dot.className = 'alpha-theme-dot';
+            dot.dataset.theme = t;
+            dot.title = t;
+            dot.addEventListener('click', () => {
+                setTheme(t);
+                themeSwitcher.querySelectorAll('.alpha-theme-dot').forEach(d => d.classList.toggle('active', d.dataset.theme === t));
+            });
+            const current = localStorage.getItem('theme') || THEMES[0];
+            if (t === current) dot.classList.add('active');
+            themeSwitcher.appendChild(dot);
+        });
+
         content.appendChild(logo);
         content.appendChild(subtitle);
         content.appendChild(buttons);
         content.appendChild(footer);
+        content.appendChild(themeSwitcher);
         dash.appendChild(content);
+        startAsciiDonut(dash);
         document.body.appendChild(dash);
     }
 
     dash.style.display = 'flex';
     requestAnimationFrame(() => dash.classList.add('active'));
+    if (!asciiAnimId) startAsciiDonut(dash);
 
     state.mode = 'ALPHA';
     el.modeSeg.innerText = 'ALPHA';
@@ -222,6 +304,7 @@ function hideAlpha() {
     const dash = document.getElementById('alpha-dashboard');
     if (!dash) return;
     dash.classList.remove('active');
+    stopAsciiDonut();
     setTimeout(() => { dash.style.display = 'none'; }, 300);
     setMode('NORMAL');
 }

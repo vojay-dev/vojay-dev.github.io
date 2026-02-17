@@ -1091,7 +1091,24 @@ code[class*="language-"], pre[class*="language-"] {
     opacity: 0;
     transition: opacity 0.3s ease;
     pointer-events: none;
-    overflow-y: auto;
+    overflow: hidden;
+}
+
+.alpha-ascii-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    line-height: 1.1;
+    color: var(--line-nr);
+    opacity: 0.45;
+    pointer-events: none;
+    z-index: 0;
+    margin: 0;
+    white-space: pre;
+    user-select: none;
 }
 
 /* CRT scanlines on alpha dashboard */
@@ -1118,6 +1135,8 @@ code[class*="language-"], pre[class*="language-"] {
     max-width: 600px;
     width: 90%;
     padding: 40px 0;
+    position: relative;
+    z-index: 1;
 }
 
 .alpha-logo {
@@ -1222,6 +1241,37 @@ code[class*="language-"], pre[class*="language-"] {
 
 .alpha-footer span {
     color: var(--green);
+}
+
+.alpha-theme-switcher {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 24px;
+    opacity: 0;
+    animation: alphaFadeUp 0.4s ease forwards;
+    animation-delay: 1.8s;
+}
+
+.alpha-theme-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--comment);
+    cursor: pointer;
+    transition: transform 0.15s, background 0.15s;
+    opacity: 0.4;
+}
+
+.alpha-theme-dot:hover {
+    transform: scale(1.4);
+    opacity: 0.8;
+}
+
+.alpha-theme-dot.active {
+    background: var(--blue);
+    opacity: 1;
+    transform: scale(1.3);
 }
 
 @media (max-width: 768px) {
