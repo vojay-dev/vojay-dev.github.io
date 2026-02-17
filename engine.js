@@ -376,9 +376,12 @@ function initMouseTrackerBar() {
 
     function pulseIndicator() {
         indicator.classList.remove('pulse');
+        bar.classList.remove('echo');
         // Restart CSS keyframe cleanly for rapid consecutive clicks.
         void indicator.offsetWidth;
+        void bar.offsetWidth;
         indicator.classList.add('pulse');
+        bar.classList.add('echo');
     }
 
     function onResize() {
