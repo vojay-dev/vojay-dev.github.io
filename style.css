@@ -1094,21 +1094,16 @@ code[class*="language-"], pre[class*="language-"] {
     overflow: hidden;
 }
 
-.alpha-ascii-bg {
+.alpha-donut-canvas {
     position: absolute;
-    top: 50%;
     left: 50%;
+    top: 50%;
     transform: translate(-50%, -50%);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 14px;
-    line-height: 1.1;
-    color: var(--line-nr);
-    opacity: 0.45;
+    width: min(66vw, 660px);
+    height: min(30vw, 300px);
+    opacity: 0.52;
     pointer-events: none;
     z-index: 0;
-    margin: 0;
-    white-space: pre;
-    user-select: none;
 }
 
 /* CRT scanlines on alpha dashboard */

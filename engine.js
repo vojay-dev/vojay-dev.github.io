@@ -148,15 +148,27 @@ if (config.alpha && config.alpha.actions) {
 }
 
 function startAsciiDonut(container) {
-    let pre = container.querySelector('.alpha-ascii-bg');
-    if (!pre) {
-        pre = document.createElement('div');
-        pre.className = 'alpha-ascii-bg';
-        container.insertBefore(pre, container.firstChild);
+    let canvas = container.querySelector('.alpha-donut-canvas');
+    if (!canvas) {
+        canvas = document.createElement('canvas');
+        canvas.className = 'alpha-donut-canvas';
+        canvas.setAttribute('aria-hidden', 'true');
+        container.insertBefore(canvas, container.firstChild);
     }
 
-    const W = 80, H = 24;
-    const chars = '.,-~:;=!*#$@';
+    const ctx = canvas.getContext('2d', { alpha: true });
+    if (!ctx) return;
+
+    const W = 72, H = 22;
+    const chars = ' .,-~:;=!*#$@';
+    const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+    const cssW = 660;
+    const cssH = 300;
+    canvas.width = Math.floor(cssW * dpr);
+    canvas.height = Math.floor(cssH * dpr);
+
+    const cellW = canvas.width / W;
+    const cellH = canvas.height / H;
 
     function render() {
         const b = new Array(W * H).fill(' ');
@@ -181,16 +193,23 @@ function startAsciiDonut(container) {
 
                 if (y >= 0 && y < H && x >= 0 && x < W && D > z[o]) {
                     z[o] = D;
-                    b[o] = chars[N > 0 ? N : 0];
+                    const shade = Math.max(0, Math.min(chars.length - 1, N));
+                    b[o] = chars[shade];
                 }
             }
         }
 
-        let out = '';
-        for (let k = 0; k < W * H; k++) {
-            out += k % W === W - 1 ? '\n' : b[k];
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--line-nr').trim() || '#3b4261';
+        ctx.textBaseline = 'top';
+        ctx.font = `${Math.floor(cellH * 0.95)}px "JetBrains Mono", monospace`;
+
+        for (let y = 0; y < H; y++) {
+            for (let x = 0; x < W; x++) {
+                const ch = b[y * W + x];
+                if (ch !== ' ') ctx.fillText(ch, x * cellW, y * cellH);
+            }
         }
-        pre.textContent = out;
 
         asciiAngles.A += 0.02;
         asciiAngles.B += 0.01;
