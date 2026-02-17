@@ -32,5 +32,35 @@ const config = {
             { key: 's', icon: 'fas fa-database', label: 'SQL',    cmd: ':sql' },
             { key: 'g', icon: 'fas fa-gamepad',  label: 'Snake',  cmd: ':snake' },
         ]
-    }
+    },
+
+    meta: {
+        description: "Developer Advocate & Data Engineer",
+        ogImage: "images/og-image.png",
+        favicon: "images/favicon.ico",
+        favicon32: "images/favicon-32x32.png",
+    },
+
+    analytics: {
+        enabled: true,
+        googleId: 'G-Y1D1YZJQ7T'
+    },
+
+    repo: {
+        url: 'https://github.com/vojay-dev/vojay-dev.github.io',
+        branch: 'main'
+    },
+
+    contact: {
+        email: 'volker@janz.sh'
+    },
+
+    blog: {
+        enabled: true,
+        manifestPath: 'posts/posts.json',
+        postsDir: 'posts'
+    },
+
+    themes: ['tokyo', 'gruvbox', 'dracula', 'cyberpunk', 'latte'],
+    defaultTheme: 'tokyo',
 };

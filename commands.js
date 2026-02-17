@@ -114,10 +114,11 @@ const customCommands = {
     'contact': {
         desc: "Send a mail",
         fn: (args, sys) => {
-            sys.print(`<p>Initiating transmission to <strong style="color:var(--green)">volker@janz.sh</strong>...</p>`);
+            const email = config.contact?.email || 'hello@example.com';
+            sys.print(`<p>Initiating transmission to <strong style="color:var(--green)">${email}</strong>...</p>`);
 
             setTimeout(() => {
-                window.location.href = "mailto:volker@janz.sh";
+                window.location.href = `mailto:${email}`;
             }, 800);
         }
     },

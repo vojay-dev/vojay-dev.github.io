@@ -1,7 +1,7 @@
 if (typeof config === 'undefined') throw new Error("config.js missing");
 if (typeof customCommands === 'undefined') console.warn("commands.js missing");
 
-const THEMES = ['tokyo', 'gruvbox', 'dracula', 'cyberpunk', 'latte'];
+const THEMES = config.themes || ['tokyo', 'gruvbox', 'dracula', 'cyberpunk', 'latte'];
 const COLORS = ['var(--blue)', 'var(--purple)', 'var(--yellow)', 'var(--green)', 'var(--red)', 'var(--cyan)', 'var(--orange)', 'var(--magenta)'];
 const state = { currentFile: null, openBuffers: [], mode: 'NORMAL' };
 
@@ -28,13 +28,16 @@ showAlpha();
 initMouseTrackerBar();
 
 // Add "blog" to sidebar only if posts exist
-fetch('posts/posts.json').then(r => r.ok ? r.json() : []).then(posts => {
-    if (posts.length > 0 && !config.files.includes('blog')) {
-        const archiveIdx = config.files.indexOf('archive');
-        config.files.splice(archiveIdx > -1 ? archiveIdx : config.files.length, 0, 'blog');
-        renderSidebar();
-    }
-}).catch(() => {});
+if (config.blog?.enabled !== false) {
+    const manifestPath = config.blog?.manifestPath || 'posts/posts.json';
+    fetch(manifestPath).then(r => r.ok ? r.json() : []).then(posts => {
+        if (posts.length > 0 && !config.files.includes('blog')) {
+            const archiveIdx = config.files.indexOf('archive');
+            config.files.splice(archiveIdx > -1 ? archiveIdx : config.files.length, 0, 'blog');
+            renderSidebar();
+        }
+    }).catch(() => {});
+}
 
 function renderSidebar() {
     const container = document.getElementById('file-list-container');
@@ -97,7 +100,7 @@ function setTheme(themeName) {
     }
 }
 
-const savedTheme = localStorage.getItem('theme') || THEMES[0];
+const savedTheme = localStorage.getItem('theme') || config.defaultTheme || THEMES[0];
 setTheme(savedTheme);
 
 const themeSwitch = document.getElementById('theme-switch');
@@ -1098,7 +1101,7 @@ updateClock();
 const gitBranch = document.getElementById('git-branch');
 if (gitBranch) {
     gitBranch.addEventListener('click', () => {
-        window.open('https://github.com/vojay-dev/vojay-dev.github.io', '_blank');
+        if (config.repo?.url) window.open(config.repo.url, '_blank');
     });
 }
 
@@ -1150,7 +1153,8 @@ async function openBlogPost(slug) {
     if (state.currentFile === bufferName) return;
 
     try {
-        const res = await fetch(`posts/${slug}.md`);
+        const postsDir = config.blog?.postsDir || 'posts';
+        const res = await fetch(`${postsDir}/${slug}.md`);
         if (!res.ok) throw new Error('Post not found');
         const raw = await res.text();
 
@@ -1196,7 +1200,7 @@ async function loadBlogCards() {
     if (!grid) return;
 
     try {
-        const res = await fetch('posts/posts.json');
+        const res = await fetch(config.blog?.manifestPath || 'posts/posts.json');
         if (!res.ok) throw new Error('Could not load posts');
         const posts = await res.json();
 
