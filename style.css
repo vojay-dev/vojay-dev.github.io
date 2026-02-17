@@ -1119,6 +1119,14 @@ code[class*="language-"], pre[class*="language-"] {
     z-index: 0;
 }
 
+@media (max-width: 768px) {
+    .alpha-donut-canvas {
+        width: 90vw;
+        height: 50vh;
+        opacity: 0.7;
+    }
+}
+
 /* CRT scanlines on alpha dashboard */
 .alpha-dashboard::after {
     content: '';
