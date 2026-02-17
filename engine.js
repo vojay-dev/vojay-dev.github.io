@@ -362,30 +362,46 @@ function initMouseTrackerBar() {
         setFromClientX(e.clientX);
     }
 
+    let touchStartX = null;
     let touchStartY = null;
+    let touchStartedOnBar = false;
+    let lastTouchAt = 0;
 
     function onTouchStart(e) {
         const touch = e.touches && e.touches[0];
         if (!touch) return;
+        const rect = bar.getBoundingClientRect();
+        touchStartedOnBar = touch.clientY >= rect.top && touch.clientY <= rect.bottom;
+        if (!touchStartedOnBar) return;
+        touchStartX = touch.clientX;
         touchStartY = touch.clientY;
         setFromClientX(touch.clientX);
     }
 
     function onTouchEnd(e) {
         const touch = e.changedTouches && e.changedTouches[0];
-        if (!touch || touchStartY === null) return;
-        if (Math.abs(touch.clientY - touchStartY) < 10) {
+        if (!touch || touchStartY === null || touchStartX === null || !touchStartedOnBar) return;
+        const movedY = Math.abs(touch.clientY - touchStartY);
+        const movedX = Math.abs(touch.clientX - touchStartX);
+        if (movedY < 10 && movedX < 10) {
             setFromClientX(touch.clientX);
             pulseIndicator();
+            lastTouchAt = Date.now();
         }
+        touchStartX = null;
         touchStartY = null;
+        touchStartedOnBar = false;
     }
 
     function onTouchCancel() {
+        touchStartX = null;
         touchStartY = null;
+        touchStartedOnBar = false;
     }
 
     function onPointerDown(e) {
+        // Ignore synthetic mouse events emitted right after touch on mobile.
+        if (Date.now() - lastTouchAt < 700) return;
         setFromClientX(e.clientX);
         pulseIndicator();
     }
