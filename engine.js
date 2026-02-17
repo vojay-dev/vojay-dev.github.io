@@ -25,6 +25,7 @@ document.title = config.title;
 initLightbox();
 renderSidebar();
 showAlpha();
+initMouseTrackerBar();
 
 // Add "blog" to sidebar only if posts exist
 fetch('posts/posts.json').then(r => r.ok ? r.json() : []).then(posts => {
@@ -329,6 +330,84 @@ function hideAlpha() {
 }
 
 window.showAlpha = showAlpha;
+
+function initMouseTrackerBar() {
+    if (document.getElementById('mouse-track-bar')) return;
+
+    const statusLine = document.querySelector('.status-line');
+    if (!statusLine || !statusLine.parentElement) return;
+
+    const bar = document.createElement('div');
+    bar.id = 'mouse-track-bar';
+    bar.className = 'mouse-track-bar';
+    bar.innerHTML = '<span id="mouse-track-indicator" class="mouse-track-indicator"></span>';
+    statusLine.parentElement.insertBefore(bar, statusLine);
+
+    const indicator = document.getElementById('mouse-track-indicator');
+    if (!indicator) return;
+
+    let currentX = 0;
+    let targetX = 0;
+    let velocityX = 0;
+    let rafId = null;
+    const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+
+    function setFromClientX(clientX) {
+        const rect = bar.getBoundingClientRect();
+        targetX = clamp(clientX - rect.left, 0, rect.width);
+        if (!currentX) currentX = targetX;
+    }
+
+    function onMouseMove(e) {
+        setFromClientX(e.clientX);
+    }
+
+    function onTouchStart(e) {
+        const touch = e.touches && e.touches[0];
+        if (!touch) return;
+        setFromClientX(touch.clientX);
+        pulseIndicator();
+    }
+
+    function onPointerDown(e) {
+        setFromClientX(e.clientX);
+        pulseIndicator();
+    }
+
+    function pulseIndicator() {
+        indicator.classList.remove('pulse');
+        // Restart CSS keyframe cleanly for rapid consecutive clicks.
+        void indicator.offsetWidth;
+        indicator.classList.add('pulse');
+    }
+
+    function onResize() {
+        const rect = bar.getBoundingClientRect();
+        targetX = clamp(targetX, 0, rect.width);
+        currentX = clamp(currentX, 0, rect.width);
+        velocityX = 0;
+    }
+
+    function tick() {
+        const delta = targetX - currentX;
+        velocityX += delta * 0.045;
+        velocityX *= 0.72;
+        currentX += velocityX;
+        indicator.style.left = `${Math.round(currentX)}px`;
+        rafId = requestAnimationFrame(tick);
+    }
+
+    const rect = bar.getBoundingClientRect();
+    currentX = rect.width * 0.5;
+    targetX = currentX;
+    indicator.style.left = `${Math.round(currentX)}px`;
+
+    window.addEventListener('mousemove', onMouseMove, { passive: true });
+    window.addEventListener('mousedown', onPointerDown, { passive: true });
+    window.addEventListener('touchstart', onTouchStart, { passive: true });
+    window.addEventListener('resize', onResize);
+    rafId = requestAnimationFrame(tick);
+}
 
 function attachImageListeners() {
     const images = el.output.querySelectorAll('img');
