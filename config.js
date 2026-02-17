@@ -5,7 +5,8 @@ const config = {
     files: [
         "home",
         "about",
-        "photos"
+        "photos",
+        "archive"
     ],
 
     links: [

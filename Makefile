@@ -4,6 +4,7 @@ all:
 	@echo "  make bust             : Bust browser cache (bump ?v= on CSS/JS)"
 	@echo "  make gallery          : Optimize images (keeps originals)"
 	@echo "  make gallery-clean    : Optimize images AND DELETE originals"
+	@echo "  make posts            : Regenerate posts/posts.json from frontmatter"
 
 .PHONY: run
 run:
@@ -22,3 +23,7 @@ gallery:
 .PHONY: gallery-clean
 gallery-clean:
 	./bin/generate-gallery --delete
+
+.PHONY: posts
+posts:
+	./bin/generate-posts

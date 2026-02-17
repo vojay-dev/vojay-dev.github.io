@@ -1,17 +1,14 @@
-// --- Validation ---
 if (typeof config === 'undefined') throw new Error("config.js missing");
 if (typeof customCommands === 'undefined') console.warn("commands.js missing");
 
-const THEMES = ['tokyo', 'gruvbox', 'dracula', 'cyberpunk'];
+const THEMES = ['tokyo', 'gruvbox', 'dracula', 'cyberpunk', 'latte'];
 const COLORS = ['var(--blue)', 'var(--purple)', 'var(--yellow)', 'var(--green)', 'var(--red)', 'var(--cyan)', 'var(--orange)', 'var(--magenta)'];
 const state = { currentFile: null, openBuffers: [], mode: 'NORMAL' };
 
 window.THEMES = THEMES;
 
-// --- DOM Elements ---
 const el = {
     output: document.getElementById('markdown-output'),
-    gutter: document.getElementById('gutter'),
     scroll: document.getElementById('scroll-container'),
     tabContainer: document.getElementById('tab-container'),
     cmdInput: document.getElementById('cmd-input'),
@@ -21,13 +18,19 @@ const el = {
     statusFile: document.getElementById('status-filename')
 };
 
-// --- Initialization ---
 document.title = config.title;
 initLightbox();
 renderSidebar();
 showAlpha();
 
-// --- Core Logic ---
+// Add "blog" to sidebar only if posts exist
+fetch('posts/posts.json').then(r => r.ok ? r.json() : []).then(posts => {
+    if (posts.length > 0 && !config.files.includes('blog')) {
+        const archiveIdx = config.files.indexOf('archive');
+        config.files.splice(archiveIdx > -1 ? archiveIdx : config.files.length, 0, 'blog');
+        renderSidebar();
+    }
+}).catch(() => {});
 
 function renderSidebar() {
     const container = document.getElementById('file-list-container');
@@ -45,8 +48,6 @@ function renderSidebar() {
     `).join('');
 }
 
-// --- Toast Logic ---
-
 function showToast(msg, type = 'info') {
     let container = document.getElementById('toast-container');
     if (!container) {
@@ -58,7 +59,6 @@ function showToast(msg, type = 'info') {
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;
 
-    // Icon based on type
     let icon = 'info-circle';
     if (type === 'error') icon = 'exclamation-triangle';
     else if (type === 'success') icon = 'check-circle';
@@ -68,14 +68,12 @@ function showToast(msg, type = 'info') {
     container.appendChild(toast);
 
     setTimeout(() => {
-        toast.style.animation = 'fade-out 0.3s ease forwards'; // 0.6s duration
-        setTimeout(() => toast.remove(), 600); // 600ms wait
+        toast.style.animation = 'fade-out 0.3s ease forwards';
+        setTimeout(() => toast.remove(), 600);
     }, 3000);
 }
 
 window.showToast = showToast;
-
-// --- Theme Logic ---
 
 function setTheme(themeName) {
     if (!THEMES.includes(themeName)) themeName = THEMES[0];
@@ -131,8 +129,6 @@ function initLightbox() {
     }
 }
 
-// --- Alpha Dashboard ---
-
 function runAlphaAction(cmd) {
     if (cmd.startsWith(':')) {
         executeCmd(cmd);
@@ -141,7 +137,6 @@ function runAlphaAction(cmd) {
     }
 }
 
-// Build keyboard shortcut map from config
 const alphaKeyMap = {};
 if (config.alpha && config.alpha.actions) {
     config.alpha.actions.forEach(a => {
@@ -161,7 +156,6 @@ function showAlpha() {
         const content = document.createElement('div');
         content.className = 'alpha-content';
 
-        // Animated logo
         const logo = document.createElement('div');
         logo.className = 'alpha-logo';
 
@@ -181,20 +175,17 @@ function showAlpha() {
             logo.appendChild(span);
         });
 
-        // Blinking cursor
         const cursor = document.createElement('span');
         cursor.className = 'alpha-cursor';
         cursor.textContent = '_';
         cursor.style.setProperty('--i', chars.length);
         logo.appendChild(cursor);
 
-        // Subtitle
         const subtitle = document.createElement('div');
         subtitle.className = 'alpha-subtitle';
         subtitle.textContent = ac.subtitle || '';
         if (ac.subtitleColor) subtitle.style.color = ac.subtitleColor;
 
-        // Action buttons
         const buttons = document.createElement('div');
         buttons.className = 'alpha-buttons';
 
@@ -207,7 +198,6 @@ function showAlpha() {
             buttons.appendChild(btn);
         });
 
-        // Footer
         const footer = document.createElement('div');
         footer.className = 'alpha-footer';
         footer.innerHTML = `<span>${titleText}${accentText}</span> &nbsp; ${config.files.length} files &nbsp; ${Object.keys(customCommands).length} commands`;
@@ -276,10 +266,10 @@ async function openFile(filename, force = false) {
 
         if (window.Prism) window.Prism.highlightAllUnder(el.output);
         attachImageListeners();
-        requestAnimationFrame(updateLineNumbers);
         updateUI();
         el.scroll.scrollTop = 0;
         if (window.innerWidth < 768) toggleTree(false);
+        if (filename === 'blog') loadBlogCards();
 
     } catch (e) {
         console.error(e);
@@ -287,29 +277,20 @@ async function openFile(filename, force = false) {
     }
 }
 
-function updateLineNumbers() {
-    const lineHeight = 24;
-    const height = el.output.scrollHeight;
-    const lines = Math.ceil(height / lineHeight);
-
-    let gutterHtml = '';
-    for (let i = 1; i <= Math.max(lines, 1); i++) {
-        gutterHtml += `<div>${i}</div>`;
-    }
-    el.gutter.innerHTML = gutterHtml;
-}
-
-const resizeObserver = new ResizeObserver(() => updateLineNumbers());
-resizeObserver.observe(el.output);
-
 function closeBuffer(filename) {
     state.openBuffers = state.openBuffers.filter(f => f !== filename);
     if (state.openBuffers.length === 0) {
         state.currentFile = null;
         el.output.innerHTML = "";
-        el.gutter.innerHTML = "";
     } else if (state.currentFile === filename) {
-        openFile(state.openBuffers[state.openBuffers.length - 1]);
+        const fallback = state.openBuffers[state.openBuffers.length - 1];
+        if (fallback.startsWith('archive:')) {
+            openArchivePost(fallback.replace('archive:', ''));
+        } else if (fallback.startsWith('blog:')) {
+            openBlogPost(fallback.replace('blog:', ''));
+        } else {
+            openFile(fallback);
+        }
     }
     updateUI();
 }
@@ -317,6 +298,25 @@ function closeBuffer(filename) {
 function updateUI() {
     el.tabContainer.innerHTML = state.openBuffers.map(file => {
         const active = file === state.currentFile ? 'active' : '';
+        const isArchive = file.startsWith('archive:');
+
+        const isBlog = file.startsWith('blog:');
+
+        if (isArchive || isBlog) {
+            const meta = isArchive ? (archiveMeta[file] || {}) : (blogMeta[file] || {});
+            const label = meta.title ? (meta.title.length > 25 ? meta.title.slice(0, 25) + '...' : meta.title) : file;
+            const slug = meta.slug || file.replace(/^(archive|blog):/, '');
+            const openFn = isArchive ? 'openArchivePost' : 'openBlogPost';
+            const icon = isArchive ? 'fa-archive' : 'fa-pen-nib';
+            const color = isArchive ? 'var(--orange)' : 'var(--green)';
+            return `
+                <div class="tab ${active}" onclick="${openFn}('${slug}')">
+                    <i class="fas ${icon}" style="color: ${color}"></i> ${label}
+                    <span class="tab-close" onclick="closeBufferEvent(event, '${file}')">&times;</span>
+                </div>
+            `;
+        }
+
         const fileIndex = config.files.indexOf(file);
         const color = fileIndex > -1 ? COLORS[fileIndex % COLORS.length] : 'var(--blue)';
         return `
@@ -328,8 +328,21 @@ function updateUI() {
     }).join('');
 
     document.querySelectorAll('.file-node').forEach(elem => elem.classList.remove('active'));
-    if (state.currentFile) document.getElementById(`node-${state.currentFile}`)?.classList.add('active');
-    el.statusFile.innerText = state.currentFile ? `${state.currentFile}.md` : '[No Name]';
+    if (state.currentFile && !state.currentFile.startsWith('archive:') && !state.currentFile.startsWith('blog:')) {
+        document.getElementById(`node-${state.currentFile}`)?.classList.add('active');
+    }
+    if (state.currentFile) {
+        if (state.currentFile.startsWith('archive:'))
+            el.statusFile.innerText = `[archive] ${archiveMeta[state.currentFile]?.slug || ''}`;
+        else if (state.currentFile.startsWith('blog:'))
+            el.statusFile.innerText = `[blog] ${blogMeta[state.currentFile]?.slug || ''}`;
+        else
+            el.statusFile.innerText = `${state.currentFile}.md`;
+    } else {
+        el.statusFile.innerText = '[No Name]';
+    }
+
+    requestAnimationFrame(updateTabOverflow);
 }
 
 window.closeBufferEvent = (e, filename) => {
@@ -337,7 +350,122 @@ window.closeBufferEvent = (e, filename) => {
     closeBuffer(filename);
 };
 
-// --- DUCKDB LOGIC ---
+let overflowBuffers = [];
+
+function updateTabOverflow() {
+    const container = el.tabContainer;
+    const btn = document.getElementById('tab-overflow-btn');
+    if (!container || !btn) return;
+
+    const tabs = Array.from(container.querySelectorAll('.tab'));
+    tabs.forEach(t => t.style.display = '');
+    btn.classList.remove('visible');
+
+    overflowBuffers = [];
+
+    if (container.scrollWidth <= container.clientWidth) {
+        const menu = document.getElementById('tab-overflow-menu');
+        if (menu) menu.remove();
+        return;
+    }
+
+    // Show button first so its width is accounted for when measuring
+    btn.classList.add('visible');
+    for (let i = tabs.length - 1; i >= 1; i--) {
+        tabs[i].style.display = 'none';
+        overflowBuffers.unshift(state.openBuffers[i]);
+        if (container.scrollWidth <= container.clientWidth) break;
+    }
+
+    btn.textContent = `+${overflowBuffers.length}`;
+}
+
+function buildOverflowItem(file) {
+    const item = document.createElement('div');
+    const active = file === state.currentFile ? ' active' : '';
+    item.className = 'tab-overflow-item' + active;
+
+    const isArchive = file.startsWith('archive:');
+    const isBlog = file.startsWith('blog:');
+    let icon, color, label;
+
+    if (isArchive) {
+        const meta = archiveMeta[file] || {};
+        icon = 'fas fa-archive';
+        color = 'var(--orange)';
+        label = meta.title ? (meta.title.length > 35 ? meta.title.slice(0, 35) + '...' : meta.title) : file;
+    } else if (isBlog) {
+        const meta = blogMeta[file] || {};
+        icon = 'fas fa-pen-nib';
+        color = 'var(--green)';
+        label = meta.title ? (meta.title.length > 35 ? meta.title.slice(0, 35) + '...' : meta.title) : file;
+    } else {
+        const fileIndex = config.files.indexOf(file);
+        icon = 'fas fa-file-code';
+        color = fileIndex > -1 ? COLORS[fileIndex % COLORS.length] : 'var(--blue)';
+        label = file + '.md';
+    }
+
+    const closeSpan = document.createElement('span');
+    closeSpan.className = 'tab-close';
+    closeSpan.innerHTML = '&times;';
+    closeSpan.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeBuffer(file);
+    });
+
+    const iconEl = document.createElement('i');
+    iconEl.className = icon;
+    iconEl.style.color = color;
+
+    const labelSpan = document.createElement('span');
+    labelSpan.textContent = label;
+
+    item.appendChild(iconEl);
+    item.appendChild(labelSpan);
+    item.appendChild(closeSpan);
+
+    item.addEventListener('click', () => {
+        const menu = document.getElementById('tab-overflow-menu');
+        if (menu) menu.remove();
+        if (isArchive) openArchivePost(file.replace('archive:', ''));
+        else if (isBlog) openBlogPost(file.replace('blog:', ''));
+        else openFile(file);
+    });
+
+    return item;
+}
+
+function toggleTabOverflow() {
+    let menu = document.getElementById('tab-overflow-menu');
+    if (menu) { menu.remove(); return; }
+
+    if (overflowBuffers.length === 0) return;
+
+    const btn = document.getElementById('tab-overflow-btn');
+    const rect = btn.getBoundingClientRect();
+
+    menu = document.createElement('div');
+    menu.id = 'tab-overflow-menu';
+    menu.className = 'tab-overflow-menu';
+    menu.style.top = rect.bottom + 'px';
+    menu.style.right = (window.innerWidth - rect.right) + 'px';
+
+    overflowBuffers.forEach(file => menu.appendChild(buildOverflowItem(file)));
+
+    document.body.appendChild(menu);
+
+    const closeHandler = (e) => {
+        if (!menu.contains(e.target) && e.target !== btn) {
+            menu.remove();
+            document.removeEventListener('click', closeHandler);
+        }
+    };
+    setTimeout(() => document.addEventListener('click', closeHandler), 0);
+}
+
+window.toggleTabOverflow = toggleTabOverflow;
+window.addEventListener('resize', () => requestAnimationFrame(updateTabOverflow));
 
 window.duckDB = null;
 window.duckConn = null;
@@ -378,7 +506,6 @@ window.initDuckDB = async function(sys) {
 
         sys.print(`<p style="color:var(--blue)">> Ingesting site pages...</p>`);
 
-        // Pages schema
         await window.duckConn.query(`
             CREATE TABLE pages (
                 filename VARCHAR,
@@ -387,7 +514,6 @@ window.initDuckDB = async function(sys) {
             );
         `);
 
-        // Ingest pages
         const inserts = config.files.map(async (file) => {
             try {
                 const res = await fetch(`content/${file}.md`);
@@ -413,10 +539,6 @@ window.initDuckDB = async function(sys) {
     }
 };
 
-
-
-
-// --- Telescope Fuzzy Finder ---
 
 let telescopeState = null;
 
@@ -638,8 +760,6 @@ function telescopeSelect() {
 
 window.openTelescope = openTelescope;
 
-// --- Command Logic ---
-
 function setMode(mode) {
     state.mode = mode;
     el.modeSeg.innerText = mode;
@@ -675,11 +795,9 @@ function executeCmd(val) {
             print: (html) => {
                 state.currentFile = null;
                 el.output.innerHTML = html;
-                requestAnimationFrame(updateLineNumbers);
                 el.statusFile.innerText = '[cmd out]';
                 document.querySelectorAll('.file-node').forEach(elem => elem.classList.remove('active'));
             },
-            // Updated to use Toast
             alert: (msg) => showToast(msg, 'info'),
             error: (msg) => showToast(msg, 'error'),
             success: (msg) => showToast(msg, 'success')
@@ -700,7 +818,6 @@ function toggleTree(force) {
     const isOpen = typeof force === 'boolean' ? force : !el.tree.classList.contains('open');
     el.tree.classList.toggle('open', isOpen);
 
-    // Backdrop for closing on outside tap (mobile)
     let backdrop = document.getElementById('tree-backdrop');
     if (isOpen) {
         if (!backdrop) {
@@ -723,8 +840,6 @@ function toggleTree(force) {
         backdrop.style.display = 'none';
     }
 }
-
-// --- Mobile Command Logic ---
 
 const mobileCmdInput = document.getElementById('mobile-cmd-input');
 const mobileCmdBtn = document.getElementById('mobile-cmd-btn');
@@ -755,8 +870,6 @@ if (mobileCmdInput && mobileCmdBtn) {
     });
 }
 
-// --- Top Bar Clock ---
-
 function updateClock() {
     const clock = document.getElementById('clock-widget');
     if (clock) {
@@ -765,9 +878,7 @@ function updateClock() {
     }
 }
 setInterval(updateClock, 1000);
-updateClock(); // Run immediately
-
-// --- Event Listeners ---
+updateClock();
 
 const gitBranch = document.getElementById('git-branch');
 if (gitBranch) {
@@ -777,7 +888,6 @@ if (gitBranch) {
 }
 
 document.addEventListener('keydown', e => {
-    // Alpha mode: shortcut keys or dismiss
     if (state.mode === 'ALPHA') {
         e.preventDefault();
         const key = e.key.toLowerCase();
@@ -790,7 +900,6 @@ document.addEventListener('keydown', e => {
         return;
     }
 
-    // Telescope mode: navigation
     if (state.mode === 'TELESCOPE') {
         if (e.key === 'Escape') { e.preventDefault(); closeTelescope(); return; }
         if (e.key === 'ArrowDown' || (e.ctrlKey && e.key === 'n')) { e.preventDefault(); telescopeNav(1); return; }
@@ -799,14 +908,12 @@ document.addEventListener('keydown', e => {
         return;
     }
 
-    // Command mode
     if (state.mode === 'COMMAND') {
         if (e.key === 'Enter') executeCmd(el.cmdInput.value);
         if (e.key === 'Escape') setMode('NORMAL');
         return;
     }
 
-    // Normal mode — skip if typing in an input
     const active = document.activeElement;
     if (active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA')) return;
 
@@ -819,8 +926,128 @@ document.addEventListener('keydown', e => {
 el.scroll.addEventListener('scroll', () => {
     const pct = Math.round((el.scroll.scrollTop / (el.scroll.scrollHeight - el.scroll.clientHeight)) * 100);
     document.getElementById('status-percent').innerText = isNaN(pct) ? 'TOP' : `${pct}%`;
-    el.gutter.scrollTop = el.scroll.scrollTop;
 });
 
+const blogMeta = {};
+
+async function openBlogPost(slug) {
+    const bufferName = `blog:${slug}`;
+    if (state.currentFile === bufferName) return;
+
+    try {
+        const res = await fetch(`posts/${slug}.md`);
+        if (!res.ok) throw new Error('Post not found');
+        const raw = await res.text();
+
+        const fmMatch = raw.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
+        let title = slug, content = raw;
+        if (fmMatch) {
+            const fmBlock = fmMatch[1];
+            content = fmMatch[2];
+            const titleMatch = fmBlock.match(/^title:\s*(.+)/m);
+            if (titleMatch) title = titleMatch[1].trim().replace(/^['"]|['"]$/g, '');
+        }
+
+        blogMeta[bufferName] = { slug, title };
+
+        const fullMarkdown = `# ${title}\n\n${content}`;
+        const parsed = parseIcons(fullMarkdown);
+
+        state.currentFile = bufferName;
+        if (!state.openBuffers.includes(bufferName)) state.openBuffers.push(bufferName);
+
+        el.output.innerHTML = marked.parse(parsed);
+
+        el.output.querySelectorAll('a').forEach(a => {
+            if (a.href && a.href.startsWith('http')) a.target = '_blank';
+        });
+
+        if (window.Prism) window.Prism.highlightAllUnder(el.output);
+        attachImageListeners();
+        updateUI();
+        el.scroll.scrollTop = 0;
+        if (window.innerWidth < 768) toggleTree(false);
+    } catch (e) {
+        console.error(e);
+        el.output.innerHTML = `<h1 style="color:var(--red)">Error: Could not load blog post</h1>`;
+    }
+}
+
+window.openBlogPost = openBlogPost;
+
+async function loadBlogCards() {
+    const grid = document.getElementById('blog-posts-grid');
+    const empty = document.getElementById('blog-posts-empty');
+    if (!grid) return;
+
+    try {
+        const res = await fetch('posts/posts.json');
+        if (!res.ok) throw new Error('Could not load posts');
+        const posts = await res.json();
+
+        if (posts.length === 0) {
+            if (empty) empty.style.display = 'block';
+            return;
+        }
+
+        grid.innerHTML = posts.map(post => `
+            <div class="archive-card" onclick="openBlogPost('${post.slug}')">
+                ${post.image ? `<img src="${post.image}" onerror="this.style.display='none'">` : ''}
+                <div class="archive-card-body">
+                    <div class="archive-card-title">${post.title}</div>
+                    <div class="archive-card-meta">
+                        ${post.date} ${post.tags.map(t => `<span class="archive-tag">${t}</span>`).join(' ')}
+                    </div>
+                    <div class="archive-card-desc">${post.description}</div>
+                </div>
+            </div>
+        `).join('');
+    } catch (e) {
+        console.error(e);
+        grid.innerHTML = '<p style="color:var(--comment)">Could not load posts.</p>';
+    }
+}
+
+const archiveMeta = {};
+
+async function openArchivePost(slug) {
+    const bufferName = `archive:${slug}`;
+    if (state.currentFile === bufferName) return;
+
+    try {
+        const res = await fetch(`_backup/_posts/${slug}.md`);
+        if (!res.ok) throw new Error('Post not found');
+        const raw = await res.text();
+
+        const meta = JekyllConverter.extractFrontmatter(raw);
+        const converted = JekyllConverter.convert(raw);
+        const title = meta.title || slug;
+
+        archiveMeta[bufferName] = { slug, title };
+
+        const fullMarkdown = `# ${title}\n\n${converted}`;
+        const parsed = parseIcons(fullMarkdown);
+
+        state.currentFile = bufferName;
+        if (!state.openBuffers.includes(bufferName)) state.openBuffers.push(bufferName);
+
+        el.output.innerHTML = marked.parse(parsed);
+
+        el.output.querySelectorAll('a').forEach(a => {
+            if (a.href && a.href.startsWith('http')) a.target = '_blank';
+        });
+
+        if (window.Prism) window.Prism.highlightAllUnder(el.output);
+        attachImageListeners();
+        updateUI();
+        el.scroll.scrollTop = 0;
+        if (window.innerWidth < 768) toggleTree(false);
+    } catch (e) {
+        console.error(e);
+        el.output.innerHTML = `<h1 style="color:var(--red)">Error: Could not load archived post</h1>`;
+    }
+}
+
 window.openFile = openFile;
+window.openArchivePost = openArchivePost;
 window.toggleTree = toggleTree;

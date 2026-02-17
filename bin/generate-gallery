@@ -5,6 +5,7 @@
 #     "Pillow",
 # ]
 # ///
+"""Scan the target directory for images, optimize them, and generate HTML snippet for the gallery"""
 
 import os
 import sys

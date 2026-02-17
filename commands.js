@@ -1,12 +1,3 @@
-/**
- * CUSTOM COMMANDS
- *
- * Structure:
- * 'command_name': {
- *     desc: "Short description for help menu",
- *     fn: (args, sys) => { ... logic ... }
- * }
- */
 const customCommands = {
 
     'help': {
@@ -16,7 +7,6 @@ const customCommands = {
             html += `<p>Type <code>:command</code> to execute.</p>`;
             html += `<table>`;
 
-            // Loop through all commands to build the list dynamically
             for (const [key, cmd] of Object.entries(customCommands)) {
                 html += `<tr>
                     <td style="color: var(--cyan); font-weight:bold; padding-right:20px">:${key}</td>
@@ -82,7 +72,6 @@ const customCommands = {
             let ip = "127.0.0.1";
             let city = "Unknown";
             try {
-                // We use a free IP API to get the data
                 const res = await fetch('https://ipapi.co/json/');
                 const data = await res.json();
                 ip = data.ip;
@@ -154,17 +143,16 @@ const customCommands = {
             const train = document.createElement('pre');
             train.style.position = 'fixed';
             train.style.top = 'calc(50% - 100px)';
-            train.style.left = '100vw'; // Start off-screen right
+            train.style.left = '100vw';
             train.style.zIndex = '10000';
-            train.style.color = 'var(--fg)'; // Theme adaptive color
+            train.style.color = 'var(--fg)';
             train.style.fontFamily = 'monospace';
             train.style.fontWeight = 'bold';
             train.style.fontSize = '12px';
             train.style.lineHeight = '12px';
             train.style.pointerEvents = 'none';
-            train.style.transition = 'transform 6s linear'; // Speed of the train
+            train.style.transition = 'transform 6s linear';
 
-            // The ASCII Art
             train.innerText = `
       ====        ________                ___________
   _D _|  |_______/        \\__I_I_____===__|_________|
@@ -180,14 +168,11 @@ __/ =| o |=-~~\\  /~\\  /~\\  /~\\ ____Y___________|__|_________________|
 
             document.body.appendChild(train);
 
-            // Trigger Animation
             requestAnimationFrame(() => {
-                // Calculate distance: Screen width + Train width
                 const distance = window.innerWidth + 600;
                 train.style.transform = `translateX(-${distance}px)`;
             });
 
-            // Cleanup after animation (6s)
             setTimeout(() => {
                 document.body.removeChild(train);
             }, 6000);
@@ -199,15 +184,14 @@ __/ =| o |=-~~\\  /~\\  /~\\  /~\\ ____Y___________|__|_________________|
         fn: (args, sys) => {
             const getThemeColor = (varName) => getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
 
-            // Capture current theme colors once at start
             const bgHex = getThemeColor('--bg');
-            const fgHex = getThemeColor('--blue'); // Uses main accent color
+            const fgHex = getThemeColor('--blue');
 
             const canvas = document.createElement('canvas');
             Object.assign(canvas.style, {
                 position: 'fixed', top: '0', left: '0',
                 width: '100vw', height: '100vh', zIndex: '99999',
-                background: 'var(--bg)', // CSS handles this one fine
+                background: 'var(--bg)',
                 transition: 'opacity 1s'
             });
             document.body.appendChild(canvas);
@@ -223,12 +207,10 @@ __/ =| o |=-~~\\  /~\\  /~\\  /~\\ ____Y___________|__|_________________|
 
             let animationId;
             const draw = () => {
-                // 1. Draw semi-transparent background to create "trail" effect
                 ctx.globalAlpha = 0.1;
                 ctx.fillStyle = bgHex;
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-                // 2. Draw Text
                 ctx.globalAlpha = 1.0;
                 ctx.fillStyle = fgHex;
                 ctx.font = fontSize + 'px monospace';
@@ -257,10 +239,9 @@ __/ =| o |=-~~\\  /~\\  /~\\  /~\\ ____Y___________|__|_________________|
         desc: "Play snake",
         fn: (args, sys) => {
             const container = document.getElementById('markdown-output');
-            const width = Math.min(container.clientWidth, window.innerWidth - 40); // Safe width
+            const width = Math.min(container.clientWidth, window.innerWidth - 40);
             const height = 400;
 
-            // 1. Inject Game + Mobile Controls HTML
             container.innerHTML = `
                 <div id="snake-ui" style="text-align:center; margin-bottom:10px;">
                     <h2 style="margin:0; color:var(--green)">VIM SNAKE</h2>
@@ -269,7 +250,6 @@ __/ =| o |=-~~\\  /~\\  /~\\  /~\\ ____Y___________|__|_________________|
                 </div>
                 <canvas id="snake-game" width="${width}" height="${height}" style="border:2px solid var(--line-nr); background:var(--bg-dark); display:block; margin:0 auto; max-width:100%;"></canvas>
 
-                <!-- Mobile D-Pad -->
                 <div id="snake-controls">
                     <div class="snake-btn" id="btn-quit">Q</div>
                     <div class="snake-btn" id="btn-up">▲</div>
@@ -279,7 +259,6 @@ __/ =| o |=-~~\\  /~\\  /~\\  /~\\ ____Y___________|__|_________________|
                 </div>
             `;
 
-            // Enable Mobile CSS
             document.body.classList.add('game-active');
 
             const canvas = document.getElementById('snake-game');
@@ -287,7 +266,6 @@ __/ =| o |=-~~\\  /~\\  /~\\  /~\\ ____Y___________|__|_________________|
             const scoreEl = document.getElementById('score');
             const highEl = document.getElementById('highscore');
 
-            // Game State
             const gridSize = 20;
             const tileCountX = Math.floor(width / gridSize);
             const tileCountY = Math.floor(height / gridSize);
@@ -300,7 +278,6 @@ __/ =| o |=-~~\\  /~\\  /~\\  /~\\ ____Y___________|__|_________________|
             let foodX = 15, foodY = 15;
             let gameInterval, isRunning = true;
 
-            // Logic
             function game() {
                 if (!isRunning) return;
                 x += dx; y += dy;
@@ -335,7 +312,6 @@ __/ =| o |=-~~\\  /~\\  /~\\  /~\\ ____Y___________|__|_________________|
                 }
             }
 
-            // Input Handlers
             function move(dir) {
                 if (!isRunning) return;
                 if (dir === 'left' && dx !== 1) { dx = -1; dy = 0; }
@@ -365,10 +341,8 @@ __/ =| o |=-~~\\  /~\\  /~\\  /~\\ ____Y___________|__|_________________|
                 sys.openFile(config.startPage, true);
             }
 
-            // Bind Keys
             document.addEventListener('keydown', keyPush);
 
-            // Bind Touch Buttons
             document.getElementById('btn-up').addEventListener('touchstart', (e) => { e.preventDefault(); move('up'); });
             document.getElementById('btn-down').addEventListener('touchstart', (e) => { e.preventDefault(); move('down'); });
             document.getElementById('btn-left').addEventListener('touchstart', (e) => { e.preventDefault(); move('left'); });
@@ -391,7 +365,6 @@ __/ =| o |=-~~\\  /~\\  /~\\  /~\\ ____Y___________|__|_________________|
                 }
             }
 
-            // 2. Handle Help / Empty Input
             const query = args.join(" ");
             if (!query || query.trim() === "") {
                 sys.print(`
@@ -416,7 +389,6 @@ __/ =| o |=-~~\\  /~\\  /~\\  /~\\ ____Y___________|__|_________________|
                     return;
                 }
 
-                // Render table
                 const columns = Object.keys(result[0]);
 
                 let html = `<div style="overflow-x:auto; margin-top:15px; border:1px solid var(--line-nr);">

@@ -13,13 +13,19 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
     <!-- Styles -->
-    <link rel="stylesheet" href="style.css?v=1771021248">
+    <link rel="stylesheet" href="style.css?v=1771291570">
 
     <!-- Syntax Highlighting (Prism) -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-ruby.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-toml.min.js"></script>
 
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y1D1YZJQ7T"></script>
@@ -60,6 +66,7 @@
         <!-- Buffer Tabs & Top Widgets -->
         <div class="buffer-bar glow-text">
             <div id="tab-container" class="tabs-left"></div>
+            <div class="tab-overflow-btn" id="tab-overflow-btn" onclick="toggleTabOverflow()"></div>
             <div class="widgets-right">
                 <div class="widget widget-green" id="telescope-widget" style="cursor:pointer;" onclick="openTelescope()"><i class="fas fa-search"></i></div>
                 <div class="widget widget-blue"><i class="fas fa-wifi"></i> ONLINE</div>
@@ -89,7 +96,6 @@
 
             <!-- Editor -->
             <div class="editor-container">
-                <div class="gutter" id="gutter"></div>
                 <div class="content-scroll" id="scroll-container" tabindex="0">
                     <div id="markdown-output" class="markdown-body glow-text"></div>
                     <br><br><div style="color: var(--comment)">~</div>
@@ -135,9 +141,10 @@
     <div class="mobile-toggle" onclick="toggleTree()"><i class="fas fa-bars"></i></div>
 
     <!-- Scripts (Load Order Matters) -->
-    <script src="config.js?v=1771021248"></script>
-    <script src="commands.js?v=1771021248"></script>
-    <script src="engine.js?v=1771021248"></script>
+    <script src="archive-converter.js?v=1771291570"></script>
+    <script src="config.js?v=1771291570"></script>
+    <script src="commands.js?v=1771291570"></script>
+    <script src="engine.js?v=1771291570"></script>
 
 </body>
 </html>
