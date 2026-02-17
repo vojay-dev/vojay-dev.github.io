@@ -1121,9 +1121,9 @@ code[class*="language-"], pre[class*="language-"] {
 
 @media (max-width: 768px) {
     .alpha-donut-canvas {
-        width: 90vw;
-        height: 50vh;
-        opacity: 0.7;
+        width: 200vw;
+        height: calc(200vw * 300 / 660);
+        opacity: 0.85;
     }
 }
 
