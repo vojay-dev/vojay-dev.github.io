@@ -362,11 +362,27 @@ function initMouseTrackerBar() {
         setFromClientX(e.clientX);
     }
 
+    let touchStartY = null;
+
     function onTouchStart(e) {
         const touch = e.touches && e.touches[0];
         if (!touch) return;
+        touchStartY = touch.clientY;
         setFromClientX(touch.clientX);
-        pulseIndicator();
+    }
+
+    function onTouchEnd(e) {
+        const touch = e.changedTouches && e.changedTouches[0];
+        if (!touch || touchStartY === null) return;
+        if (Math.abs(touch.clientY - touchStartY) < 10) {
+            setFromClientX(touch.clientX);
+            pulseIndicator();
+        }
+        touchStartY = null;
+    }
+
+    function onTouchCancel() {
+        touchStartY = null;
     }
 
     function onPointerDown(e) {
@@ -408,6 +424,8 @@ function initMouseTrackerBar() {
     window.addEventListener('mousemove', onMouseMove, { passive: true });
     window.addEventListener('mousedown', onPointerDown, { passive: true });
     window.addEventListener('touchstart', onTouchStart, { passive: true });
+    window.addEventListener('touchend', onTouchEnd, { passive: true });
+    window.addEventListener('touchcancel', onTouchCancel, { passive: true });
     window.addEventListener('resize', onResize);
     rafId = requestAnimationFrame(tick);
 }
