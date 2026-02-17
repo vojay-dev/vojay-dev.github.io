@@ -24,7 +24,8 @@ const el = {
 document.title = config.title;
 initLightbox();
 renderSidebar();
-showAlpha();
+if (config.alpha?.enabled !== false) showAlpha();
+else openFile(config.startPage);
 initMouseTrackerBar();
 
 // Add "blog" to sidebar only if posts exist
@@ -115,13 +116,19 @@ if (themeSwitch) {
 
 window.setTheme = setTheme;
 
-function parseIcons(markdown) {
-    return markdown.replace(/:([a-z0-9- ]+):/g, (match, iconClass) => {
+function parseIcons(html) {
+    const codeBlocks = [];
+    let safe = html.replace(/<(code|pre)[^>]*>[\s\S]*?<\/\1>/gi, (m) => {
+        codeBlocks.push(m);
+        return `\x00CODE${codeBlocks.length - 1}\x00`;
+    });
+    safe = safe.replace(/:([a-z0-9- ]+):/g, (match, iconClass) => {
         if (iconClass.includes('fa') || iconClass.includes('brands')) {
             return `<i class="${iconClass}"></i>`;
         }
         return match;
     });
+    return safe.replace(/\x00CODE(\d+)\x00/g, (_, i) => codeBlocks[i]);
 }
 
 function initLightbox() {
@@ -223,11 +230,175 @@ function startAsciiDonut(container) {
     render();
 }
 
-function stopAsciiDonut() {
+function stopAsciiAnimation() {
     if (asciiAnimId) {
         cancelAnimationFrame(asciiAnimId);
         asciiAnimId = null;
     }
+}
+
+function startAsciiStarfield(container) {
+    let canvas = container.querySelector('.alpha-donut-canvas');
+    if (!canvas) {
+        canvas = document.createElement('canvas');
+        canvas.className = 'alpha-donut-canvas';
+        canvas.setAttribute('aria-hidden', 'true');
+        container.insertBefore(canvas, container.firstChild);
+    }
+
+    const ctx = canvas.getContext('2d', { alpha: true });
+    if (!ctx) return;
+
+    const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+    const cssW = 660, cssH = 300;
+    canvas.width = Math.floor(cssW * dpr);
+    canvas.height = Math.floor(cssH * dpr);
+
+    const W = canvas.width, H = canvas.height;
+    const cx = W / 2, cy = H / 2;
+    const numStars = 200;
+    const stars = [];
+    const starChars = '.+*';
+
+    for (let i = 0; i < numStars; i++) {
+        stars.push({
+            x: (Math.random() - 0.5) * W * 2,
+            y: (Math.random() - 0.5) * H * 2,
+            z: Math.random() * 1000
+        });
+    }
+
+    const fontSize = 14 * dpr;
+    ctx.font = `${fontSize}px "JetBrains Mono", monospace`;
+    ctx.textBaseline = 'middle';
+    ctx.textAlign = 'center';
+
+    function render() {
+        ctx.clearRect(0, 0, W, H);
+        const color = getComputedStyle(document.documentElement).getPropertyValue('--line-nr').trim() || '#3b4261';
+
+        for (let i = 0; i < numStars; i++) {
+            const s = stars[i];
+            s.z -= 2;
+            if (s.z <= 0) {
+                s.x = (Math.random() - 0.5) * W * 2;
+                s.y = (Math.random() - 0.5) * H * 2;
+                s.z = 1000;
+            }
+
+            const sx = cx + (s.x / s.z) * 200;
+            const sy = cy + (s.y / s.z) * 200;
+
+            if (sx < 0 || sx >= W || sy < 0 || sy >= H) continue;
+
+            const brightness = 1 - s.z / 1000;
+            const charIdx = Math.min(starChars.length - 1, Math.floor(brightness * starChars.length));
+            ctx.globalAlpha = brightness * 0.8;
+            ctx.fillStyle = color;
+            ctx.fillText(starChars[charIdx], sx, sy);
+        }
+
+        ctx.globalAlpha = 1;
+        asciiAnimId = requestAnimationFrame(render);
+    }
+
+    render();
+}
+
+function startAsciiCube(container) {
+    let canvas = container.querySelector('.alpha-donut-canvas');
+    if (!canvas) {
+        canvas = document.createElement('canvas');
+        canvas.className = 'alpha-donut-canvas';
+        canvas.setAttribute('aria-hidden', 'true');
+        container.insertBefore(canvas, container.firstChild);
+    }
+
+    const ctx = canvas.getContext('2d', { alpha: true });
+    if (!ctx) return;
+
+    const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+    const cssW = 660, cssH = 300;
+    canvas.width = Math.floor(cssW * dpr);
+    canvas.height = Math.floor(cssH * dpr);
+
+    const W = canvas.width, H = canvas.height;
+    const cx = W / 2, cy = H / 2;
+    const size = Math.min(W, H) * 0.28;
+
+    const vertices = [
+        [-1,-1,-1], [1,-1,-1], [1,1,-1], [-1,1,-1],
+        [-1,-1,1],  [1,-1,1],  [1,1,1],  [-1,1,1]
+    ];
+    const edges = [
+        [0,1],[1,2],[2,3],[3,0],
+        [4,5],[5,6],[6,7],[7,4],
+        [0,4],[1,5],[2,6],[3,7]
+    ];
+
+    const fontSize = 10 * dpr;
+    ctx.font = `${fontSize}px "JetBrains Mono", monospace`;
+    ctx.textBaseline = 'middle';
+    ctx.textAlign = 'center';
+
+    function project(v) {
+        const { A, B } = asciiAngles;
+        const sA = Math.sin(A), cA = Math.cos(A), sB = Math.sin(B), cB = Math.cos(B);
+        let [x, y, z] = v;
+        const y1 = y * cA - z * sA;
+        const z1 = y * sA + z * cA;
+        const x1 = x * cB - z1 * sB;
+        const z2 = x * sB + z1 * cB;
+        const scale = 3 / (3 + z2);
+        return [cx + x1 * size * scale, cy + y1 * size * scale];
+    }
+
+    function render() {
+        ctx.clearRect(0, 0, W, H);
+        const color = getComputedStyle(document.documentElement).getPropertyValue('--line-nr').trim() || '#3b4261';
+        ctx.fillStyle = color;
+
+        for (const [a, b] of edges) {
+            const [x1, y1] = project(vertices[a]);
+            const [x2, y2] = project(vertices[b]);
+
+            const dx = x2 - x1, dy = y2 - y1;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            const steps = Math.floor(dist / (fontSize * 0.6));
+
+            for (let i = 0; i <= steps; i++) {
+                const t = steps === 0 ? 0 : i / steps;
+                const px = x1 + dx * t;
+                const py = y1 + dy * t;
+                ctx.fillText('.', px, py);
+            }
+        }
+
+        for (const v of vertices) {
+            const [px, py] = project(v);
+            ctx.fillText('+', px, py);
+        }
+
+        asciiAngles.A += 0.015;
+        asciiAngles.B += 0.01;
+        asciiAnimId = requestAnimationFrame(render);
+    }
+
+    render();
+}
+
+function startAlphaAnimation(container) {
+    const animType = config.alpha?.animation;
+    if (animType === false) return;
+
+    const animations = {
+        donut: startAsciiDonut,
+        starfield: startAsciiStarfield,
+        cube: startAsciiCube
+    };
+
+    const fn = animations[animType] || animations.cube;
+    fn(container);
 }
 
 function showAlpha() {
@@ -310,13 +481,13 @@ function showAlpha() {
         content.appendChild(footer);
         content.appendChild(themeSwitcher);
         dash.appendChild(content);
-        startAsciiDonut(dash);
+        startAlphaAnimation(dash);
         document.body.appendChild(dash);
     }
 
     dash.style.display = 'flex';
     requestAnimationFrame(() => dash.classList.add('active'));
-    if (!asciiAnimId) startAsciiDonut(dash);
+    if (!asciiAnimId) startAlphaAnimation(dash);
 
     state.mode = 'ALPHA';
     el.modeSeg.innerText = 'ALPHA';
@@ -327,7 +498,7 @@ function hideAlpha() {
     const dash = document.getElementById('alpha-dashboard');
     if (!dash) return;
     dash.classList.remove('active');
-    stopAsciiDonut();
+    stopAsciiAnimation();
     setTimeout(() => { dash.style.display = 'none'; }, 300);
     setMode('NORMAL');
 }
@@ -469,12 +640,11 @@ async function openFile(filename, force = false) {
         const res = await fetch(`content/${filename}.md`);
         if (!res.ok) throw new Error("File not found");
         let text = await res.text();
-        text = parseIcons(text);
 
         state.currentFile = filename;
         if (!state.openBuffers.includes(filename)) state.openBuffers.push(filename);
 
-        el.output.innerHTML = marked.parse(text);
+        el.output.innerHTML = parseIcons(marked.parse(text));
 
         el.output.querySelectorAll('a').forEach(a => {
             if (a.href && a.href.startsWith('http')) {
@@ -1170,12 +1340,11 @@ async function openBlogPost(slug) {
         blogMeta[bufferName] = { slug, title };
 
         const fullMarkdown = `# ${title}\n\n${content}`;
-        const parsed = parseIcons(fullMarkdown);
 
         state.currentFile = bufferName;
         if (!state.openBuffers.includes(bufferName)) state.openBuffers.push(bufferName);
 
-        el.output.innerHTML = marked.parse(parsed);
+        el.output.innerHTML = parseIcons(marked.parse(fullMarkdown));
 
         el.output.querySelectorAll('a').forEach(a => {
             if (a.href && a.href.startsWith('http')) a.target = '_blank';
@@ -1210,14 +1379,14 @@ async function loadBlogCards() {
         }
 
         grid.innerHTML = posts.map(post => `
-            <div class="archive-card" onclick="openBlogPost('${post.slug}')">
+            <div class="blog-card" onclick="openBlogPost('${post.slug}')">
                 ${post.image ? `<img src="${post.image}" onerror="this.style.display='none'">` : ''}
-                <div class="archive-card-body">
-                    <div class="archive-card-title">${post.title}</div>
-                    <div class="archive-card-meta">
-                        ${post.date} ${post.tags.map(t => `<span class="archive-tag">${t}</span>`).join(' ')}
+                <div class="blog-card-body">
+                    <div class="blog-card-title">${post.title}</div>
+                    <div class="blog-card-meta">
+                        ${post.date} ${post.tags.map(t => `<span class="blog-tag">${t}</span>`).join(' ')}
                     </div>
-                    <div class="archive-card-desc">${post.description}</div>
+                    <div class="blog-card-desc">${post.description}</div>
                 </div>
             </div>
         `).join('');
@@ -1245,12 +1414,11 @@ async function openArchivePost(slug) {
         archiveMeta[bufferName] = { slug, title };
 
         const fullMarkdown = `# ${title}\n\n${converted}`;
-        const parsed = parseIcons(fullMarkdown);
 
         state.currentFile = bufferName;
         if (!state.openBuffers.includes(bufferName)) state.openBuffers.push(bufferName);
 
-        el.output.innerHTML = marked.parse(parsed);
+        el.output.innerHTML = parseIcons(marked.parse(fullMarkdown));
 
         el.output.querySelectorAll('a').forEach(a => {
             if (a.href && a.href.startsWith('http')) a.target = '_blank';

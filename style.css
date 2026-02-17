@@ -355,6 +355,12 @@ body {
     font-weight: normal;
 }
 
+.markdown-body i {
+    font-weight: unset;
+    font-size: unset !important;
+    line-height: unset !important;
+}
+
 .markdown-body > *:first-child {
     margin-top: 0 !important;
 }
@@ -414,6 +420,13 @@ body {
 
 .markdown-body blockquote p {
     margin-bottom: 0;
+}
+
+.markdown-body hr {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--comment), transparent);
+    margin: var(--line-height) 0;
 }
 
 .markdown-body ul,
@@ -625,16 +638,16 @@ body {
     border-color: var(--blue);
 }
 
-/* --- ARCHIVE CARDS --- */
+/* --- BLOG CARDS --- */
 
-.archive-grid {
+.blog-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 16px;
     margin-bottom: 24px;
 }
 
-.archive-card {
+.blog-card {
     background: var(--bg-dark);
     border: 1px solid var(--line-nr);
     border-radius: 6px;
@@ -643,12 +656,12 @@ body {
     cursor: pointer;
 }
 
-.archive-card:hover {
+.blog-card:hover {
     border-color: var(--blue);
     transform: translateY(-2px);
 }
 
-.archive-card img {
+.blog-card img {
     width: 100%;
     height: 140px;
     object-fit: cover;
@@ -658,11 +671,11 @@ body {
     cursor: default;
 }
 
-.archive-card-body {
+.blog-card-body {
     padding: 14px;
 }
 
-.archive-card-title {
+.blog-card-title {
     color: var(--blue);
     font-weight: bold;
     font-size: 0.85rem !important;
@@ -670,13 +683,13 @@ body {
     margin-bottom: 8px !important;
 }
 
-.archive-card-meta {
+.blog-card-meta {
     color: var(--comment);
     font-size: 0.7rem !important;
     margin-bottom: 8px !important;
 }
 
-.archive-card-meta .archive-tag {
+.blog-card-meta .blog-tag {
     background: var(--selection);
     color: var(--fg);
     padding: 1px 6px;
@@ -684,7 +697,7 @@ body {
     font-size: 0.65rem !important;
 }
 
-.archive-card-desc {
+.blog-card-desc {
     color: var(--fg);
     font-size: 0.75rem !important;
     line-height: 1.5 !important;
@@ -692,7 +705,7 @@ body {
 }
 
 @media (max-width: 768px) {
-    .archive-grid {
+    .blog-grid {
         grid-template-columns: 1fr;
     }
 }

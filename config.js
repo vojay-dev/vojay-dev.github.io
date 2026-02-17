@@ -18,6 +18,8 @@ const config = {
     ],
 
     alpha: {
+        enabled: true,
+        animation: 'cube',
         title: "vojay",
         titleColor: "var(--blue)",
         titleAccent: ".io",
