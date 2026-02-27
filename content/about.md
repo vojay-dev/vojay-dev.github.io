@@ -14,6 +14,8 @@ As a Senior Developer Advocate at [Astronomer](https://www.astronomer.io/), I fo
 
 ## :fas fa-hand-holding-heart: Volunteering
 
+- **Data Engineer Things** (2026 - Present)
+    - Mentor
 - **Data Engineer Things** (2025 - Present)
     - Newsletter Lead
 
