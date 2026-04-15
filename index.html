@@ -1514,39 +1514,34 @@ a { color: inherit; text-decoration: none; }
     }
 
     // ========================================
-    // MOBILE: SCROLL-DRIVEN BLUE→RED TRANSITION
+    // MOBILE: TAP TO SWITCH + FADE ON SCROLL
     // ========================================
 
     if (!canHover) {
-        let mobileTimeout = null;
+        let mobileSide = 'code';
+        let mobileBase = 0.5;
         let scrollTicking = false;
-        let currentParticleState = '';
 
-        function updateMobileScroll() {
-            if (activeSide) return;
+        function applyMobileScroll() {
             const scrollY = window.scrollY;
             const gateH = gate.offsetHeight;
-            const transition = Math.min(Math.max(scrollY / (gateH * 0.6), 0), 1);
-            const visibility = Math.min(Math.max(1 - scrollY / gateH, 0), 1);
+            const fade = Math.min(Math.max(1 - scrollY / (gateH * 0.7), 0), 1);
+            const target = mobileBase * fade;
 
-            dagSystem.setTarget((1 - transition) * visibility * 0.5);
-            tendrilSystemLeft.setTarget(transition * visibility * 0.5);
-
-            if (currentParticleState !== 'ambient') {
-                setParticleTargets('ambient');
-                currentParticleState = 'ambient';
+            if (mobileSide === 'creative') {
+                tendrilSystemLeft.setTarget(target);
+                dagSystem.setTarget(0);
+            } else {
+                dagSystem.setTarget(target);
+                tendrilSystemLeft.setTarget(0);
             }
         }
 
         function mobileActivate(side) {
-            clearTimeout(mobileTimeout);
+            mobileSide = side;
+            mobileBase = 1;
             enterSide(side);
-            mobileTimeout = setTimeout(() => {
-                activeSide = null;
-                gate.classList.remove('creative-hover', 'code-hover');
-                setAtmo(null);
-                updateMobileScroll();
-            }, 3000);
+            applyMobileScroll();
         }
 
         let touchStartY = 0;
@@ -1571,16 +1566,15 @@ a { color: inherit; text-decoration: none; }
             if (scrollTicking) return;
             scrollTicking = true;
             requestAnimationFrame(() => {
-                updateMobileScroll();
+                applyMobileScroll();
                 scrollTicking = false;
             });
         }, { passive: true });
 
         setTimeout(() => {
             dagSystem.setTarget(0.5);
-            tendrilSystemLeft.setTarget(0);
             setParticleTargets('ambient');
-            currentParticleState = 'ambient';
+            applyMobileScroll();
         }, 1800);
     }
 
