@@ -1014,7 +1014,7 @@ a { color: inherit; text-decoration: none; }
 
         generate() {
             this.tendrils = [];
-            const count = canHover ? 15 : 6;
+            const count = 15;
             const fromLeft = this.side === 'left';
 
             for (let i = 0; i < count; i++) {
@@ -1275,7 +1275,7 @@ a { color: inherit; text-decoration: none; }
 
         generate() {
             this.branches = [];
-            const count = canHover ? 10 : 4;
+            const count = 10;
 
             for (let i = 0; i < count; i++) {
                 const t = i / (count - 1);
@@ -1499,15 +1499,10 @@ a { color: inherit; text-decoration: none; }
         dagSystem.setTarget(0);
     }
 
-    // Desktop: hover effects. Mobile: scroll-triggered effects.
     if (canHover) {
         creativeEl.addEventListener('mouseenter', () => enterSide('creative'));
         codeEl.addEventListener('mouseenter', () => enterSide('code'));
         gate.addEventListener('mouseleave', leaveSide);
-    } else {
-        // Mobile: both effects always on at reduced count, no switching
-        tendrilSystemLeft.setTarget(1);
-        dagSystem.setTarget(1);
     }
 
     // Clicks
