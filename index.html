@@ -1498,12 +1498,36 @@ a { color: inherit; text-decoration: none; }
         dagSystem.setTarget(0);
     }
 
-    // Only enable hover effects on non-touch devices (pointer: fine = mouse/trackpad)
+    // Desktop: hover effects. Mobile: scroll-triggered effects.
     const canHover = window.matchMedia('(pointer: fine)').matches;
     if (canHover) {
         creativeEl.addEventListener('mouseenter', () => enterSide('creative'));
         codeEl.addEventListener('mouseenter', () => enterSide('code'));
         gate.addEventListener('mouseleave', leaveSide);
+    } else {
+        // Mobile: activate effects based on which section is in view
+        const mobileObs = new IntersectionObserver((entries) => {
+            for (const entry of entries) {
+                const side = entry.target === creativeEl ? 'creative' : 'code';
+                if (entry.isIntersecting) {
+                    if (side === 'creative') {
+                        tendrilSystemLeft.setTarget(1);
+                        setParticleTargets('creative');
+                    } else {
+                        dagSystem.setTarget(1);
+                        setParticleTargets('code');
+                    }
+                } else {
+                    if (side === 'creative') {
+                        tendrilSystemLeft.setTarget(0);
+                    } else {
+                        dagSystem.setTarget(0);
+                    }
+                }
+            }
+        }, { threshold: 0.5 });
+        mobileObs.observe(creativeEl);
+        mobileObs.observe(codeEl);
     }
 
     // Clicks
