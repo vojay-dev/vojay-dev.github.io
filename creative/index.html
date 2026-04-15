@@ -377,25 +377,6 @@ a { color: inherit; text-decoration: none; }
     color: var(--stone);
     margin-top: 1.2rem;
 }
-.coming-soon {
-    text-align: center;
-    padding: 6rem 2rem;
-    border: 1px solid rgba(255,255,255,0.04);
-    background: var(--coal);
-}
-.coming-soon-text {
-    font-family: var(--font-display);
-    font-size: clamp(1.8rem, 4vw, 3rem);
-    letter-spacing: 0.2em;
-    color: var(--blood-bright);
-    margin-bottom: 1rem;
-}
-.coming-soon-sub {
-    font-size: 0.75rem;
-    font-weight: 300;
-    letter-spacing: 0.15em;
-    color: var(--stone);
-}
 
 .project-grid {
     display: grid;
@@ -643,7 +624,7 @@ a { color: inherit; text-decoration: none; }
     <div class="gate-side gate-creative" id="gate-creative">
         <div class="gate-watermark" aria-hidden="true">CREATIVE</div>
         <div class="gate-content">
-            <img src="images/justv-logo-transparent.png" alt="V" class="v-logo">
+            <img src="../images/justv-logo-transparent.png" alt="V" class="v-logo">
             <div class="gate-label">Creative</div>
             <div class="gate-tagline">Raw Visual Storytelling</div>
             <button class="gate-cta" id="cta-creative">View Work</button>
@@ -672,9 +653,66 @@ a { color: inherit; text-decoration: none; }
         <p class="section-subtitle">Gym &middot; Fitness &middot; Athletes</p>
     </div>
 
-    <div class="coming-soon reveal-up">
-        <p class="coming-soon-text">Coming Soon</p>
-        <p class="coming-soon-sub">New projects currently in production. Stay tuned.</p>
+    <div class="project-grid">
+        <article class="project-card featured">
+            <div class="card-thumb">
+                <div class="card-thumb-inner"><span class="card-thumb-text">METROFLEX MURRIETA</span></div>
+                <div class="play-btn"></div>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Metroflex Murrieta</h3>
+                <p class="card-desc">Brand film capturing the raw energy and relentless grind of one of SoCal's most hardcore training facilities.</p>
+                <div class="card-tags"><span class="tag">Brand Film</span><span class="tag">Fitness</span></div>
+            </div>
+        </article>
+
+        <article class="project-card">
+            <div class="card-thumb">
+                <div class="card-thumb-inner"><span class="card-thumb-text">IRON PARADISE</span></div>
+                <div class="play-btn"></div>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Iron Paradise</h3>
+                <p class="card-desc">High-intensity training montage. Heavy lifts, chalk dust, no filter.</p>
+                <div class="card-tags"><span class="tag">Montage</span><span class="tag">Gym</span></div>
+            </div>
+        </article>
+
+        <article class="project-card">
+            <div class="card-thumb">
+                <div class="card-thumb-inner"><span class="card-thumb-text">RAW STRENGTH</span></div>
+                <div class="play-btn"></div>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Raw Strength</h3>
+                <p class="card-desc">Athlete spotlight. Close-up portraits of discipline, power, and presence.</p>
+                <div class="card-tags"><span class="tag">Portrait</span><span class="tag">Power</span></div>
+            </div>
+        </article>
+
+        <article class="project-card">
+            <div class="card-thumb">
+                <div class="card-thumb-inner"><span class="card-thumb-text">DAWN GRIND</span></div>
+                <div class="play-btn"></div>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Dawn Grind</h3>
+                <p class="card-desc">5 AM. Empty gym. One athlete. A short doc about the hours nobody sees.</p>
+                <div class="card-tags"><span class="tag">Documentary</span><span class="tag">Lifestyle</span></div>
+            </div>
+        </article>
+
+        <article class="project-card">
+            <div class="card-thumb">
+                <div class="card-thumb-inner"><span class="card-thumb-text">COMPETITION DAY</span></div>
+                <div class="play-btn"></div>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Competition Day</h3>
+                <p class="card-desc">Behind the curtain at a bodybuilding show. Backstage pumps, stage lights, everything on the line.</p>
+                <div class="card-tags"><span class="tag">Event</span><span class="tag">Coverage</span></div>
+            </div>
+        </article>
     </div>
 </section>
 
@@ -688,12 +726,9 @@ a { color: inherit; text-decoration: none; }
         Same obsession with craft. Different medium.
     </p>
     <div class="about-links">
-        <a href="https://linkedin.com/in/vjanz" target="_blank" rel="noopener" class="about-link">LinkedIn</a>
-        <a href="https://github.com/vojay-dev" target="_blank" rel="noopener" class="about-link">GitHub</a>
-        <a href="https://medium.com/@vojay" target="_blank" rel="noopener" class="about-link">Medium</a>
-        <a href="https://twitter.com/vojaydev" target="_blank" rel="noopener" class="about-link">X</a>
         <a href="https://instagram.com/vojay.io" target="_blank" rel="noopener" class="about-link">Instagram</a>
         <a href="mailto:volker@janz.sh" class="about-link">Email</a>
+        <a href="/terminal.html" class="about-link">Terminal</a>
     </div>
     <a href="#gate" class="back-top">
         <div class="arrow-up"></div>

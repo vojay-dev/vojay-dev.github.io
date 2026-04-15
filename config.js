@@ -5,7 +5,6 @@ const config = {
     files: [
         'home',
         'about',
-        'photos',
         'archive'
     ],
 
@@ -29,7 +28,6 @@ const config = {
         actions: [
             { key: 'h', icon: 'fas fa-home',     label: 'Home',   cmd: 'home' },
             { key: 'a', icon: 'fas fa-user',     label: 'About',  cmd: 'about' },
-            { key: 'p', icon: 'fas fa-camera',   label: 'Photos', cmd: 'photos' },
             { key: '?', icon: 'fas fa-terminal', label: 'Help',   cmd: ':help' },
             { key: 's', icon: 'fas fa-database', label: 'SQL',    cmd: ':sql' },
             { key: 'g', icon: 'fas fa-gamepad',  label: 'Snake',  cmd: ':snake' },

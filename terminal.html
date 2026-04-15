@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Loading...</title>
+
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css?v=1771370427">
+
+    <!-- Syntax Highlighting (Prism) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-ruby.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-toml.min.js"></script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y1D1YZJQ7T"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-Y1D1YZJQ7T');
+    </script>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Volker Janz | Senior Developer Advocate">
+    <meta name="description" content="Senior Developer Advocate & Data Engineer. Building bridges between complex technology and the global data community.">
+
+    <!-- Open Graph / Facebook / LinkedIn -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vojay.io/">
+    <meta property="og:title" content="Volker Janz | Senior Developer Advocate">
+    <meta property="og:description" content="Senior Developer Advocate & Data Engineer. Building bridges between complex technology and the global data community.">
+    <meta property="og:image" content="https://vojay.io/images/og-image.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://vojay.io/">
+    <meta property="twitter:title" content="Volker Janz | Senior Developer Advocate">
+    <meta property="twitter:description" content="Senior Developer Advocate & Data Engineer. Building bridges between complex technology and the global data community.">
+    <meta property="twitter:image" content="https://vojay.io/images/og-image.png">
+</head>
+<body>
+
+    <div class="scanlines"></div>
+
+    <div class="app-container">
+        <!-- Buffer Tabs & Top Widgets -->
+        <div class="buffer-bar glow-text">
+            <div id="tab-container" class="tabs-left"></div>
+            <div class="tab-overflow-btn" id="tab-overflow-btn" onclick="toggleTabOverflow()"></div>
+            <div class="widgets-right">
+                <div class="widget widget-green" id="telescope-widget" style="cursor:pointer;" onclick="openTelescope()"><i class="fas fa-search"></i></div>
+                <div class="widget widget-blue"><i class="fas fa-wifi"></i> ONLINE</div>
+                <div class="widget widget-purple"><i class="fas fa-clock"></i> <span id="clock-widget"></span></div>
+            </div>
+        </div>
+
+        <div class="workspace">
+            <!-- Sidebar -->
+            <div class="nvim-tree" id="nvim-tree">
+                <div class="tree-header"><i class="fas fa-project-diagram"></i> Explorer</div>
+                <div id="file-list-container"></div>
+                <div class="tree-hint" onclick="openTelescope()"><i class="fas fa-search"></i> Search <span class="tree-hint-key">/</span></div>
+
+                <div id="mobile-cmd-wrapper">
+                    <span style="color: var(--green); margin-right: 8px;">❯</span>
+                    <input type="text" id="mobile-cmd-input" placeholder="Enter cmd..." autocomplete="off" autocapitalize="off" spellcheck="false">
+                    <button id="mobile-cmd-btn">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <div class="tree-header" style="margin-top:auto; border-top: none; padding-top:10px;">Links</div>
+                <div id="link-list-container"></div>
+                <div style="height: 10px;"></div>
+            </div>
+
+            <!-- Editor -->
+            <div class="editor-container">
+                <div class="content-scroll" id="scroll-container" tabindex="0">
+                    <div id="markdown-output" class="markdown-body glow-text"></div>
+                    <br><br><div style="color: var(--comment)">~</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="status-line">
+            <div style="display:flex; height:100%">
+                <!-- Mode -->
+                <div class="segment mode-normal" id="mode-segment">NORMAL</div>
+
+                <!-- Git -->
+                <div class="segment seg-dark" id="git-branch" style="cursor: pointer;">
+                    <i class="fas fa-code-branch" style="font-size: 10px;"></i> main
+                </div>
+
+                <!-- Theme switcher -->
+                <div class="segment seg-dark" id="theme-switch" style="cursor: pointer; border-left: 1px solid var(--border);">
+                    <i class="fas fa-palette" style="font-size: 10px;"></i>
+                    <span id="theme-name"></span>
+                </div>
+
+                <!-- Filename -->
+                <div class="segment seg-light" id="status-filename">[No Name]</div>
+            </div>
+
+            <div style="display:flex; height:100%">
+                <div class="segment seg-light">markdown</div>
+                <div class="segment seg-dark" id="status-percent">TOP</div>
+            </div>
+        </div>
+
+
+        <!-- Command Bar -->
+        <div class="cmd-bar">
+            <span id="cmd-display" style="color: var(--comment)">:help</span>
+            <input type="text" id="cmd-input" class="cmd-input">
+        </div>
+    </div>
+    <div class="mobile-toggle mobile-search" onclick="openTelescope()"><i class="fas fa-search"></i></div>
+    <div class="mobile-toggle" onclick="toggleTree()"><i class="fas fa-bars"></i></div>
+
+    <!-- Scripts (Load Order Matters) -->
+    <script src="archive-converter.js?v=1771370427"></script>
+    <script src="config.js?v=1771370427"></script>
+    <script src="commands.js?v=1771370427"></script>
+    <script src="engine.js?v=1771370427"></script>
+
+</body>
+</html>

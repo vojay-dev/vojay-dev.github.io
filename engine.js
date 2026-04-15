@@ -21,6 +21,8 @@ const el = {
     statusFile: document.getElementById('status-filename')
 };
 
+if (new URLSearchParams(window.location.search).has('noalpha')) config.alpha.enabled = false;
+
 document.title = config.title;
 initLightbox();
 renderSidebar();
