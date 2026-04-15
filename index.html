@@ -36,7 +36,7 @@
     --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
 }
 
-html { scroll-behavior: smooth; cursor: crosshair; }
+html { cursor: crosshair; }
 
 body {
     background: var(--black);
@@ -595,8 +595,6 @@ a { color: inherit; text-decoration: none; }
     .gate-watermark { display: none; }
     .project-grid { grid-template-columns: 1fr; }
     .project-card.featured .card-thumb { padding-bottom: 56.25%; }
-    .atmo-glow { display: none; }
-    .vignette { display: none; }
 }
 
 @media (max-width: 480px) {
@@ -715,6 +713,7 @@ a { color: inherit; text-decoration: none; }
     let W, H;
 
     let needsRegenerate = false;
+    let lastW = 0;
 
     function resize() {
         W = window.innerWidth;
@@ -724,7 +723,10 @@ a { color: inherit; text-decoration: none; }
         canvas.style.width = W + 'px';
         canvas.style.height = H + 'px';
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        needsRegenerate = true;
+        if (W !== lastW) {
+            needsRegenerate = true;
+            lastW = W;
+        }
     }
     resize();
     window.addEventListener('resize', resize);
@@ -1316,7 +1318,7 @@ a { color: inherit; text-decoration: none; }
     // EMBER PARTICLES (background ambiance)
     // ========================================
 
-    const PARTICLE_COUNT = 400;
+    const PARTICLE_COUNT = canHover ? 400 : 250;
     const particles = [];
     let activeSide = null;
 
@@ -1352,6 +1354,12 @@ a { color: inherit; text-decoration: none; }
                 this.tr = c.r; this.tg = c.g; this.tb = c.b;
                 this.targetVx = 0.4 + Math.random() * 0.6;
                 this.targetBinary = 1;
+            } else if (side === 'ambient') {
+                const warm = { r: 80, g: 30, b: 50 };
+                const c = lerpColor(DIM, warm, 0.3 + rand * 0.5);
+                this.tr = c.r; this.tg = c.g; this.tb = c.b;
+                this.targetVx = (Math.random() - 0.5) * 0.2;
+                this.targetBinary = 0;
             } else {
                 const c = lerpColor(DIM, RED, rand * 0.3);
                 this.tr = c.r; this.tg = c.g; this.tb = c.b;
@@ -1503,6 +1511,73 @@ a { color: inherit; text-decoration: none; }
         creativeEl.addEventListener('mouseenter', () => enterSide('creative'));
         codeEl.addEventListener('mouseenter', () => enterSide('code'));
         gate.addEventListener('mouseleave', leaveSide);
+    }
+
+    // ========================================
+    // MOBILE: AMBIENT + TAP + SCROLL-FADE
+    // ========================================
+
+    if (!canHover) {
+        let mobileTimeout = null;
+        let mobileAmbientTarget = 0.5;
+
+        function setMobileAmbient(intensity) {
+            mobileAmbientTarget = intensity;
+            if (!activeSide) {
+                tendrilSystemLeft.setTarget(intensity);
+                dagSystem.setTarget(intensity);
+            }
+        }
+
+        function mobileActivate(side) {
+            clearTimeout(mobileTimeout);
+            enterSide(side);
+            mobileTimeout = setTimeout(() => {
+                activeSide = null;
+                gate.classList.remove('creative-hover', 'code-hover');
+                setParticleTargets('ambient');
+                setAtmo(null);
+                tendrilSystemLeft.setTarget(mobileAmbientTarget);
+                dagSystem.setTarget(mobileAmbientTarget);
+            }, 3000);
+        }
+
+        let touchStartY = 0;
+        creativeEl.addEventListener('touchstart', (e) => { touchStartY = e.touches[0].clientY; }, { passive: true });
+        creativeEl.addEventListener('touchend', (e) => {
+            if (e.target.closest('.gate-cta')) return;
+            if (Math.abs(e.changedTouches[0].clientY - touchStartY) < 10) {
+                mobileActivate('creative');
+                e.preventDefault();
+            }
+        });
+        codeEl.addEventListener('touchstart', (e) => { touchStartY = e.touches[0].clientY; }, { passive: true });
+        codeEl.addEventListener('touchend', (e) => {
+            if (e.target.closest('.gate-cta')) return;
+            if (Math.abs(e.changedTouches[0].clientY - touchStartY) < 10) {
+                mobileActivate('code');
+                e.preventDefault();
+            }
+        });
+
+        setTimeout(() => {
+            tendrilSystemLeft.setTarget(0.5);
+            dagSystem.setTarget(0.5);
+            setParticleTargets('ambient');
+        }, 1800);
+
+        const gateObs = new IntersectionObserver((entries) => {
+            const ratio = entries[0].intersectionRatio;
+            const scaledTarget = ratio * 0.5;
+            mobileAmbientTarget = scaledTarget;
+            if (!activeSide) {
+                tendrilSystemLeft.setTarget(scaledTarget);
+                dagSystem.setTarget(scaledTarget);
+            }
+        }, {
+            threshold: Array.from({ length: 21 }, (_, i) => i / 20)
+        });
+        gateObs.observe(gate);
     }
 
     // Clicks
