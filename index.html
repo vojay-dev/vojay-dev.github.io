@@ -1014,7 +1014,7 @@ a { color: inherit; text-decoration: none; }
 
         generate() {
             this.tendrils = [];
-            const count = 15;
+            const count = canHover ? 15 : 6;
             const fromLeft = this.side === 'left';
 
             for (let i = 0; i < count; i++) {
@@ -1073,6 +1073,7 @@ a { color: inherit; text-decoration: none; }
         }
     }
 
+    const canHover = window.matchMedia('(pointer: fine)').matches;
     let tendrilSystemLeft = new TendrilSystem('left');
 
     // ========================================
@@ -1274,7 +1275,7 @@ a { color: inherit; text-decoration: none; }
 
         generate() {
             this.branches = [];
-            const count = 10;
+            const count = canHover ? 10 : 4;
 
             for (let i = 0; i < count; i++) {
                 const t = i / (count - 1);
@@ -1499,38 +1500,28 @@ a { color: inherit; text-decoration: none; }
     }
 
     // Desktop: hover effects. Mobile: scroll-triggered effects.
-    const canHover = window.matchMedia('(pointer: fine)').matches;
     if (canHover) {
         creativeEl.addEventListener('mouseenter', () => enterSide('creative'));
         codeEl.addEventListener('mouseenter', () => enterSide('code'));
         gate.addEventListener('mouseleave', leaveSide);
     } else {
-        // Mobile: track which section is most visible, activate its effect
-        let mobileRatios = { creative: 0, code: 0 };
-        const mobileObs = new IntersectionObserver((entries) => {
-            for (const entry of entries) {
-                const side = entry.target === creativeEl ? 'creative' : 'code';
-                mobileRatios[side] = entry.intersectionRatio;
-            }
-            // Activate whichever side is more visible (or neither if both are gone)
-            const cVis = mobileRatios.creative;
-            const dVis = mobileRatios.code;
-            if (cVis <= 0.05 && dVis <= 0.05) {
-                tendrilSystemLeft.setTarget(0);
+        // Mobile: DAG branches by default, red tendrils when portfolio scrolls into view
+        dagSystem.setTarget(1);
+        setParticleTargets('code');
+
+        const portfolioEl = document.getElementById('portfolio');
+        const portfolioObs = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
                 dagSystem.setTarget(0);
-                setParticleTargets(null);
-            } else if (cVis >= dVis) {
                 tendrilSystemLeft.setTarget(1);
-                dagSystem.setTarget(0);
                 setParticleTargets('creative');
             } else {
-                dagSystem.setTarget(1);
                 tendrilSystemLeft.setTarget(0);
+                dagSystem.setTarget(1);
                 setParticleTargets('code');
             }
-        }, { threshold: [0, 0.25, 0.5, 0.75, 1] });
-        mobileObs.observe(creativeEl);
-        mobileObs.observe(codeEl);
+        }, { threshold: 0.15 });
+        portfolioObs.observe(portfolioEl);
     }
 
     // Clicks
