@@ -718,12 +718,12 @@ a { color: inherit; text-decoration: none; }
     function resize() {
         W = window.innerWidth;
         H = window.innerHeight;
-        canvas.width = W * dpr;
-        canvas.height = H * dpr;
-        canvas.style.width = W + 'px';
-        canvas.style.height = H + 'px';
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         if (W !== lastW) {
+            canvas.width = W * dpr;
+            canvas.height = H * dpr;
+            canvas.style.width = W + 'px';
+            canvas.style.height = H + 'px';
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
             needsRegenerate = true;
             lastW = W;
         }
@@ -1514,18 +1514,27 @@ a { color: inherit; text-decoration: none; }
     }
 
     // ========================================
-    // MOBILE: AMBIENT + TAP + SCROLL-FADE
+    // MOBILE: SCROLL-DRIVEN BLUE→RED TRANSITION
     // ========================================
 
     if (!canHover) {
         let mobileTimeout = null;
-        let mobileAmbientTarget = 0.5;
+        let scrollTicking = false;
+        let currentParticleState = '';
 
-        function setMobileAmbient(intensity) {
-            mobileAmbientTarget = intensity;
-            if (!activeSide) {
-                tendrilSystemLeft.setTarget(intensity);
-                dagSystem.setTarget(intensity);
+        function updateMobileScroll() {
+            if (activeSide) return;
+            const scrollY = window.scrollY;
+            const gateH = gate.offsetHeight;
+            const transition = Math.min(Math.max(scrollY / (gateH * 0.6), 0), 1);
+            const visibility = Math.min(Math.max(1 - scrollY / gateH, 0), 1);
+
+            dagSystem.setTarget((1 - transition) * visibility * 0.5);
+            tendrilSystemLeft.setTarget(transition * visibility * 0.5);
+
+            if (currentParticleState !== 'ambient') {
+                setParticleTargets('ambient');
+                currentParticleState = 'ambient';
             }
         }
 
@@ -1535,10 +1544,8 @@ a { color: inherit; text-decoration: none; }
             mobileTimeout = setTimeout(() => {
                 activeSide = null;
                 gate.classList.remove('creative-hover', 'code-hover');
-                setParticleTargets('ambient');
                 setAtmo(null);
-                tendrilSystemLeft.setTarget(mobileAmbientTarget);
-                dagSystem.setTarget(mobileAmbientTarget);
+                updateMobileScroll();
             }, 3000);
         }
 
@@ -1560,24 +1567,21 @@ a { color: inherit; text-decoration: none; }
             }
         });
 
-        setTimeout(() => {
-            tendrilSystemLeft.setTarget(0.5);
-            dagSystem.setTarget(0.5);
-            setParticleTargets('ambient');
-        }, 1800);
+        window.addEventListener('scroll', () => {
+            if (scrollTicking) return;
+            scrollTicking = true;
+            requestAnimationFrame(() => {
+                updateMobileScroll();
+                scrollTicking = false;
+            });
+        }, { passive: true });
 
-        const gateObs = new IntersectionObserver((entries) => {
-            const ratio = entries[0].intersectionRatio;
-            const scaledTarget = ratio * 0.5;
-            mobileAmbientTarget = scaledTarget;
-            if (!activeSide) {
-                tendrilSystemLeft.setTarget(scaledTarget);
-                dagSystem.setTarget(scaledTarget);
-            }
-        }, {
-            threshold: Array.from({ length: 21 }, (_, i) => i / 20)
-        });
-        gateObs.observe(gate);
+        setTimeout(() => {
+            dagSystem.setTarget(0.5);
+            tendrilSystemLeft.setTarget(0);
+            setParticleTargets('ambient');
+            currentParticleState = 'ambient';
+        }, 1800);
     }
 
     // Clicks
