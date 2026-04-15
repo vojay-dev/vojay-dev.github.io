@@ -13,7 +13,7 @@ run:
 .PHONY: bust
 bust:
 	@V=$$(date +%s); \
-	sed -i '' -E "s/\.(css|js)\?v=[0-9]+/.\1?v=$$V/g" index.html; \
+	sed -i '' -E "s/\.(css|js)\?v=[0-9]+/.\1?v=$$V/g" terminal.html; \
 	echo "Cache busted with v=$$V"
 
 .PHONY: gallery
