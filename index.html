@@ -1505,24 +1505,9 @@ a { color: inherit; text-decoration: none; }
         codeEl.addEventListener('mouseenter', () => enterSide('code'));
         gate.addEventListener('mouseleave', leaveSide);
     } else {
-        // Mobile: DAG branches at top, red tendrils once you scroll past the gate
+        // Mobile: both effects always on at reduced count, no switching
+        tendrilSystemLeft.setTarget(1);
         dagSystem.setTarget(1);
-        setParticleTargets('code');
-
-        const gateObs = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting) {
-                // Gate visible = back at top → DAGs
-                dagSystem.setTarget(1);
-                tendrilSystemLeft.setTarget(0);
-                setParticleTargets('code');
-            } else {
-                // Gate scrolled away = below the fold → tendrils
-                tendrilSystemLeft.setTarget(1);
-                dagSystem.setTarget(0);
-                setParticleTargets('creative');
-            }
-        }, { threshold: 0.1 });
-        gateObs.observe(gate);
     }
 
     // Clicks
