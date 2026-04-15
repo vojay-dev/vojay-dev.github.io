@@ -1505,27 +1505,30 @@ a { color: inherit; text-decoration: none; }
         codeEl.addEventListener('mouseenter', () => enterSide('code'));
         gate.addEventListener('mouseleave', leaveSide);
     } else {
-        // Mobile: activate effects based on which section is in view
+        // Mobile: track which section is most visible, activate its effect
+        let mobileRatios = { creative: 0, code: 0 };
         const mobileObs = new IntersectionObserver((entries) => {
             for (const entry of entries) {
                 const side = entry.target === creativeEl ? 'creative' : 'code';
-                if (entry.isIntersecting) {
-                    if (side === 'creative') {
-                        tendrilSystemLeft.setTarget(1);
-                        setParticleTargets('creative');
-                    } else {
-                        dagSystem.setTarget(1);
-                        setParticleTargets('code');
-                    }
-                } else {
-                    if (side === 'creative') {
-                        tendrilSystemLeft.setTarget(0);
-                    } else {
-                        dagSystem.setTarget(0);
-                    }
-                }
+                mobileRatios[side] = entry.intersectionRatio;
             }
-        }, { threshold: 0.5 });
+            // Activate whichever side is more visible (or neither if both are gone)
+            const cVis = mobileRatios.creative;
+            const dVis = mobileRatios.code;
+            if (cVis <= 0.05 && dVis <= 0.05) {
+                tendrilSystemLeft.setTarget(0);
+                dagSystem.setTarget(0);
+                setParticleTargets(null);
+            } else if (cVis >= dVis) {
+                tendrilSystemLeft.setTarget(1);
+                dagSystem.setTarget(0);
+                setParticleTargets('creative');
+            } else {
+                dagSystem.setTarget(1);
+                tendrilSystemLeft.setTarget(0);
+                setParticleTargets('code');
+            }
+        }, { threshold: [0, 0.25, 0.5, 0.75, 1] });
         mobileObs.observe(creativeEl);
         mobileObs.observe(codeEl);
     }
