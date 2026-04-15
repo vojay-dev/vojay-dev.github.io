@@ -1,6 +1,6 @@
 # vojay.io
 
-Personal nvim style website. Visit [vojay.io](https://vojay.io).
+Personal website. Creative videography portfolio + neovim-themed DevRel / Data Engineering site. Visit [vojay.io](https://vojay.io).
 
 ![vojay.io](images/og-image.png)
 

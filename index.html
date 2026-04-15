@@ -683,7 +683,7 @@ a { color: inherit; text-decoration: none; }
 <section class="about-strip reveal-up">
     <h3 class="about-name">V <span class="sep">&middot;</span> Code & Camera</h3>
     <p class="about-text">
-        By day, DevRel engineer building data platforms at Astronomer.
+        By day, Developer Advocate blending deep data engineering expertise with a passion for teaching, writing, and building in public.
         By night, behind the lens capturing raw stories for gyms, athletes,
         and fitness brands across Southern California.
         Same obsession with craft. Different medium.
@@ -1498,9 +1498,13 @@ a { color: inherit; text-decoration: none; }
         dagSystem.setTarget(0);
     }
 
-    creativeEl.addEventListener('mouseenter', () => enterSide('creative'));
-    codeEl.addEventListener('mouseenter', () => enterSide('code'));
-    gate.addEventListener('mouseleave', leaveSide);
+    // Only enable hover effects on non-touch devices (pointer: fine = mouse/trackpad)
+    const canHover = window.matchMedia('(pointer: fine)').matches;
+    if (canHover) {
+        creativeEl.addEventListener('mouseenter', () => enterSide('creative'));
+        codeEl.addEventListener('mouseenter', () => enterSide('code'));
+        gate.addEventListener('mouseleave', leaveSide);
+    }
 
     // Clicks
     document.getElementById('cta-creative').addEventListener('click', (e) => {
